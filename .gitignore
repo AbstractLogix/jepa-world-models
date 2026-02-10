@@ -1,0 +1,18 @@
+# local virtual env
+.venv
+
+# Jupyter checkpoints
+.ipynb_checkpoints
+
+# python 
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+
+# VSCode
+.vscode/
+
+# github
+.github/

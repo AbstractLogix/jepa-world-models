@@ -14,6 +14,8 @@ import project from "$lib/data/projects/jepa-world-models.json";
 
 Use `media[].alt` as the image alternative text and `media[].caption` as the visible caption. Show each finding's `status`, `scope`, and `claimBoundary` with the summary. Do not present the MountainCar analogues as JEPA results or paper reproductions.
 
+Render `pendingWork` as an open or gated item. Keep it separate from `verifiedFindings`; it describes work that has no completed result to publish.
+
 ## Claim checks
 
 | Claim | Source to inspect | Safe wording |
@@ -24,12 +26,13 @@ Use `media[].alt` as the image alternative text and `media[].caption` as the vis
 | Prior-guided search analogue | [Notebook 16 report](../reproductions/action-video-planning.md) and [episode CSV](../evidence/action-video-planning-episodes.csv) | A hand-written prior improved this local CEM setup; it is not a learned policy or JEPA result. |
 | Calibration under planner shift | [Notebook 17 report](../reproductions/model-uncertainty-planning.md) and [raw rows](../evidence/model-uncertainty-calibration.csv) | Five state-model fits had wider planner-shift uncertainty; one task only. |
 | Official V-JEPA checkpoint execution | [Notebook 09 run record](../evidence/vjepa21-local-run.md) | Checkpoint inference on one synthetic clip; no benchmark or planning claim. |
+| Notebook 22 local comparison | [Notebook 22 report](../reproductions/visual-jepa-decision-usefulness.md), [model records](../evidence/visual-jepa-model-runs.csv), [interventions](../evidence/visual-jepa-interventions.csv), and [episodes](../evidence/visual-jepa-episodes.csv) | The VISReg-style adaptation passed its fixed spread screen. Uniform-start JEPA CEM succeeded on 0/100 starts; momentum-prior JEPA CEM succeeded on 100/100, while the direct hand-written prior succeeded on 20/20. Do not attribute the outcome to JEPA alone. |
 
-“Verified” in the manifest means the value was checked against local records. It does not mean an independent party repeated the experiment. The current portfolio branch is stacked on draft PR #1. Wait for maintainer review and merge before treating these files as part of the default repository branch.
+“Verified” in the manifest means the value was checked against local records. It does not mean an independent party repeated the experiment. The `uv` migration and portfolio case study are in `main`; PRs #1 and #2 are merged.
 
 ## Rebuild and validate
 
-From the repository root, on the current `uv` branch:
+From the repository root:
 
 ```bash
 uv sync --locked
@@ -37,4 +40,4 @@ uv run --locked --no-sync python scripts/generate_portfolio_figures.py
 uv run --locked --no-sync python -m unittest discover -s tests
 ```
 
-The figure script reads the saved Notebook 14 episode table and the retained Notebook 16 and 17 CSV evidence. It does not train a model or download a dataset. See the [case study](CASE_STUDY.md) for figure captions, scope, and limits.
+The figure script reads the saved Notebook 14 episode table and retained CSV evidence from Notebooks 16, 17, and 22. It regenerates all four figures without training a model or downloading a dataset. Notebook 22 charts keep model-seed variation separate from fixed-start baseline intervals and show action ranking within each method's score space. See the [case study](CASE_STUDY.md) for captions, scope, and limits.

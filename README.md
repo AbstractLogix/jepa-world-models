@@ -4,7 +4,7 @@
 
 [Start learning](CURRICULUM_GUIDE.md) · [Browse lessons](docs/CURRICULUM_COVERAGE.md) · [Read the research case study](docs/portfolio/CASE_STUDY.md) · [Explore the research roadmap](docs/ROADMAP.md) · [Read the reproduction matrix](docs/REPRODUCTION_MATRIX.md)
 
-This repository has 21 notebooks. It separates paper-reported results from local measurements and teaching analogies. A toy result is never presented as a paper reproduction.
+This repository has 22 notebooks. It separates paper-reported results from local measurements and teaching analogies. A toy result is never presented as a paper reproduction.
 
 ## Learning path
 
@@ -15,7 +15,7 @@ flowchart LR
     A["01 · Intuition"] --> B["02–03 · Representation learning"]
     B --> C["05–06 · Latent planning"]
     C --> D["14, 16, 17, 20, 21 · Decision evaluation"]
-    E["Optional research lessons · 09–21"] -. "extend the path" .-> B
+    E["Optional research lessons · 09–22"] -. "extend the path" .-> B
     E -.-> C
 ```
 
@@ -24,7 +24,7 @@ flowchart LR
 | 1 | [01 · Intuition](notebooks/01_intuition.ipynb) | See how predictive learning works and how collapse can occur. |
 | 2 | [02 · LeJEPA](notebooks/02_lejepa_from_scratch.ipynb) and [03 · Rectified LpJEPA](notebooks/03_rectified_lpjepa.ipynb) | Train small models and compare representation objectives. |
 | 3 | [05 · Value-guided planning](notebooks/05_value_guided_planning.ipynb) and [06 · Gradient-based planning](notebooks/06_gradient_based_planning.ipynb) | Use learned representations to plan actions in a small control task. |
-| 4 | [14 · Decision usefulness](notebooks/14_decision_usefulness.ipynb), [16 · Action-conditioned planning](notebooks/16_action_conditioned_video_planning.ipynb), [17 · Uncertainty](notebooks/17_model_uncertainty_planning.ipynb), [20 · Policy-noise planning](notebooks/20_policy_noise_planning.ipynb), and [21 · Sampling-based planning](notebooks/21_sampling_based_planning.ipynb) | Measure decision outcomes and compare ways to search action sequences. |
+| 4 | [14 · Decision usefulness](notebooks/14_decision_usefulness.ipynb), [16 · Action-conditioned planning](notebooks/16_action_conditioned_video_planning.ipynb), [17 · Uncertainty](notebooks/17_model_uncertainty_planning.ipynb), [20 · Policy-noise planning](notebooks/20_policy_noise_planning.ipynb), [21 · Sampling-based planning](notebooks/21_sampling_based_planning.ipynb), and [22 · Visual JEPA decisions](notebooks/22_visual_jepa_decision_usefulness.ipynb) | Measure prediction, action ranking, uncertainty, and decision outcomes. Notebook 22 completed a five-seed CUDA study after its validation gate passed. Uniform-start JEPA CEM succeeded on 0/100 starts; momentum-prior JEPA CEM and its direct visual-momentum baseline succeeded on all tested starts. The result shows that the prior matters; it does not establish an added JEPA benefit. |
 
 The [curriculum guide](CURRICULUM_GUIDE.md) gives a teaching sequence. The [coverage map](docs/CURRICULUM_COVERAGE.md) lists every notebook, its evidence, and its limits.
 

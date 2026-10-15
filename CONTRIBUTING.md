@@ -12,7 +12,7 @@ Thank you for helping improve this course. Contributions can improve a lesson, a
 
 Record the learner outcome, prerequisites, primary sources, required data and models, expected output, and local validation path. For a research reproduction, also select one exact claim and record its metric, baseline, data split, run count, and decision rule before the final evaluation.
 
-Keep paper-reported results separate from local measurements. Label a toy example as **Illustrative**. A reduced or changed setup is a partial or scaled attempt, not an exact reproduction. Do not commit datasets, checkpoints, credentials, or generated run outputs.
+Keep paper-reported results separate from local measurements. Label a toy example as **Illustrative**. A reduced or changed setup is a partial or scaled attempt, not an exact reproduction. Do not commit datasets, checkpoints, credentials, or bulky generated outputs. Commit compact raw evidence records only when the evaluation protocol or feature specification requires them, and document their provenance and limits.
 
 ## Spec Kit workflow
 

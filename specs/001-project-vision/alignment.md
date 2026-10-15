@@ -17,7 +17,7 @@
 
 ## Research roadmap refresh
 
-The 2026-10-15 source review added LeWAM for RoboTwin 2.0 (arXiv:2609.27455), GA-WM (arXiv:2609.03565), and Hamiltonian JEPA (arXiv:2609.33497) to the future-work map. It names these separately from the existing Push-T LeWAM, diffusion-steering LeWAM, hierarchical H-JEPA, and LeHami entries. The released RoboTwin checkpoint still needs a fixed-case runtime check and a code-license review; the other two candidates still need first-party implementation and evaluation artifacts. No local results are claimed. See the [roadmap](../../docs/ROADMAP.md), [reproduction matrix](../../docs/REPRODUCTION_MATRIX.md), and [research review](research.md).
+The 2026-10-15 source review added LeWAM for RoboTwin 2.0 (arXiv:2609.27455), GA-WM (arXiv:2609.03565), Hamiltonian JEPA (arXiv:2609.33497), and calibrated risk screening with a deterministic shield (arXiv:2608.17496) to the future-work map. It names these separately from the existing Push-T LeWAM, diffusion-steering LeWAM, hierarchical H-JEPA, and LeHami entries. The released RoboTwin checkpoint still needs a fixed-case runtime check and a code-license review; the other candidates still need first-party implementation and evaluation artifacts. The risk-screening paper says it releases materials but the reviewed arXiv record and paper text do not expose a first-party code/data location; its +3-point gain over reranking-only is not statistically significant. Its local evaluation status is unchanged. No local results are claimed. See the [roadmap](../../docs/ROADMAP.md), [reproduction matrix](../../docs/REPRODUCTION_MATRIX.md), and [research review](research.md).
 
 ## Evaluation protocol audit
 

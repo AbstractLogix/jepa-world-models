@@ -10,9 +10,16 @@ __pycache__/
 *.pyo
 *.pyd
 *.pkl
+venv/
+dist/
+*.egg-info/
 
 # VSCode
 .vscode/
 
 # github
 .github/
+
+# Model data
+notebooks/data/
+notebooks/checkpoints/

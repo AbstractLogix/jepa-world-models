@@ -1,0 +1,22 @@
+experiment: rectified_lpjepa_imagenet
+seed: 42
+
+data:
+  dataset: imagenet100
+  root: data/imagenet100
+  image_size: 224
+  batch_size: 64
+  num_workers: 8
+
+model:
+  encoder: vit_small_patch16_224
+  embedding_dim: 384
+
+train:
+  epochs: 100
+  lr: 0.0003
+  weight_decay: 0.05
+
+loss:
+  sparsity_weight: 0.001
+  entropy_weight: 0.001

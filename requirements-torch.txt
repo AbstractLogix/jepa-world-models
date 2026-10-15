@@ -1,0 +1,14 @@
+# PyTorch-family wheels live on a custom index (not PyPI).
+# These must be installed separately from the Poetry-managed environment.
+#
+# Usage (run once after `poetry install`):
+#   pip install -r requirements-torch.txt
+#
+# CPU-only alternative (no CUDA, for laptops without GPU):
+#   pip install -r requirements-torch.txt --index-url https://download.pytorch.org/whl/cpu
+
+--index-url https://download.pytorch.org/whl/cu128
+
+torch==2.10.0
+torchvision==0.25.0
+torchcodec==0.10.0

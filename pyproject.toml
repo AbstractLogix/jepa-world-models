@@ -1,0 +1,86 @@
+[project]
+name = "jepa-world-models-tutorial"
+version = "0.1.0"
+description = "Educational walkthrough of JEPA world models (LeJEPA, V-JEPA, VL-JEPA, planning)"
+authors = [
+]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10,<3.14"
+
+dependencies = [
+    # ── Core scientific stack ──────────────────────────────────────────────
+    "numpy>=2.0,<3",
+    "scipy>=1.13,<2",
+    "matplotlib>=3.9,<4",
+    "scikit-learn>=1.5,<2",
+    "tqdm>=4.66,<5",
+    "Pillow>=10.0,<13",
+    "PyYAML>=6.0,<7",
+
+    # ── Notebook environment ───────────────────────────────────────────────
+    "ipykernel>=6.29,<8",
+    "jupyterlab>=4.2,<5",
+    "ipywidgets>=8.1,<9",
+
+    # ── ML extras ─────────────────────────────────────────────────────────
+    "timm>=1.0,<2",
+    "gymnasium>=0.29,<1",
+
+    # ── PyTorch: installed separately via requirements-torch.txt ──────────
+    # torch, torchvision, torchcodec are on the PyTorch wheel index, not PyPI.
+    # Run: pip install -r requirements-torch.txt
+]
+
+[project.optional-dependencies]
+# V-JEPA 2.1 Hub code imports einops; the checkpoint remains opt-in.
+vjepa21 = ["einops>=0.8,<1", "opencv-python-headless>=4.10,<5"]
+
+# VL-JEPA-inspired notebook 11 uses real text embeddings; PyTorch remains separate.
+vljepa = ["transformers>=5,<6", "safetensors>=0.4,<1"]
+
+# Physical planning labs (07/08) – requires cmake/bazel + MUJOCO_PATH set.
+# Install with:  pip install dm-control
+# dm = ["dm-control>=1.0"]
+
+dev = [
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+# PyTorch wheels use a custom index and local version suffixes (+cu124) that
+# Poetry's resolver cannot handle. Install them separately:
+#   pip install -r requirements-torch.txt
+
+[build-system]
+requires = [
+    "poetry-core",
+]
+build-backend = "poetry.core.masonry.api"
+
+# ── Tool config ────────────────────────────────────────────────────────────────
+[tool.poetry]
+# using src/ layout avoids accidental namespace clashes (e.g. the stdlib
+# ``code`` module) and makes editable installs clean.
+packages = [
+    { include = "jepa_tutorial", from = "src" },
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "W",
+    "I",
+]
+ignore = [
+    "E501",
+]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true

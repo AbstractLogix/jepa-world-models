@@ -1,0 +1,25 @@
+experiment: value_guided_planning_cartpole
+seed: 42
+
+env:
+  id: CartPole-v1
+  max_episode_steps: 500
+
+world_model:
+  checkpoint: checkpoints/lejepa_epoch_50.pt
+  latent_dim: 256
+
+planner:
+  method: grasp
+  horizon: 16
+  n_candidates: 256
+  n_iters: 10
+  lr: 0.05
+
+value_head:
+  hidden_dim: 128
+  lr: 0.001
+
+rollout:
+  episodes: 20
+  render: false

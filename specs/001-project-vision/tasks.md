@@ -8,7 +8,7 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 **Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, and `quickstart.md`
 
-**Verification**: Notebooks 01–21 have local execution records or scoped reports. Notebook 09's official checkpoint path passed a fresh CPU-kernel rerun on 2026-10-15. Notebook 15's full 16-cell run passed in a fresh CPU kernel; Notebooks 16, 20, and 21 have paired evaluation evidence. The LpWM reproduction attempt stopped before epoch 1. Notebooks 05 and 06 have two matching seeded runs each. See `docs/evidence/`, `docs/reproductions/`, and `docs/CURRICULUM_COVERAGE.md` for scope and evidence limits.
+**Verification**: Notebooks 01–21 have local execution records or scoped reports. Notebook 22 has a full-size CUDA SIGReg training/validation pilot and a separate VICReg-style validation-only probe using its training path; both failed the collapse screen. The fresh CPU notebook smoke passed and emitted limited rows on seeds reserved for smoke. The full protocol intervention and closed-loop comparison did not run, and a full CUDA notebook run remains open. Notebook 09's official checkpoint path passed a fresh CPU-kernel rerun on 2026-10-15. Notebook 15's full 16-cell run passed in a fresh CPU kernel; Notebooks 16, 20, and 21 have paired evaluation evidence. The LpWM reproduction attempt stopped before epoch 1. Notebooks 05 and 06 have two matching seeded runs each. See `docs/evidence/`, `docs/reproductions/`, and `docs/CURRICULUM_COVERAGE.md` for scope and evidence limits.
 
 **Organization**: Tasks follow the user stories in `spec.md`. Checked tasks are complete in this checkout. Open tasks remain part of the long-term project goal.
 
@@ -254,6 +254,19 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 - [x] T080 Review arXiv:2608.17496 and align it as a gated P3 watch item. Record the reported LIBERO-Long comparisons, the nonsignificant reranking-only margin, compute and execution gaps, and that the reviewed sources do not expose a first-party location for the release materials. No assets were transferred and no evaluation was run.
 
+## Phase 31: Learned visual JEPA decision usefulness
+
+**Goal**: Measure when an action-conditioned learned visual representation supports action selection, while preserving model failures and compute conditions.
+
+**Independent Test**: A non-collapsed visual JEPA passes the fixed validation screen before the predeclared held-out interventions and paired episode comparison run. All five training seeds, raw evaluation rows, model access differences, and compute limits are recorded.
+
+- [x] T081 Specify and implement the local visual-JEPA lesson, model primitives, optional CUDA selection, CPU fallback, fixed protocol, validation-only pilot mode, and hash-matched fail-closed gate in feature 028. The lesson is not a paper reproduction.
+- [x] T082 Run and record validation-only CUDA pilots on the RTX 5070, including the full 16-episode training and 4-episode validation split. The default SIGReg model and separate VICReg-style objective probe both collapsed across all 32 dimensions; no intervention or evaluation starts were used. See [feature 028](../028-visual-jepa-decisions/spec.md) and the [partial report](../../docs/reproductions/visual-jepa-decision-usefulness.md).
+- [ ] T083 Continue the collapse diagnosis. The GPU replay found a zero SIGReg input gradient for exact constant zero embeddings but no confirmed defect or validated fix. Review source-grounded alternatives such as VISReg and verify first-party code and license terms before reuse. Update feature 028's spec and plan before any new objective pilot. Do not inspect intervention or evaluation outcomes.
+- [ ] T084 After a protocol-hash-matched configuration passes the collapse screen, train the replacement final pairs 7221/5100, 7227/5101, 7239/5102, 7253/5103, and 7263/5104 for each learned baseline. Record prediction, spread, device, time, and memory. Exclude pre-gate pairs 2121/1100, 2127/1101, 2139/1102, 2153/1103, and 2163/1104.
+- [ ] T085 After training passes, run the fixed held-out action interventions and paired closed-loop conditions, preserving all failed or missing records and labeling privileged state access and unequal compute.
+- [ ] T086 Complete the feature report, align the README, curriculum, roadmap, reproduction matrix, and project records with the measured results, then run focused checks and Spec Kit analysis/convergence.
+
 ## Dependencies and Execution Order
 
 - Setup and foundational tasks are complete.
@@ -280,6 +293,7 @@ T074 adds a second planning analogy: 100 shared starts and five evaluation group
 T076 adds Notebook 09's fresh checkpoint-path evidence to the protocol inventory. The comparison uses one synthetic clip and has no pass threshold; it remains illustrative and does not establish general feature quality or a paper benchmark.
 T079 records a source-pinned LeWAM RoboTwin 2.0 preflight only. WSL GPU simulation/rendering is unsupported by RoboTwin, the CUDA toolkit and Vulkan tools are absent, and the code terms are unresolved. No assets or code were transferred; the fixed-case evaluation remains not run.
 T080 adds a research watch item only. It does not implement a safety shield, evaluate a JEPA, or reproduce the cited simulation results.
+T081 and T082 specify Notebook 22, implement the protocol-hash-matched pilot gate, and record full-size CUDA validation pilots. The SIGReg and VICReg-style pilots collapsed. A gradient replay found exact-collapse zero gradient but no confirmed fix. Five model/data pairs were trained before the root-level pilot prerequisite was noticed; preserve them only as excluded pre-gate diagnostics. Replacement final pairs 7221/5100, 7227/5101, 7239/5102, 7253/5103, and 7263/5104 remain unused. T083 must identify a verified non-collapsed configuration before T084–T085 can proceed. The held-out comparison remains open; these runs are not paper reproductions.
 
 ### Parallel opportunities
 

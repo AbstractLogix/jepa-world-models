@@ -21,8 +21,7 @@
   ],
   "status": {
     "label": "Active research tutorial",
-    "summary": "Local lessons and evidence are available. The learned-JEPA-versus-direct-policy comparison and large paper benchmarks remain pending.",
-    "branchContext": "These portfolio files are on a draft branch stacked on PR #1. The uv migration and lessons on that base branch are not yet merged to main.",
+    "summary": "Local lessons and evidence are available. Notebook 22's learned visual JEPA comparison remains gated after a failed GPU validation pilot. Large paper benchmarks remain pending.",
     "license": "The package metadata declares MIT. No root LICENSE file is present; confirm rights-holder details before making a license claim."
   },
   "researchQuestion": "When do predictive representations actually improve action selection, and when does accurate prediction fail to translate into effective decisions?",
@@ -90,6 +89,20 @@
       ]
     }
   ],
+  "pendingWork": [
+    {
+      "id": "notebook-22-learned-visual-jepa-decision-comparison",
+      "title": "Learned visual JEPA decision comparison",
+      "status": "gated after failed validation-only pilot",
+      "summary": "On an RTX 5070, the 35-epoch SIGReg pilot and a local VICReg-style probe both fell below the predeclared embedding-spread threshold in all 32 dimensions. The replacement final seeds, held-out interventions, and paired episode comparison remain unopened. Earlier five-seed fits are retained as excluded pre-gate diagnostics.",
+      "claimBoundary": "This is a local configuration failure. It does not establish a general JEPA result or show whether a learned visual JEPA improves decisions.",
+      "evidence": [
+        "notebooks/22_visual_jepa_decision_usefulness.ipynb",
+        "docs/reproductions/visual-jepa-decision-usefulness.md",
+        "docs/evidence/visual-jepa-validation-pilots.csv"
+      ]
+    }
+  ],
   "repository": {
     "url": "https://github.com/AbstractLogix/jepa-world-models",
     "defaultBranch": "main"
@@ -121,10 +134,19 @@
       "kind": "documentation"
     },
     {
-      "label": "Draft PR #1 base",
-      "url": "https://github.com/AbstractLogix/jepa-world-models/pull/1",
-      "kind": "pull-request",
-      "status": "draft; unmerged"
+      "label": "Notebook 22: Visual JEPA decision usefulness",
+      "path": "notebooks/22_visual_jepa_decision_usefulness.ipynb",
+      "kind": "notebook"
+    },
+    {
+      "label": "Notebook 22 validation report",
+      "path": "docs/reproductions/visual-jepa-decision-usefulness.md",
+      "kind": "evidence"
+    },
+    {
+      "label": "Notebook 22 CUDA pilot records",
+      "path": "docs/evidence/visual-jepa-validation-pilots.csv",
+      "kind": "evidence"
     }
   ],
   "media": [

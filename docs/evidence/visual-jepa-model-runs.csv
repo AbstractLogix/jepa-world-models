@@ -1,0 +1,2 @@
+method,model_seed,training_data_seed,status,device,device_name,torch_version,cuda_version,precision,sigreg_weight,sigreg_projections,epochs,train_rows,validation_rows,train_seconds,peak_allocated_mib,total_loss,prediction_loss,pixel_loss,sigreg,finite,mean_std,low_variance_dims,dimension,collapsed,error
+jepa,2021,1000,complete,cuda,NVIDIA GeForce RTX 5070,2.10.0+cu128,12.8,float32,0.1,128,35,4800,1200,13.022000203000061,509.03515625,53.858341979980466,0.0013512237463146448,,538.5699035644532,true,7.386750803561881e-05,32,32,true,

@@ -88,6 +88,12 @@ Evidence: [Notebook 17](../../notebooks/17_model_uncertainty_planning.ipynb) · 
 
 The chart generator reads Notebook 14's saved episode table and the raw Notebook 16 and 17 CSV records. Focused unit checks are in `tests/test_portfolio_figures.py`.
 
+## Exploratory validation: learned visual JEPA
+
+Notebook 22 records a bounded CUDA validation pilot on an RTX 5070. After 35 epochs on 16 training episodes and 4 validation episodes, the SIGReg model had all 32 embedding dimensions below the predeclared `1e-3` spread threshold. A local VICReg-style probe also collapsed across all 32 dimensions. An earlier five-seed training run is retained as excluded pre-gate diagnostics.
+
+The final replacement seeds, held-out interventions, and paired episode comparison remain gated. These pilots show that the tested configurations failed the collapse screen; they do not show whether a learned visual JEPA improves decisions. See [Notebook 22](../../notebooks/22_visual_jepa_decision_usefulness.ipynb), its [run report](../reproductions/visual-jepa-decision-usefulness.md), and the [pilot records](../evidence/visual-jepa-validation-pilots.csv).
+
 ## Official V-JEPA checkpoint check
 
 Notebook 09 loaded an official V-JEPA 2.1 ViT-B/384 checkpoint on CPU from a deterministic synthetic 16-frame clip. The output had shape `[1, 8, 24, 24, 768]` and finite values. Retrieval selected a patch one grid cell from the known synthetic patch; a mean-RGB baseline selected the same patch. The run confirms local checkpoint loading and feature extraction only. It does not establish general correspondence quality, planning value, or a paper benchmark result.
@@ -96,15 +102,15 @@ Evidence: [Notebook 09](../../notebooks/09_vjepa21_dense_features.ipynb) · [che
 
 ## Reproducibility and compute
 
-- The current portfolio branch is based on the open draft PR #1 branch. Its `uv` migration and new tutorials are not yet part of `main`. See [PR #1](https://github.com/AbstractLogix/jepa-world-models/pull/1).
-- On the current branch, the core environment is defined by `pyproject.toml` and `uv.lock`. Use `uv sync --locked` for the default CPU environment. Apply `requirements-torch.txt` only when a CUDA 12.8 setup is intended.
+- The `uv` migration and portfolio case study are in `main` (PRs [#1](https://github.com/AbstractLogix/jepa-world-models/pull/1) and [#2](https://github.com/AbstractLogix/jepa-world-models/pull/2) are merged).
+- The core environment is defined by `pyproject.toml` and `uv.lock`. Use `uv sync --locked` for the default CPU environment. Apply `requirements-torch.txt` only when a CUDA 12.8 setup is intended.
 - Keep downloaded data, checkpoints, and package caches on E: or D: by setting `JEPA_ASSETS_DIR`, `UV_CACHE_DIR`, `HF_HUB_CACHE`, `HF_ASSETS_CACHE`, and `TORCH_HOME` before setup. The README gives a WSL example.
 - Notebooks 14 and 16 use CPU and no external assets. Notebook 17 uses CPU and retains 60,000 calibration rows, 200 selected plans, 220 episode outcomes, and five run records.
 - Notebook 09's checkpoint is about 1.66 GB and its license terms must be checked before redistribution. The notebook does not redistribute weights.
 - The repository has a focused unit-test suite for the new portfolio evidence summaries. The evidence validator for Notebooks 20 and 21 checks record structure; it does not rerun notebooks or validate scientific claims.
 - `pyproject.toml` declares MIT, but the repository has no root `LICENSE` file. Maintainers should confirm the rights holder and add the license text before describing the repository as MIT-licensed.
 
-The case study does not run the full JEPA-WAM LIBERO-Plus benchmark, the scoped 450-episode Push-T evaluation, or any new GPU experiment.
+The Notebook 22 work includes bounded CUDA validation pilots. It does not run the full JEPA-WAM LIBERO-Plus benchmark or the scoped 450-episode Push-T evaluation.
 
 ## Technical challenges and limits
 

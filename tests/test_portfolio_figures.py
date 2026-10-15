@@ -52,11 +52,24 @@ class PortfolioEvidenceTests(unittest.TestCase):
 
     def test_manifest_paths_and_accessibility_fields_exist(self) -> None:
         manifest = json.loads((ROOT / "docs/portfolio/project.json").read_text(encoding="utf-8"))
-        for field in ("schemaVersion", "slug", "title", "summary", "description", "verifiedFindings", "repository", "links", "media"):
+        for field in ("schemaVersion", "slug", "title", "summary", "description", "categories", "technologies", "status", "verifiedFindings", "pendingWork", "repository", "links", "media"):
             self.assertIn(field, manifest)
+        self.assertTrue(manifest["categories"])
+        self.assertTrue(manifest["technologies"])
+        self.assertTrue(manifest["status"]["label"])
+        self.assertTrue(manifest["status"]["summary"])
+        self.assertGreaterEqual(len(manifest["verifiedFindings"]), 3)
+        self.assertLessEqual(len(manifest["verifiedFindings"]), 5)
+        verified_ids = {finding["id"] for finding in manifest["verifiedFindings"]}
         for finding in manifest["verifiedFindings"]:
             self.assertTrue(finding["claimBoundary"])
             for evidence_path in finding["evidence"]:
+                self.assertTrue((ROOT / evidence_path).is_file(), evidence_path)
+        for work in manifest["pendingWork"]:
+            self.assertTrue(work["status"])
+            self.assertTrue(work["claimBoundary"])
+            self.assertNotIn(work["id"], verified_ids)
+            for evidence_path in work["evidence"]:
                 self.assertTrue((ROOT / evidence_path).is_file(), evidence_path)
         for link in manifest["links"]:
             if "path" in link:

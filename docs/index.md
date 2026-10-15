@@ -16,6 +16,7 @@ flowchart LR
 | --- | --- |
 | Learn the core path | [Curriculum guide](../CURRICULUM_GUIDE.md) and the [README quick start](../README.md) |
 | See what each notebook proves | [Curriculum coverage](CURRICULUM_COVERAGE.md) |
+| Read the research case study | [Portfolio case study](portfolio/CASE_STUDY.md) and [website manifest](portfolio/project.json) |
 | Explore new research | [Research roadmap](ROADMAP.md) |
 | Check or reproduce a claim | [Evaluation protocol](EVALUATION_PROTOCOL.md) and [reproduction matrix](REPRODUCTION_MATRIX.md) |
 | Find a local result | [Evidence records](evidence/) and [reproduction reports](reproductions/) |

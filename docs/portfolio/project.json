@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0.0",
+  "slug": "jepa-world-models",
+  "title": "JEPA World Models: From Prediction to Decisions",
+  "summary": "An evidence-led tutorial that tests when predictive representations help action selection—and when accurate prediction is not enough.",
+  "description": "This research tutorial connects JEPA representation learning, action-conditioned prediction, planning, uncertainty, and decision evaluation. It includes small local LeJEPA objective studies, a verified inference check with an official V-JEPA 2.1 checkpoint, and clearly labeled MountainCar analogues that expose the gap between one-step prediction and closed-loop control. Toy results are not presented as paper reproductions. A genuine learned-JEPA-versus-direct-policy benchmark remains future work.",
+  "categories": [
+    "Applied AI Research",
+    "Reproducible Machine Learning",
+    "Research Education",
+    "World Models and Planning"
+  ],
+  "technologies": [
+    "Python",
+    "PyTorch",
+    "Jupyter",
+    "uv",
+    "Gymnasium",
+    "scikit-learn",
+    "Matplotlib"
+  ],
+  "status": {
+    "label": "Active research tutorial",
+    "summary": "Local lessons and evidence are available. The learned-JEPA-versus-direct-policy comparison and large paper benchmarks remain pending.",
+    "branchContext": "These portfolio files are on a draft branch stacked on PR #1. The uv migration and lessons on that base branch are not yet merged to main.",
+    "license": "The package metadata declares MIT. No root LICENSE file is present; confirm rights-holder details before making a license claim."
+  },
+  "researchQuestion": "When do predictive representations actually improve action selection, and when does accurate prediction fail to translate into effective decisions?",
+  "verifiedFindings": [
+    {
+      "id": "lejepa-sigreg-local-objective-study",
+      "title": "SIGReg changed feature statistics without a measured probe gain",
+      "status": "locally measured",
+      "summary": "On a five-seed CIFAR-10 subset study, the paired frozen-probe difference was -0.24 percentage points, with a 95% interval of [-1.591, 1.111] points. The interval includes zero.",
+      "scope": "640 self-supervised images, small CNN, five seeds; local objective study only.",
+      "claimBoundary": "Not the LeJEPA ImageNet-1K result; does not establish general superiority or inferiority.",
+      "evidence": [
+        "notebooks/02_lejepa_from_scratch.ipynb",
+        "docs/reproductions/lejepa-rectified-lpjepa.md"
+      ]
+    },
+    {
+      "id": "rectified-lpjepa-local-projector-study",
+      "title": "RDMReg improved the local projector probe over a degenerate teaching proxy",
+      "status": "locally measured",
+      "summary": "The paired projector-probe difference was +6.94 percentage points, with a 95% interval of [2.918, 10.962]. Encoder-probe scores were similar.",
+      "scope": "Five-seed CIFAR-10 subset study with a local CNN and projector.",
+      "claimBoundary": "The teaching proxy was often near zero and fully zero on one seed. This is not the paper's ImageNet-100 result.",
+      "evidence": [
+        "notebooks/03_rectified_lpjepa.ipynb",
+        "docs/reproductions/lejepa-rectified-lpjepa.md"
+      ]
+    },
+    {
+      "id": "notebook-14-prediction-to-decision-gap",
+      "title": "Near-perfect action ranking did not make local MPC successful",
+      "status": "locally measured illustrative analogue",
+      "summary": "The state model ranked 60/60 non-tied action pairs correctly, yet MPC reached 0/20 goals and a direct momentum rule reached 20/20. The planner used 7.68 million model transitions and 12.747 seconds; the rule used no model transitions and 0.007 seconds.",
+      "scope": "One deterministic polynomial Ridge model; MountainCarContinuous; 20 paired starts.",
+      "claimBoundary": "Not a JEPA result or matched-actual-compute comparison. It applies only to the recorded local task and settings.",
+      "evidence": [
+        "notebooks/14_decision_usefulness.ipynb",
+        "docs/reproductions/decision-usefulness.md"
+      ]
+    },
+    {
+      "id": "notebook-16-prior-guided-search-analogue",
+      "title": "A hand-written controller prior changed CEM outcomes",
+      "status": "locally measured exploratory analogue",
+      "summary": "On 20 paired starts, neutral-start CEM reached 0/20 goals; momentum-prior CEM and direct control each reached 20/20. Direct control used zero model calls and averaged fewer steps than the prior planner.",
+      "scope": "One fixed color-moment feature extractor and one Ridge fit on rendered MountainCar frames.",
+      "claimBoundary": "The prior is hand-written, not a learned policy. This is not PiJEPA or a learned JEPA planner.",
+      "evidence": [
+        "notebooks/16_action_conditioned_video_planning.ipynb",
+        "docs/evidence/action-video-planning-episodes.csv",
+        "docs/reproductions/action-video-planning.md"
+      ]
+    },
+    {
+      "id": "notebook-17-uncertainty-analogue",
+      "title": "Planner-shift coverage intervals were wider across five fits",
+      "status": "locally measured analogue",
+      "summary": "For 90% prediction intervals, mean position coverage was 90.7% [89.7%, 91.7%] on random actions and 89.0% [82.2%, 95.7%] under planner shift.",
+      "scope": "Five independent state-space Ridge ensembles on MountainCarContinuous.",
+      "claimBoundary": "Not a JEPA uncertainty result; five fits and one task do not establish general calibration.",
+      "evidence": [
+        "notebooks/17_model_uncertainty_planning.ipynb",
+        "docs/evidence/model-uncertainty-calibration.csv",
+        "docs/reproductions/model-uncertainty-planning.md"
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/AbstractLogix/jepa-world-models",
+    "defaultBranch": "main"
+  },
+  "links": [
+    {
+      "label": "Portfolio case study",
+      "path": "docs/portfolio/CASE_STUDY.md",
+      "kind": "case-study"
+    },
+    {
+      "label": "Curriculum guide",
+      "path": "CURRICULUM_GUIDE.md",
+      "kind": "documentation"
+    },
+    {
+      "label": "Research roadmap",
+      "path": "docs/ROADMAP.md",
+      "kind": "documentation"
+    },
+    {
+      "label": "Evaluation protocol",
+      "path": "docs/EVALUATION_PROTOCOL.md",
+      "kind": "documentation"
+    },
+    {
+      "label": "Reproduction matrix",
+      "path": "docs/REPRODUCTION_MATRIX.md",
+      "kind": "documentation"
+    },
+    {
+      "label": "Draft PR #1 base",
+      "url": "https://github.com/AbstractLogix/jepa-world-models/pull/1",
+      "kind": "pull-request",
+      "status": "draft; unmerged"
+    }
+  ],
+  "media": [
+    {
+      "path": "docs/portfolio/figures/decision-usefulness.png",
+      "alt": "Separate MountainCar plots compare closed-loop success for a state-model planner and direct momentum rule, and for neutral CEM, hand-written momentum-prior CEM, and direct control. Both neutral planners fail all 20 starts despite perfect local intervention ranking.",
+      "caption": "Closed-loop success on separate 20-start evaluations. Error bars are Wilson intervals across starts, not training runs.",
+      "evidence": [
+        "notebooks/14_decision_usefulness.ipynb",
+        "docs/evidence/action-video-planning-episodes.csv"
+      ]
+    },
+    {
+      "path": "docs/portfolio/figures/uncertainty-calibration.png",
+      "alt": "Position and velocity coverage of nominal 90 percent prediction intervals on random-action and planner-shift tests. Means are near 90 percent; planner-shift confidence intervals are wider.",
+      "caption": "Coverage means and 95% Student-t intervals across five independent state-space model fits.",
+      "evidence": [
+        "docs/evidence/model-uncertainty-calibration.csv",
+        "docs/reproductions/model-uncertainty-planning.md"
+      ]
+    }
+  ]
+}

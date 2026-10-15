@@ -26,21 +26,21 @@ dependencies = [
     # ── ML extras ─────────────────────────────────────────────────────────
     "timm>=1.0,<2",
     "gymnasium>=0.29,<1",
-
-    # ── PyTorch: installed separately via requirements-torch.txt ──────────
-    # torch, torchvision, torchcodec are on the PyTorch wheel index, not PyPI.
-    # Run: pip install -r requirements-torch.txt
+    # CPU PyTorch wheels are the locked default; use requirements-torch.txt for CUDA.
+    "torch==2.10.0",
+    "torchvision==0.25.0",
+    "torchcodec==0.10.0",
 ]
 
 [project.optional-dependencies]
 # V-JEPA 2.1 Hub code imports einops; the checkpoint remains opt-in.
 vjepa21 = ["einops>=0.8,<1", "opencv-python-headless>=4.10,<5"]
 
-# VL-JEPA-inspired notebook 11 uses real text embeddings; PyTorch remains separate.
+# VL-JEPA-inspired notebook 11 uses real text embeddings; PyTorch is in the base lock.
 vljepa = ["transformers>=5,<6", "safetensors>=0.4,<1"]
 
 # Physical planning labs (07/08) – requires cmake/bazel + MUJOCO_PATH set.
-# Install with:  pip install dm-control
+# Install with:  uv pip install dm-control
 # dm = ["dm-control>=1.0"]
 
 dev = [
@@ -48,23 +48,28 @@ dev = [
     "mypy>=1.10",
 ]
 
-# PyTorch wheels use a custom index and local version suffixes (+cu124) that
-# Poetry's resolver cannot handle. Install them separately:
-#   pip install -r requirements-torch.txt
+# The base lock uses CPU PyTorch wheels. For CUDA 12.8, replace them after
+# `uv sync --locked` with the builds in requirements-torch.txt.
+#   uv pip install -r requirements-torch.txt
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+torchcodec = { index = "pytorch-cpu" }
 
 [build-system]
-requires = [
-    "poetry-core",
-]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
 
 # ── Tool config ────────────────────────────────────────────────────────────────
-[tool.poetry]
-# using src/ layout avoids accidental namespace clashes (e.g. the stdlib
-# ``code`` module) and makes editable installs clean.
-packages = [
-    { include = "jepa_tutorial", from = "src" },
-]
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["jepa_tutorial*"]
 
 [tool.ruff]
 line-length = 100

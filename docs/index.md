@@ -1,24 +1,31 @@
-# Project Documentation
+# Explore the course
 
-Use this page to find the learning guides, research notes, and local evidence.
+*Start with a runnable lesson. Follow the evidence when you want to go deeper.*
 
-## Learn and teach
+```mermaid
+flowchart LR
+  A["Learn the core ideas"] --> B["Build and compare models"]
+  B --> C["Test action choices"]
+  C --> D["Explore current research"]
+  D --> E["Check the evidence"]
+```
 
-- [Curriculum guide](../CURRICULUM_GUIDE.md) — recommended sequence, session plan, and assessment rubric.
-- [Curriculum coverage](CURRICULUM_COVERAGE.md) — what each notebook teaches and what its results support.
-- [README](../README.md) — project overview, core path, and quick start.
+## Choose your next step
 
-## Research and evaluation
+| You want to | Start here |
+| --- | --- |
+| Learn the core path | [Curriculum guide](../CURRICULUM_GUIDE.md) and the [README quick start](../README.md) |
+| See what each notebook proves | [Curriculum coverage](CURRICULUM_COVERAGE.md) |
+| Explore new research | [Research roadmap](ROADMAP.md) |
+| Check or reproduce a claim | [Evaluation protocol](EVALUATION_PROTOCOL.md) and [reproduction matrix](REPRODUCTION_MATRIX.md) |
+| Find a local result | [Evidence records](evidence/) and [reproduction reports](reproductions/) |
+| Add a lesson | [Spec Kit quickstart](../specs/001-project-vision/quickstart.md) and [contributing guide](../CONTRIBUTING.md) |
 
-- [Research roadmap](ROADMAP.md) — current research themes, future lessons, and prerequisites.
-- [Reproduction matrix](REPRODUCTION_MATRIX.md) — selected paper claims, local attempts, and open resource gates.
-- [Evaluation protocol](EVALUATION_PROTOCOL.md) — how to define, compare, and report runs.
-- [Reproduction reports](reproductions/) — scoped plans and local results for individual claims.
+## Read each result in context
 
-## Evidence and contribution
+- **Paper-reported** — the value comes from a cited paper or official source.
+- **Locally measured** — this repository produced the value under recorded conditions.
+- **Illustrative** — the result teaches an idea but does not test a paper claim.
+- **Not run** — no local execution evidence is available.
 
-- [Evidence records](evidence/) — run conditions, saved outcomes, and protocol audits.
-- [Spec Kit quickstart](../specs/001-project-vision/quickstart.md) — workflow for new lessons and substantial changes.
-- [Contributing guide](../CONTRIBUTING.md) — source, evidence, style, and review expectations.
-
-Paper results remain labeled as paper-reported. Local results include their task, setup, and limits. A teaching analogy does not count as a paper reproduction.
+A teaching analogy is not a paper reproduction. Each report states its task, setup, and limits.

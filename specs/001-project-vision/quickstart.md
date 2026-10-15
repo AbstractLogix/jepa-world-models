@@ -17,9 +17,9 @@ Commit the generated Spec Kit skills when they contain project workflow instruct
 From the repository root:
 
 ```bash
-poetry install
-poetry run pip install -r requirements-torch.txt
-poetry run jupyter lab
+uv sync --locked
+uv pip install -r requirements-torch.txt  # optional CUDA 12.8 override; omit for CPU-only use
+uv run jupyter lab
 ```
 
 Start with `notebooks/01_intuition.ipynb`. Use [the coverage map](../../docs/CURRICULUM_COVERAGE.md) to select later lessons and understand their limits. Use [the evaluation protocol](../../docs/EVALUATION_PROTOCOL.md) before comparing results. Use [the roadmap](../../docs/ROADMAP.md) for future topics.

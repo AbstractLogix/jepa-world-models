@@ -183,8 +183,22 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 ## Phase 21: Scope the JEPA-WAM released-checkpoint evaluation
 
 - [x] T065 Review the JEPA-WAM paper, pinned code and checkpoint revisions, LIBERO-Plus task count and protocol, third-party terms, and local host; create feature 021 and align the preflight, roadmap, and reproduction matrix.
-- [ ] T066 In an isolated Python 3.10 environment, verify the scoped inference artifacts and run the upstream one-task, one-action diagnostic. Record CUDA, memory, renderer, versions, elapsed time, and errors. Do not transfer training RLDS data.
+- [x] T066 In an isolated Python 3.10 environment, verify the scoped inference artifacts and run the upstream one-task diagnostic with its ten no-op warm-up steps and one policy action. Record CUDA, memory, renderer, versions, elapsed time, and errors. Do not transfer training RLDS data. The one-task smoke completed with 0/1 task success; this is not a paper score. See the [evidence report](../../docs/reproductions/jepa-wam-libero-plus.md).
 - [ ] T067 If T066 passes and the measured runtime is acceptable, evaluate all 2,402 spatial-suite variants across seven categories with one trial per task. Preserve each outcome and compute. Report this as a released-checkpoint re-evaluation, not a training reproduction.
+
+## Phase 22: Refresh the public research map
+
+- [x] T068 Review newly released JEPA world-model and world-action papers at arXiv:2609.27455, arXiv:2609.03565, and arXiv:2609.33497; verify first-party code, checkpoint, benchmark, and license status before adding candidates.
+- [x] T069 Align the research roadmap, reproduction matrix, curriculum coverage, project research, alignment, and remaining-work records. Disambiguate the RoboTwin and Push-T LeWAM studies and hierarchical versus Hamiltonian H-JEPA. Keep all new paper claims separate from local evidence.
+- [x] T070 Align the project plan and Spec Kit task records with the current count of nineteen notebooks.
+
+## Phase 23: Adopt uv for the project environment
+
+**Goal**: Use one fast, committed lockfile workflow for the tutorial environment and keep platform-specific PyTorch wheels documented separately.
+
+**Independent Test**: `uv sync --locked` installs the project into the selected environment, the package imports, learner setup commands use `uv`, and no Poetry lockfile or CLI setup remains.
+
+- [x] T071 Replace the Poetry lock and build backend with `uv.lock` and a standard build backend; align the constitution with CPU wheels in the lock and a separate CUDA override; update learner setup guides and external-drive paths; verify a clean E:-hosted environment.
 
 ## Dependencies and Execution Order
 
@@ -204,6 +218,9 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 - User Story 4 has the Spec Kit workflow in place. Future feature work must use it and keep the roadmap aligned.
 
 T065 pins the JEPA-WAM checkpoint evaluation. T066 must pass before T067 starts; the full task count and checkpoint-versus-paper training mismatch stay visible in any report.
+T068 and T069 refresh the dated research map and public documentation. They add future candidates only; no model, dataset, or simulator assets were transferred and no new paper result was measured.
+T070 corrects stale notebook counts in the project plan and alignment record; it does not change lesson scope.
+T071 migrates the project Python environment to uv and amends constitution version 2.0.0 to record the CPU-lock/CUDA-override boundary. The E:-hosted Python 3.13 environment installs from the lock and imports the project, PyTorch, TorchVision, TorchCodec, and timm. The CUDA 12.8 override passes a matrix operation on the RTX 5070. The pre-existing repository `.venv` remains intact.
 
 ### Parallel opportunities
 

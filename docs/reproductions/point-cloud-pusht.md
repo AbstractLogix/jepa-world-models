@@ -3,6 +3,8 @@
 **Paper result**: Point-LeWM 83.6% ± 3.4; Point-Delta-JEPA 70.8% ± 7.7. These are the paper's reported values, not measurements from this project.  
 **Local status**: Stopped at host preflight on 2026-10-14. No evaluation assets were downloaded.
 
+**Host update (2026-10-15)**: An E:-hosted CUDA runtime now passes a basic matrix check. The RTX 5070 still has 12 GB VRAM, below the official 24 GB requirement, so the transfer and evaluation gates remain closed.
+
 ## Host preflight
 
 | Requirement | Observed | Result |

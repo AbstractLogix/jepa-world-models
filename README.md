@@ -34,19 +34,33 @@ In Notebook 14's MountainCar study, learned-model MPC reached the goal on 0 of 2
 
 ## Install and run
 
-Requires Python 3.10–3.13 and [Poetry](https://python-poetry.org/docs/).
+Requires Python 3.10–3.13 and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-poetry install
-poetry run pip install -r requirements-torch.txt
-poetry run jupyter lab
+uv sync --locked
+uv pip install -r requirements-torch.txt  # CUDA 12.8; omit for CPU-only use
+uv run jupyter lab
 ```
 
-Open `notebooks/01_intuition.ipynb` first. For a CPU-only PyTorch setup, use the alternative command in [requirements-torch.txt](requirements-torch.txt). Notebook 11 uses optional text-embedding dependencies:
+The lock uses CPU PyTorch wheels by default. On a CUDA 12.8 system, install the matching wheels after `uv sync --locked`. Open `notebooks/01_intuition.ipynb` first. Notebook 11 needs optional text-embedding dependencies. Select the extra before installing or replacing PyTorch:
 
 ```bash
-poetry install --extras vljepa
+uv sync --locked --extra vljepa
+uv pip install -r requirements-torch.txt  # optional CUDA 12.8 override
 ```
+
+For CPU-only setup, use the locked CPU wheels and omit the CUDA install command. `uv sync --locked` restores those CPU wheels; on a GPU host, reapply the CUDA override after each sync.
+
+If the system drive is low on space, set `UV_CACHE_DIR` and `UV_PROJECT_ENVIRONMENT` to folders on E: or D: before `uv sync --locked`. This keeps the package cache and virtual environment on that drive. In WSL, also target the selected environment when installing CUDA wheels:
+
+```bash
+export UV_CACHE_DIR=/mnt/e/codex-research/uv-cache
+export UV_PROJECT_ENVIRONMENT=/mnt/e/codex-research/jepa-world-models-tutorial/.venv
+uv sync --locked
+uv pip install --python "$UV_PROJECT_ENVIRONMENT/bin/python" -r requirements-torch.txt
+```
+
+For Windows PowerShell, set the same variables to Windows paths and use `uv pip install --python "$env:UV_PROJECT_ENVIRONMENT\Scripts\python.exe" -r requirements-torch.txt`. Notebook data and model files use their own paths; check the [coverage map](docs/CURRICULUM_COVERAGE.md) before a lesson that downloads assets.
 
 Some optional lessons download data or model weights. Notebook 09 uses an approximately 1.66 GB checkpoint, Notebook 11 uses about 300 MB of first-run assets, and Notebook 13 uses about 800 MB of dataset files. Check the [coverage map](docs/CURRICULUM_COVERAGE.md) before starting a lesson.
 

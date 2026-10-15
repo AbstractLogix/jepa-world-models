@@ -31,16 +31,19 @@ These lessons use different levels of evidence. The [coverage map](docs/CURRICUL
 From the repository root:
 
 ```bash
-poetry install
-poetry run pip install -r requirements-torch.txt
-poetry run jupyter lab
+uv sync --locked
+uv pip install -r requirements-torch.txt  # CUDA 12.8; omit for CPU-only use
+uv run jupyter lab
 ```
 
-Notebook 11 also needs:
+The lock uses CPU PyTorch wheels by default. For CUDA 12.8, install those wheels after `uv sync --locked`. Select Notebook 11's extra before installing or replacing PyTorch:
 
 ```bash
-poetry install --extras vljepa
+uv sync --locked --extra vljepa
+uv pip install -r requirements-torch.txt  # optional CUDA 12.8 override
 ```
+
+For CPU-only setup, use the locked CPU wheels and omit the CUDA install command. `uv sync --locked` restores those CPU wheels; on a GPU host, reapply the CUDA override after each sync.
 
 Check the notebook and coverage map before class if you need to download data or model weights. In particular, Notebook 09 downloads an approximately 1.66 GB checkpoint, Notebook 11 uses about 300 MB of first-run assets, and Notebook 13 uses about 800 MB of dataset files.
 

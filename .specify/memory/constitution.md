@@ -25,7 +25,7 @@ Prefer the smallest change that improves learning or reliability. Keep existing 
 ## Educational and Evidence Constraints
 
 - Use direct, simple English in learner-facing text. Keep technical terms when they are needed and define them at first use.
-- The current project targets Python 3.10 through 3.13. Keep PyTorch installation separate from the general Python dependency set as documented in the README.
+- The current project targets Python 3.10 through 3.13. Keep CPU PyTorch wheels in the locked `uv` environment; document CUDA wheel overrides separately from the base lock.
 - State the source, license, size, and access limits for external data and model weights. Do not commit downloaded datasets, checkpoints, credentials, or generated outputs.
 - Treat simulated control, synthetic data, and public robot data as different evidence. Do not imply physical robot validation from a simulation.
 - Mark unknown runtime, hardware, data, and reproducibility claims as unverified until they are checked.
@@ -41,4 +41,4 @@ Prefer the smallest change that improves learning or reliability. Keep existing 
 
 This constitution governs the project specifications and tutorial content. A change that conflicts with a principle MUST explain why in its plan and record the decision. Update this constitution when project goals or teaching rules change. Use semantic versioning: MAJOR for a change to an existing principle, MINOR for a new principle or section, and PATCH for wording that does not change meaning. Review the constitution, requirements checklist, and current code during convergence.
 
-**Version**: 1.0.0 | **Ratified**: 2026-10-14 | **Last Amended**: 2026-10-14
+**Version**: 2.0.0 | **Ratified**: 2026-10-14 | **Last Amended**: 2026-10-15

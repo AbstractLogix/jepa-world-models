@@ -9,15 +9,17 @@
 Install the project dependencies if needed:
 
 ```bash
-poetry install
+uv sync --locked
 ```
+
+The lock includes CPU PyTorch wheels. For CUDA 12.8, install the optional override after sync with `uv pip install -r requirements-torch.txt`. Reapply it after every `uv sync --locked`.
 
 ## Execute
 
 Run Notebook 17 in a fresh kernel:
 
 ```bash
-poetry run jupyter nbconvert --execute --to notebook --inplace notebooks/17_model_uncertainty_planning.ipynb
+uv run jupyter nbconvert --execute --to notebook --inplace notebooks/17_model_uncertainty_planning.ipynb
 ```
 
 The notebook writes four compact CSV records under `docs/evidence/`: model-run provenance, calibration transitions, selected plans, and closed-loop episodes. The files remain local working-tree evidence and are not staged or committed.

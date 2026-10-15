@@ -58,6 +58,7 @@ A contributor wants to add a tutorial without losing the link between the projec
 
 1. **Given** a proposed tutorial change, **When** the contributor records its learner outcome and acceptance criteria, **Then** the task list can be checked against those criteria.
 2. **Given** a change that is not fully implemented, **When** the contributor reviews its status, **Then** missing work remains visible as open tasks.
+3. **Given** a clean checkout, **When** a contributor follows the setup guide, **Then** `uv` creates the locked CPU environment and the optional CUDA install uses the documented wheel index.
 
 ### User Story 5 - Reproduce selected paper findings (Priority: P2)
 
@@ -98,6 +99,7 @@ A contributor wants to check whether a published finding appears under a clearly
 - **FR-011**: A reproduction attempt MUST select and record a specific paper claim, metric, baseline, expected decision rule, and run conditions before final evaluation.
 - **FR-012**: A reproduction report MUST separate paper-reported and locally measured values and list all deviations and failed runs.
 - **FR-013**: A scaled or partial experiment MUST NOT be described as reproducing a full paper result.
+- **FR-014**: The project MUST use `uv` and a committed `uv.lock` for its base Python environment; CPU PyTorch wheels MUST be locked by default, and the CUDA wheel override MUST be documented.
 
 ### Key Entities
 
@@ -119,6 +121,7 @@ A contributor wants to check whether a published finding appears under a clearly
 - **SC-006**: Unbuilt future lessons remain open in `tasks.md`; documentation work does not mark the full project vision complete.
 - **SC-007**: The paper-reproduction matrix lists selected claims, first-party source status, access or resource gates, and an explicit not-run status until local evidence exists.
 - **SC-008**: At least one feasible paper claim has a scoped feature specification and local reproduction report, including raw run values, deviations, and a result limited to that experiment.
+- **SC-009**: A clean checkout can resolve the project environment from `uv.lock` with `uv sync --locked`, and the learner setup commands use `uv`.
 
 ## Assumptions
 

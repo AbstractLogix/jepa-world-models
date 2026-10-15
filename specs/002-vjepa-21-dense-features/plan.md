@@ -4,6 +4,8 @@
 
 **Input**: [spec.md](spec.md)
 
+> Historical plan: this feature was implemented while the project used Poetry. T071 later migrated the current environment to `uv`; use the root README and `uv.lock` for current setup.
+
 ## Summary
 
 Add an optional ninth notebook that loads the smallest official V-JEPA 2.1 checkpoint from a pinned upstream revision, creates a deterministic 16-frame clip locally, visualizes its dense patch features, and measures one known-motion correspondence against a pixel baseline. Keep checkpoint download opt-in. Use the public model entrypoint's 384-pixel input and label the synthetic task as an illustration, not a paper reproduction.

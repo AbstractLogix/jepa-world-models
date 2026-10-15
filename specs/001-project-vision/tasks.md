@@ -8,7 +8,7 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 **Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, and `quickstart.md`
 
-**Verification**: Notebooks 01–19 have local execution records or scoped reports. Notebook 09's official checkpoint path passed a fresh CPU-kernel rerun on 2026-10-15. Notebook 15's full 16-cell run passed in a fresh CPU kernel; Notebook 16 has episode and intervention CSVs. The LpWM reproduction attempt stopped before epoch 1. Notebooks 05 and 06 have two matching seeded runs each. See `docs/evidence/`, `docs/reproductions/`, and `docs/CURRICULUM_COVERAGE.md` for scope and evidence limits.
+**Verification**: Notebooks 01–21 have local execution records or scoped reports. Notebook 09's official checkpoint path passed a fresh CPU-kernel rerun on 2026-10-15. Notebook 15's full 16-cell run passed in a fresh CPU kernel; Notebooks 16, 20, and 21 have paired evaluation evidence. The LpWM reproduction attempt stopped before epoch 1. Notebooks 05 and 06 have two matching seeded runs each. See `docs/evidence/`, `docs/reproductions/`, and `docs/CURRICULUM_COVERAGE.md` for scope and evidence limits.
 
 **Organization**: Tasks follow the user stories in `spec.md`. Checked tasks are complete in this checkout. Open tasks remain part of the long-term project goal.
 
@@ -183,8 +183,68 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 ## Phase 21: Scope the JEPA-WAM released-checkpoint evaluation
 
 - [x] T065 Review the JEPA-WAM paper, pinned code and checkpoint revisions, LIBERO-Plus task count and protocol, third-party terms, and local host; create feature 021 and align the preflight, roadmap, and reproduction matrix.
-- [ ] T066 In an isolated Python 3.10 environment, verify the scoped inference artifacts and run the upstream one-task, one-action diagnostic. Record CUDA, memory, renderer, versions, elapsed time, and errors. Do not transfer training RLDS data.
+- [x] T066 In an isolated Python 3.10 environment, verify the scoped inference artifacts and run the upstream one-task diagnostic with its ten no-op warm-up steps and one policy action. Record CUDA, memory, renderer, versions, elapsed time, and errors. Do not transfer training RLDS data. The one-task smoke completed with 0/1 task success; this is not a paper score. See the [evidence report](../../docs/reproductions/jepa-wam-libero-plus.md).
 - [ ] T067 If T066 passes and the measured runtime is acceptable, evaluate all 2,402 spatial-suite variants across seven categories with one trial per task. Preserve each outcome and compute. Report this as a released-checkpoint re-evaluation, not a training reproduction.
+
+## Phase 22: Refresh the public research map
+
+- [x] T068 Review newly released JEPA world-model and world-action papers at arXiv:2609.27455, arXiv:2609.03565, and arXiv:2609.33497; verify first-party code, checkpoint, benchmark, and license status before adding candidates.
+- [x] T069 Align the research roadmap, reproduction matrix, curriculum coverage, project research, alignment, and remaining-work records. Disambiguate the RoboTwin and Push-T LeWAM studies and hierarchical versus Hamiltonian H-JEPA. Keep all new paper claims separate from local evidence.
+- [x] T070 Align the project plan and Spec Kit task records with the current count of nineteen notebooks.
+
+## Phase 23: Adopt uv for the project environment
+
+**Goal**: Use one fast, committed lockfile workflow for the tutorial environment and keep platform-specific PyTorch wheels documented separately.
+
+**Independent Test**: `uv sync --locked` installs the project into the selected environment, the package imports, learner setup commands use `uv`, and no Poetry lockfile or CLI setup remains.
+
+- [x] T071 Replace the Poetry lock and build backend with `uv.lock` and a standard build backend; align the constitution with CPU wheels in the lock and a separate CUDA override; update learner setup guides and external-drive paths; verify a clean E:-hosted environment.
+
+## Phase 24: Deliver a policy-noise planning lesson
+
+**Goal**: Add a source-backed, locally runnable lesson about planning in a generative policy's noise space while keeping the paper reproduction separate.
+
+- [x] T072 Deliver feature 022's CPU-only Notebook 20 and local report; align the README, curriculum coverage, roadmap, reproduction matrix, project research, and remaining-work record.
+- [x] T073 Validate the shared evaluation protocol against Notebook 20's fresh-kernel run and update `docs/EVALUATION_PROTOCOL.md`, `docs/evidence/evaluation-protocol-audit.md`, and the project alignment record.
+
+## Phase 25: Deliver a sampling-based planning lesson
+
+**Goal**: Teach tree search and shooting optimization with a reproducible toy task while keeping the paper evaluation separate.
+
+- [x] T074 Deliver feature 023's CPU-only Notebook 21 and local report; align the README, curriculum, roadmap, reproduction matrix, project research, and remaining-work record.
+- [x] T075 Apply the shared evaluation protocol to Notebook 21, extend the protocol audit, and analyze and converge feature 023. Keep the paper reproduction not run until author-linked artifacts are available.
+
+## Phase 26: Align the shared protocol with Notebook 09 evidence
+
+**Goal**: Record the fresh V-JEPA 2.1 checkpoint inspection as a bounded illustrative measurement in the shared protocol and its audit.
+
+**Independent Test**: The protocol, audit, curriculum coverage, roadmap, and project alignment all describe the same Notebook 09 evidence and state that it does not establish general feature quality or reproduce a paper benchmark.
+
+- [x] T076 Add Notebook 09 to the protocol audit and align its evidence boundary across the protocol, curriculum, roadmap, and project records.
+
+## Phase 27: Align retained episode evidence
+
+**Goal**: Keep the shared protocol, research roadmap, and project records aligned with the saved Notebook 20 and 21 episode rows.
+
+**Independent Test**: The canonical protocol and roadmap link both CSV files. The project alignment and remaining-work records state the row coverage and preserve the illustrative claim boundary.
+
+- [x] T077 Update the protocol and roadmap with the Notebook 20 and 21 episode CSV links; update the project alignment and remaining-work records without presenting toy outcomes as paper evidence.
+
+## Phase 28: Validate retained episode evidence
+
+**Goal**: Make the integrity checks for the saved Notebook 20 and 21 episode records repeatable.
+
+**Independent Test**: The documented command passes both current CSVs, reports their 300 rows and complete paired coverage, and rejects temporary copies with missing or malformed evidence. The protocol audit states that this validates record integrity only.
+
+- [x] T078 Add and run the episode evidence validator, document its command and limits, and align the evaluation protocol audit and project status records. See [feature 026](../026-episode-evidence-validation/spec.md).
+
+## Phase 29: Preflight LeWAM RoboTwin 2.0
+
+**Goal**: Establish source, terms, and host readiness before any LeWAM RoboTwin evaluation assets are transferred.
+
+**Independent Test**: The preflight records the reviewed paper and code revision, reports no local run, identifies the WSL/runtime and license gates, and aligns the roadmap, matrix, and project records. It remains separate from LeWAM Push-T.
+
+- [x] T079 Record the source-pinned LeWAM RoboTwin preflight and align the roadmap, reproduction matrix, project alignment, and remaining-work record. See [feature 027](../027-lewam-robotwin-preflight/spec.md) and the [preflight report](../../docs/reproductions/lewam-robotwin-preflight.md).
 
 ## Dependencies and Execution Order
 
@@ -204,6 +264,13 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 - User Story 4 has the Spec Kit workflow in place. Future feature work must use it and keep the roadmap aligned.
 
 T065 pins the JEPA-WAM checkpoint evaluation. T066 must pass before T067 starts; the full task count and checkpoint-versus-paper training mismatch stay visible in any report.
+T068 and T069 refresh the dated research map and public documentation. They add future candidates only; no model, dataset, or simulator assets were transferred and no new paper result was measured.
+T070 corrects stale notebook counts in the project plan and alignment record; it does not change lesson scope.
+T071 migrates the project Python environment to uv and amends constitution version 2.0.0 to record the CPU-lock/CUDA-override boundary. The E:-hosted Python 3.13 environment installs from the lock and imports the project, PyTorch, TorchVision, TorchCodec, and timm. The CUDA 12.8 override passes a matrix operation on the RTX 5070. The pre-existing repository `.venv` remains intact.
+T072 adds one local analogy and its evidence; it does not reproduce the LeWAM diffusion-steering paper. T073 applies the existing protocol to its paired starts, compute record, and claim boundary. The five seed groups are evaluation variation, not model-training runs.
+T074 adds a second planning analogy: 100 shared starts and five evaluation groups for RRT, KPIECE, and CEM. Its success, transition-call, runtime, and failure counts apply only to the known toy point-mass task. T075 applies the protocol and convergence workflow; the paper evaluation remains not run.
+T076 adds Notebook 09's fresh checkpoint-path evidence to the protocol inventory. The comparison uses one synthetic clip and has no pass threshold; it remains illustrative and does not establish general feature quality or a paper benchmark.
+T079 records a source-pinned LeWAM RoboTwin 2.0 preflight only. WSL GPU simulation/rendering is unsupported by RoboTwin, the CUDA toolkit and Vulkan tools are absent, and the code terms are unresolved. No assets or code were transferred; the fixed-case evaluation remains not run.
 
 ### Parallel opportunities
 

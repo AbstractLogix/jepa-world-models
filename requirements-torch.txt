@@ -1,14 +1,13 @@
 # PyTorch-family wheels live on a custom index (not PyPI).
-# These must be installed separately from the Poetry-managed environment.
+# Replace the CPU PyTorch wheels from uv.lock with CUDA 12.8 wheels after `uv sync --locked`.
 #
-# Usage (run once after `poetry install`):
-#   pip install -r requirements-torch.txt
+# Usage:
+#   uv pip install -r requirements-torch.txt
 #
-# CPU-only alternative (no CUDA, for laptops without GPU):
-#   pip install -r requirements-torch.txt --index-url https://download.pytorch.org/whl/cpu
+# CPU-only setup is the default in uv.lock. Run `uv sync --locked` to restore it after a CUDA install.
 
 --index-url https://download.pytorch.org/whl/cu128
 
-torch==2.10.0
-torchvision==0.25.0
-torchcodec==0.10.0
+torch==2.10.0+cu128
+torchvision==0.25.0+cu128
+torchcodec==0.10.0+cu128

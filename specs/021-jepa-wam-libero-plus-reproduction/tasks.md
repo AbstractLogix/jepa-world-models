@@ -8,7 +8,7 @@
 
 ## Phase 2: Qualify the released evaluation path
 
-- [ ] T002 In a disposable checkout and environment, verify only the required inference artifact hashes and run the upstream one-task, one-action diagnostic. Record dependencies, CUDA, GPU memory, renderer status, elapsed time, and errors. Do not download RLDS training data.
+- [x] T002 In a disposable checkout and environment, verify only the required inference artifact hashes and run the upstream one-task diagnostic with its ten no-op warm-up steps and one policy action. Record dependencies, CUDA, GPU memory, renderer status, elapsed time, and errors. Do not download RLDS training data. The diagnostic rendered one task and executed one policy action; 0/1 task success is not a benchmark result. See the [evidence report](../../docs/reproductions/jepa-wam-libero-plus.md).
 
 ## Phase 3: Re-evaluate the published result
 

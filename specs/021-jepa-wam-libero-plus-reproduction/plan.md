@@ -4,15 +4,15 @@
 
 ## Summary
 
-Re-evaluate the released JEPA-WAM checkpoint on the authors' documented LIBERO-Plus spatial-suite path. Start with the upstream one-task, one-action diagnostic. Run the full 2,402-task suite only after the smoke succeeds and the measured runtime and memory fit the available host. Do not repeat training.
+Re-evaluate the released JEPA-WAM checkpoint on the authors' documented LIBERO-Plus spatial-suite path. Start with the upstream one-task diagnostic: preserve its ten no-op warm-up steps and require one policy action. Run the full 2,402-task suite only after the smoke succeeds and the measured runtime and memory fit the available host. Do not repeat training.
 
 ## Technical Context
 
 - **Language/Version**: Python 3.10.16 per the released environment.
-- **Primary Dependencies**: Pinned JEPA-WAM source and its Python 3.10/CUDA 12.1 environment; PyTorch GPU support must be qualified on the RTX 5070.
+- **Primary Dependencies**: Pinned JEPA-WAM source and its inference artifacts. The local diagnostic used Python 3.10.12/PyTorch 2.7.0+cu128 because the upstream PyTorch 2.2.0+cu121 wheel lacks an `sm_120` kernel for the RTX 5070. See the [runtime evidence](../../docs/evidence/jepa-wam-storage-preflight.md).
 - **Storage**: Download only the evaluation checkpoints, language/vision encoders, LIBERO-Plus source, and simulator assets. Do not download RLDS training data or the full checkpoint repository.
 - **Evaluation**: Upstream LIBERO-Plus evaluator, one trial per task, all seven categories.
-- **Target Platform**: One local RTX 5070 with 12 GB VRAM and MuJoCo/EGL. Neither the runtime nor renderer is qualified yet.
+- **Target Platform**: One local RTX 5070 with 12 GB VRAM and MuJoCo/EGL. The pinned evaluator loaded its model, rendered one task, and ran one policy action. TensorFlow did not register a GPU, but the PyTorch model used the RTX 5070. The full suite remains pending after a naive first-task estimate of about 61.7 hours.
 - **Project Type**: Released-checkpoint evaluation and evidence documentation.
 - **Constraints**: Keep all third-party assets and temporary source outside Git. Review the pinned checkpoint-loading path before loading any serialized weights. Do not describe the result as a training reproduction.
 

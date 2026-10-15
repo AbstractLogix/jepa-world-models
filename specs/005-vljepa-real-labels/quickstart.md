@@ -11,8 +11,13 @@
 ## Install
 
 ```bash
-poetry install --extras vljepa
-poetry run pip install -r requirements-torch.txt --index-url https://download.pytorch.org/whl/cpu
+uv sync --locked --extra vljepa
+```
+
+The lock supplies CPU PyTorch wheels. For CUDA 12.8, install the matching wheels after sync:
+
+```bash
+uv pip install -r requirements-torch.txt  # optional CUDA 12.8 override
 ```
 
 For a supported GPU, follow the root README's matching PyTorch wheel instructions instead of the CPU wheel command.

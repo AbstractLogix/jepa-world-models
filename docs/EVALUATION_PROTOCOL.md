@@ -93,6 +93,8 @@ Use a compact results table and include these fields in the table or its adjacen
 
 The report may keep shared task, data, runtime, and claim details in a nearby run-conditions section instead of repeating them in every row. Keep each field explicit and easy to find. Link or attach raw per-run values when they are available. Include missing runs and explain why they are missing.
 
+For the retained episode records from Notebooks 20 and 21, run `uv run --locked --no-sync python scripts/validate_episode_evidence.py` from the repository root. The check verifies the two CSV schemas, row counts, group and pairing coverage, matching start states across methods, statuses, and field values. A pass confirms record integrity only. It does not rerun either notebook or validate a scientific claim.
+
 ## 10. Current-project status
 
 The protocol has these current applications:

@@ -12,7 +12,7 @@
 - A source-backed roadmap with priorities, outcomes, and completion evidence.
 - A paper-reproduction matrix with candidate claims, first-party code/data gates, and explicit local-attempt status.
 - A `uv.lock` and uv-based learner setup. The lock installs CPU PyTorch wheels by default; the documented file selects a CUDA 12.8 override.
-- A reproduction protocol that requires a pre-scoped claim, a named baseline and metric, all run values, and disclosed deviations. It also separates prediction, intervention, closed-loop, decision-benefit, and reliability evidence.
+- A reproduction protocol that requires a pre-scoped claim, a named baseline and metric, all run values, and disclosed deviations. It also separates prediction, intervention, closed-loop, decision-benefit, and reliability evidence. A repeatable validator checks the retained Notebook 20 and Notebook 21 episode CSVs for schema, row count, pairing, methods, statuses, and valid field values; this confirms record integrity only.
 - README and curriculum-guide descriptions that match the current notebook scope.
 - Open tasks for future tutorial implementation.
 

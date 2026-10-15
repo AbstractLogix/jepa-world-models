@@ -230,6 +230,14 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 - [x] T077 Update the protocol and roadmap with the Notebook 20 and 21 episode CSV links; update the project alignment and remaining-work records without presenting toy outcomes as paper evidence.
 
+## Phase 28: Validate retained episode evidence
+
+**Goal**: Make the integrity checks for the saved Notebook 20 and 21 episode records repeatable.
+
+**Independent Test**: The documented command passes both current CSVs, reports their 300 rows and complete paired coverage, and rejects temporary copies with missing or malformed evidence. The protocol audit states that this validates record integrity only.
+
+- [x] T078 Add and run the episode evidence validator, document its command and limits, and align the evaluation protocol audit and project status records. See [feature 026](../026-episode-evidence-validation/spec.md).
+
 ## Dependencies and Execution Order
 
 - Setup and foundational tasks are complete.

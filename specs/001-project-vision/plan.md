@@ -18,7 +18,7 @@ Keep the existing notebooks and make their scope clear. Add a project constituti
 - **Project type**: Educational Python repository with Jupyter notebooks.
 - **Performance goals**: None for this documentation slice.
 - **Constraints**: Do not overwrite staged user work. Keep data, model downloads, and credentials out of the repository. State where external access or hardware is needed.
-- **Scale/scope**: Nineteen numbered notebooks; the research roadmap tracks future tutorial modules and paper-aligned reproduction work.
+- **Scale/scope**: Twenty-one numbered notebooks; the research roadmap tracks future tutorial modules and paper-aligned reproduction work.
 
 ## Constitution Check
 
@@ -55,7 +55,7 @@ docs/
 ### Existing source layout
 
 ```text
-notebooks/                # twenty learner-facing lessons
+notebooks/                # twenty-one learner-facing lessons
 src/jepa_tutorial/       # loss, evaluation, and value-shaping helpers
 src/planning/            # planning helpers and CartPole demo
 src/viz/                 # embedding, value-shaping, and rollout plots

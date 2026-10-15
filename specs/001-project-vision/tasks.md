@@ -8,7 +8,7 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 **Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, and `quickstart.md`
 
-**Verification**: Notebooks 01–20 have local execution records or scoped reports. Notebook 09's official checkpoint path passed a fresh CPU-kernel rerun on 2026-10-15. Notebook 15's full 16-cell run passed in a fresh CPU kernel; Notebooks 16 and 20 have paired evaluation evidence. The LpWM reproduction attempt stopped before epoch 1. Notebooks 05 and 06 have two matching seeded runs each. See `docs/evidence/`, `docs/reproductions/`, and `docs/CURRICULUM_COVERAGE.md` for scope and evidence limits.
+**Verification**: Notebooks 01–21 have local execution records or scoped reports. Notebook 09's official checkpoint path passed a fresh CPU-kernel rerun on 2026-10-15. Notebook 15's full 16-cell run passed in a fresh CPU kernel; Notebooks 16, 20, and 21 have paired evaluation evidence. The LpWM reproduction attempt stopped before epoch 1. Notebooks 05 and 06 have two matching seeded runs each. See `docs/evidence/`, `docs/reproductions/`, and `docs/CURRICULUM_COVERAGE.md` for scope and evidence limits.
 
 **Organization**: Tasks follow the user stories in `spec.md`. Checked tasks are complete in this checkout. Open tasks remain part of the long-term project goal.
 
@@ -207,6 +207,13 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 - [x] T072 Deliver feature 022's CPU-only Notebook 20 and local report; align the README, curriculum coverage, roadmap, reproduction matrix, project research, and remaining-work record.
 - [x] T073 Validate the shared evaluation protocol against Notebook 20's fresh-kernel run and update `docs/EVALUATION_PROTOCOL.md`, `docs/evidence/evaluation-protocol-audit.md`, and the project alignment record.
 
+## Phase 25: Deliver a sampling-based planning lesson
+
+**Goal**: Teach tree search and shooting optimization with a reproducible toy task while keeping the paper evaluation separate.
+
+- [x] T074 Deliver feature 023's CPU-only Notebook 21 and local report; align the README, curriculum, roadmap, reproduction matrix, project research, and remaining-work record.
+- [x] T075 Apply the shared evaluation protocol to Notebook 21, extend the protocol audit, and analyze and converge feature 023. Keep the paper reproduction not run until author-linked artifacts are available.
+
 ## Dependencies and Execution Order
 
 - Setup and foundational tasks are complete.
@@ -229,6 +236,7 @@ T068 and T069 refresh the dated research map and public documentation. They add 
 T070 corrects stale notebook counts in the project plan and alignment record; it does not change lesson scope.
 T071 migrates the project Python environment to uv and amends constitution version 2.0.0 to record the CPU-lock/CUDA-override boundary. The E:-hosted Python 3.13 environment installs from the lock and imports the project, PyTorch, TorchVision, TorchCodec, and timm. The CUDA 12.8 override passes a matrix operation on the RTX 5070. The pre-existing repository `.venv` remains intact.
 T072 adds one local analogy and its evidence; it does not reproduce the LeWAM diffusion-steering paper. T073 applies the existing protocol to its paired starts, compute record, and claim boundary. The five seed groups are evaluation variation, not model-training runs.
+T074 adds a second planning analogy: 100 shared starts and five evaluation groups for RRT, KPIECE, and CEM. Its success, transition-call, runtime, and failure counts apply only to the known toy point-mass task. T075 applies the protocol and convergence workflow; the paper evaluation remains not run.
 
 ### Parallel opportunities
 

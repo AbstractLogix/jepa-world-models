@@ -51,16 +51,21 @@ uv pip install -r requirements-torch.txt  # optional CUDA 12.8 override
 
 For CPU-only setup, use the locked CPU wheels and omit the CUDA install command. `uv sync --locked` restores those CPU wheels; on a GPU host, reapply the CUDA override after each sync.
 
-If the system drive is low on space, set `UV_CACHE_DIR` and `UV_PROJECT_ENVIRONMENT` to folders on E: or D: before `uv sync --locked`. This keeps the package cache and virtual environment on that drive. In WSL, also target the selected environment when installing CUDA wheels:
+This project uses `uv` for Python environments and installs. If the system drive is low on space, set `UV_CACHE_DIR`, `UV_PROJECT_ENVIRONMENT`, and `JEPA_ASSETS_DIR` to folders on E: or D: before setup. Set `HF_HUB_CACHE`, `HF_ASSETS_CACHE`, and `TORCH_HOME` too if model downloads must stay on that drive. In WSL, for example:
 
 ```bash
 export UV_CACHE_DIR=/mnt/e/codex-research/uv-cache
 export UV_PROJECT_ENVIRONMENT=/mnt/e/codex-research/jepa-world-models-tutorial/.venv
+export JEPA_ASSETS_DIR=/mnt/e/codex-research/jepa-world-models-assets
+export HF_HUB_CACHE=/mnt/e/codex-research/huggingface/hub
+export HF_ASSETS_CACHE=/mnt/e/codex-research/huggingface/assets
+export TORCH_HOME=/mnt/e/codex-research/torch
+mkdir -p "$JEPA_ASSETS_DIR" "$HF_HUB_CACHE" "$HF_ASSETS_CACHE" "$TORCH_HOME"
 uv sync --locked
 uv pip install --python "$UV_PROJECT_ENVIRONMENT/bin/python" -r requirements-torch.txt
 ```
 
-For Windows PowerShell, set the same variables to Windows paths and use `uv pip install --python "$env:UV_PROJECT_ENVIRONMENT\Scripts\python.exe" -r requirements-torch.txt`. Notebook data and model files use their own paths; check the [coverage map](docs/CURRICULUM_COVERAGE.md) before a lesson that downloads assets.
+Replace `/mnt/e` with `/mnt/d` to use D:. For Windows PowerShell commands and path checks, see the [external-storage quickstart](specs/024-external-asset-storage/quickstart.md). The quickstart does not move existing files. Check the [coverage map](docs/CURRICULUM_COVERAGE.md) before a lesson that downloads assets.
 
 Some optional lessons download data or model weights. Notebook 09 uses an approximately 1.66 GB checkpoint, Notebook 11 uses about 300 MB of first-run assets, and Notebook 13 uses about 800 MB of dataset files. Check the [coverage map](docs/CURRICULUM_COVERAGE.md) before starting a lesson.
 

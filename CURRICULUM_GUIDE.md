@@ -38,6 +38,8 @@ uv pip install -r requirements-torch.txt  # CUDA 12.8; omit for CPU-only use
 uv run jupyter lab
 ```
 
+This project uses `uv` to install and run Python packages. To keep the environment, package cache, lesson data, checkpoints, and model caches on E: or D:, follow the [external-storage quickstart](specs/024-external-asset-storage/quickstart.md) before setup. The commands select future paths; they do not move files that already exist.
+
 The lock uses CPU PyTorch wheels by default. For CUDA 12.8, install those wheels after `uv sync --locked`. Select Notebook 11's extra before installing or replacing PyTorch:
 
 ```bash

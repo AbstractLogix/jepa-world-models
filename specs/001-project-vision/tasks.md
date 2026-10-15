@@ -246,6 +246,14 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 - [x] T079 Record the source-pinned LeWAM RoboTwin preflight and align the roadmap, reproduction matrix, project alignment, and remaining-work record. See [feature 027](../027-lewam-robotwin-preflight/spec.md) and the [preflight report](../../docs/reproductions/lewam-robotwin-preflight.md).
 
+## Phase 30: Review calibrated JEPA risk screening
+
+**Goal**: Add a recent, decision-focused safety paper to the research map without presenting author-reported results as local evidence or treating the learned model as a safety guarantee.
+
+**Independent Test**: The research review, tutorial roadmap, reproduction matrix, curriculum coverage, project alignment, and remaining-work inventory agree on the paper's scope, simulation-only evidence, unresolved reranking comparison, source status, and no-run status.
+
+- [x] T080 Review arXiv:2608.17496 and align it as a gated P3 watch item. Record the reported LIBERO-Long comparisons, the nonsignificant reranking-only margin, compute and execution gaps, and that the reviewed sources do not expose a first-party location for the release materials. No assets were transferred and no evaluation was run.
+
 ## Dependencies and Execution Order
 
 - Setup and foundational tasks are complete.
@@ -271,6 +279,7 @@ T072 adds one local analogy and its evidence; it does not reproduce the LeWAM di
 T074 adds a second planning analogy: 100 shared starts and five evaluation groups for RRT, KPIECE, and CEM. Its success, transition-call, runtime, and failure counts apply only to the known toy point-mass task. T075 applies the protocol and convergence workflow; the paper evaluation remains not run.
 T076 adds Notebook 09's fresh checkpoint-path evidence to the protocol inventory. The comparison uses one synthetic clip and has no pass threshold; it remains illustrative and does not establish general feature quality or a paper benchmark.
 T079 records a source-pinned LeWAM RoboTwin 2.0 preflight only. WSL GPU simulation/rendering is unsupported by RoboTwin, the CUDA toolkit and Vulkan tools are absent, and the code terms are unresolved. No assets or code were transferred; the fixed-case evaluation remains not run.
+T080 adds a research watch item only. It does not implement a safety shield, evaluate a JEPA, or reproduce the cited simulation results.
 
 ### Parallel opportunities
 

@@ -238,6 +238,14 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 - [x] T078 Add and run the episode evidence validator, document its command and limits, and align the evaluation protocol audit and project status records. See [feature 026](../026-episode-evidence-validation/spec.md).
 
+## Phase 29: Preflight LeWAM RoboTwin 2.0
+
+**Goal**: Establish source, terms, and host readiness before any LeWAM RoboTwin evaluation assets are transferred.
+
+**Independent Test**: The preflight records the reviewed paper and code revision, reports no local run, identifies the WSL/runtime and license gates, and aligns the roadmap, matrix, and project records. It remains separate from LeWAM Push-T.
+
+- [x] T079 Record the source-pinned LeWAM RoboTwin preflight and align the roadmap, reproduction matrix, project alignment, and remaining-work record. See [feature 027](../027-lewam-robotwin-preflight/spec.md) and the [preflight report](../../docs/reproductions/lewam-robotwin-preflight.md).
+
 ## Dependencies and Execution Order
 
 - Setup and foundational tasks are complete.
@@ -262,6 +270,7 @@ T071 migrates the project Python environment to uv and amends constitution versi
 T072 adds one local analogy and its evidence; it does not reproduce the LeWAM diffusion-steering paper. T073 applies the existing protocol to its paired starts, compute record, and claim boundary. The five seed groups are evaluation variation, not model-training runs.
 T074 adds a second planning analogy: 100 shared starts and five evaluation groups for RRT, KPIECE, and CEM. Its success, transition-call, runtime, and failure counts apply only to the known toy point-mass task. T075 applies the protocol and convergence workflow; the paper evaluation remains not run.
 T076 adds Notebook 09's fresh checkpoint-path evidence to the protocol inventory. The comparison uses one synthetic clip and has no pass threshold; it remains illustrative and does not establish general feature quality or a paper benchmark.
+T079 records a source-pinned LeWAM RoboTwin 2.0 preflight only. WSL GPU simulation/rendering is unsupported by RoboTwin, the CUDA toolkit and Vulkan tools are absent, and the code terms are unresolved. No assets or code were transferred; the fixed-case evaluation remains not run.
 
 ### Parallel opportunities
 

@@ -2,6 +2,8 @@
 
 **Reviewed**: 2026-10-15
 
+See the [documentation index](index.md) for the learner guide, research roadmap, evaluation protocol, and evidence records.
+
 **Evidence basis**: source review and local runs. Notebooks 01–19 have local evidence reports or execution records. Notebook 09's official checkpoint path was repeated in a fresh CPU kernel on 2026-10-15. Notebook 15's full 16-cell notebook run completed in a fresh CPU Jupyter kernel; it uses the Python standard library and does not require a data or checkpoint download. Notebook 16 has paired episode and intervention records. Notebook 01 and 04–08 run details are in the [legacy lesson report](evidence/legacy-lessons-local-run.md).
 
 This map describes what the current files teach. “Inspired by” means the lesson is an educational analogue. It does not mean that the lesson reproduces the cited paper.

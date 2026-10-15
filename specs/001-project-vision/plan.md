@@ -55,7 +55,7 @@ docs/
 ### Existing source layout
 
 ```text
-notebooks/                # nineteen learner-facing lessons
+notebooks/                # twenty learner-facing lessons
 src/jepa_tutorial/       # loss, evaluation, and value-shaping helpers
 src/planning/            # planning helpers and CartPole demo
 src/viz/                 # embedding, value-shaping, and rollout plots

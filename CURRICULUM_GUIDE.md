@@ -1,6 +1,6 @@
 # JEPA World Models Curriculum Guide
 
-This guide gives learners and instructors a clear route through the course. The [coverage map](docs/CURRICULUM_COVERAGE.md) lists all 19 lessons and their evidence limits. Read the [evaluation protocol](docs/EVALUATION_PROTOCOL.md) before comparing results.
+This guide gives learners and instructors a clear route through the course. The [coverage map](docs/CURRICULUM_COVERAGE.md) lists all 20 lessons and their evidence limits. Read the [evaluation protocol](docs/EVALUATION_PROTOCOL.md) before comparing results.
 
 ## Recommended learning path
 
@@ -23,6 +23,7 @@ The core path does not need robot hardware or private data. Some lessons need do
 | Language prediction | 11 | Predict real CIFAR-10 class-prompt embeddings. This is a supervised analogue, not a VL-JEPA reproduction. |
 | Planning and reliability | 16, 17 | Action-conditioned visual prediction, uncertainty calibration, and model exploitation checks. |
 | Structured and hierarchical models | 15, 18, 19 | Symplectic dynamics, multi-path inference, and hierarchical planning analogies. |
+| Policy-noise planning | [20](notebooks/20_policy_noise_planning.ipynb) | Compare raw-action and policy-noise search under a deliberately imperfect toy model. |
 
 These lessons use different levels of evidence. The [coverage map](docs/CURRICULUM_COVERAGE.md) states what each notebook measures and what it does not establish.
 
@@ -67,6 +68,7 @@ Before class, run the selected notebook in a clean kernel and check its data and
 | 05–06 | Planner returns beside a named baseline; improvement is measured, not assumed. |
 | 10 | Success by planning horizon and feedback setting, with the exact-model boundary stated. |
 | 14 | Held-out action interventions and paired policy outcomes on the same starts. |
+| 20 | Paired closed-loop outcomes, model calls, and off-support prediction error in an illustrative toy task. |
 
 Use the [coverage map](docs/CURRICULUM_COVERAGE.md) for the expected output and claim boundary of every notebook.
 

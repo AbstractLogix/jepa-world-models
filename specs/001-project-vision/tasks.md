@@ -8,7 +8,7 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 **Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, and `quickstart.md`
 
-**Verification**: Notebooks 01–19 have local execution records or scoped reports. Notebook 09's official checkpoint path passed a fresh CPU-kernel rerun on 2026-10-15. Notebook 15's full 16-cell run passed in a fresh CPU kernel; Notebook 16 has episode and intervention CSVs. The LpWM reproduction attempt stopped before epoch 1. Notebooks 05 and 06 have two matching seeded runs each. See `docs/evidence/`, `docs/reproductions/`, and `docs/CURRICULUM_COVERAGE.md` for scope and evidence limits.
+**Verification**: Notebooks 01–20 have local execution records or scoped reports. Notebook 09's official checkpoint path passed a fresh CPU-kernel rerun on 2026-10-15. Notebook 15's full 16-cell run passed in a fresh CPU kernel; Notebooks 16 and 20 have paired evaluation evidence. The LpWM reproduction attempt stopped before epoch 1. Notebooks 05 and 06 have two matching seeded runs each. See `docs/evidence/`, `docs/reproductions/`, and `docs/CURRICULUM_COVERAGE.md` for scope and evidence limits.
 
 **Organization**: Tasks follow the user stories in `spec.md`. Checked tasks are complete in this checkout. Open tasks remain part of the long-term project goal.
 
@@ -200,6 +200,13 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 - [x] T071 Replace the Poetry lock and build backend with `uv.lock` and a standard build backend; align the constitution with CPU wheels in the lock and a separate CUDA override; update learner setup guides and external-drive paths; verify a clean E:-hosted environment.
 
+## Phase 24: Deliver a policy-noise planning lesson
+
+**Goal**: Add a source-backed, locally runnable lesson about planning in a generative policy's noise space while keeping the paper reproduction separate.
+
+- [x] T072 Deliver feature 022's CPU-only Notebook 20 and local report; align the README, curriculum coverage, roadmap, reproduction matrix, project research, and remaining-work record.
+- [x] T073 Validate the shared evaluation protocol against Notebook 20's fresh-kernel run and update `docs/EVALUATION_PROTOCOL.md`, `docs/evidence/evaluation-protocol-audit.md`, and the project alignment record.
+
 ## Dependencies and Execution Order
 
 - Setup and foundational tasks are complete.
@@ -221,6 +228,7 @@ T065 pins the JEPA-WAM checkpoint evaluation. T066 must pass before T067 starts;
 T068 and T069 refresh the dated research map and public documentation. They add future candidates only; no model, dataset, or simulator assets were transferred and no new paper result was measured.
 T070 corrects stale notebook counts in the project plan and alignment record; it does not change lesson scope.
 T071 migrates the project Python environment to uv and amends constitution version 2.0.0 to record the CPU-lock/CUDA-override boundary. The E:-hosted Python 3.13 environment installs from the lock and imports the project, PyTorch, TorchVision, TorchCodec, and timm. The CUDA 12.8 override passes a matrix operation on the RTX 5070. The pre-existing repository `.venv` remains intact.
+T072 adds one local analogy and its evidence; it does not reproduce the LeWAM diffusion-steering paper. T073 applies the existing protocol to its paired starts, compute record, and claim boundary. The five seed groups are evaluation variation, not model-training runs.
 
 ### Parallel opportunities
 

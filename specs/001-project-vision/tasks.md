@@ -222,6 +222,14 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 - [x] T076 Add Notebook 09 to the protocol audit and align its evidence boundary across the protocol, curriculum, roadmap, and project records.
 
+## Phase 27: Align retained episode evidence
+
+**Goal**: Keep the shared protocol, research roadmap, and project records aligned with the saved Notebook 20 and 21 episode rows.
+
+**Independent Test**: The canonical protocol and roadmap link both CSV files. The project alignment and remaining-work records state the row coverage and preserve the illustrative claim boundary.
+
+- [x] T077 Update the protocol and roadmap with the Notebook 20 and 21 episode CSV links; update the project alignment and remaining-work records without presenting toy outcomes as paper evidence.
+
 ## Dependencies and Execution Order
 
 - Setup and foundational tasks are complete.

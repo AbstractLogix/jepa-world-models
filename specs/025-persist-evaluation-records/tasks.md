@@ -26,12 +26,19 @@
 - [x] T005 [US1] Update `docs/evidence/evaluation-protocol-audit.md` to record the saved files and their verified row coverage.
 - [x] T006 [US1] Execute both notebooks in fresh CPU kernels and validate schemas, 300 rows, unique pairing keys, five groups, three methods, and report links for `docs/evidence/policy-noise-episodes.csv` and `docs/evidence/sampling-based-episodes.csv`.
 
+## Phase 4: Align canonical project records
+
+**Purpose**: Keep the shared protocol, research roadmap, and project status records consistent with the retained episode evidence.
+
+- [x] T007 [US1] Link both CSV files from `docs/EVALUATION_PROTOCOL.md` and the Notebook 20 and 21 roadmap rows; align `specs/001-project-vision/alignment.md`, `specs/001-project-vision/remaining-work.md`, and `specs/001-project-vision/tasks.md` with the retained rows and illustrative claim boundary.
+
 ## Dependencies and execution order
 
 - T001 is complete and confirms no setup change is needed.
 - T002 and T003 can proceed in parallel because they edit different notebooks and produce separate files.
 - T004 can proceed in parallel with the notebook edits because it changes only reports.
 - T005 and T006 depend on T002–T004.
+- T007 depends on T002–T006.
 
 ## Parallel opportunities
 
@@ -39,4 +46,4 @@
 
 ## Implementation strategy
 
-Add persistence after each existing evaluation loop without changing planner logic. Update both reports and the audit, execute both notebooks, then inspect and validate the saved raw records.
+Add persistence after each existing evaluation loop without changing planner logic. Update the reports and project records, execute both notebooks, then inspect and validate the saved raw records.

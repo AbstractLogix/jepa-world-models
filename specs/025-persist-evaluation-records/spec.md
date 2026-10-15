@@ -16,7 +16,7 @@ A learner or reviewer wants to inspect the episode-level results behind Notebook
 
 **Why this priority**: The evaluation protocol asks reports to link raw per-run values when they are available. Both notebooks currently create 300 in-memory records and discard them after summarizing.
 
-**Independent Test**: Execute each notebook in a fresh CPU kernel. Confirm each output CSV has 300 rows, the expected fields, all five evaluation groups, all 100 paired starts, and all three methods for every start. Confirm the report and protocol audit link to the saved files.
+**Independent Test**: Execute each notebook in a fresh CPU kernel. Confirm each output CSV has 300 rows, the expected fields, all five evaluation groups, all 100 paired starts, and all three methods for every start. Confirm the reports, protocol, roadmap, and project alignment records link to the saved files and preserve their illustrative status.
 
 **Acceptance Scenarios**:
 
@@ -24,6 +24,7 @@ A learner or reviewer wants to inspect the episode-level results behind Notebook
 2. **Given** Notebook 21 completes its fixed evaluation, **When** it writes the evidence record, **Then** `docs/evidence/sampling-based-episodes.csv` contains all 300 planner-by-start rows, including statuses, failures, costs, and pairing keys.
 3. **Given** a reader opens either reproduction report, **When** they inspect the local result, **Then** they can open the raw CSV and identify its columns and row count.
 4. **Given** either notebook runs without a repository-root working directory, **When** it saves evidence, **Then** it locates the repository and writes to the same tracked evidence path.
+5. **Given** the episode files are retained, **When** a reader checks the canonical protocol or roadmap, **Then** both documents point to the files and state that they contain toy-task evidence, not paper results.
 
 ## Requirements
 
@@ -36,6 +37,7 @@ A learner or reviewer wants to inspect the episode-level results behind Notebook
 - **FR-005**: The reproduction reports and evaluation-protocol audit MUST link the raw files and describe their scope accurately.
 - **FR-006**: The change MUST preserve planner behavior, fixed seeds, aggregate calculations, and the illustrative (non-reproduction) claim labels.
 - **FR-007**: The evidence files MUST contain only the small, generated toy-task records; do not add external datasets, model weights, or user data.
+- **FR-008**: The canonical evaluation protocol and research roadmap MUST link the saved episode files, and the project alignment and remaining-work records MUST describe the same evidence scope and claim limits.
 
 ## Success Criteria
 
@@ -46,6 +48,7 @@ A learner or reviewer wants to inspect the episode-level results behind Notebook
 - **SC-003**: Each CSV retains the planned row count and required provenance and outcome fields, including failed outcomes.
 - **SC-004**: The two reproduction reports and the protocol audit link to the corresponding saved CSV files.
 - **SC-005**: No model, dataset, or training behavior changes, and the outputs remain explicitly illustrative.
+- **SC-006**: The protocol, roadmap, project alignment, and remaining-work records link or describe the two 300-row CSV files without presenting them as paper reproduction evidence.
 
 ## Assumptions
 

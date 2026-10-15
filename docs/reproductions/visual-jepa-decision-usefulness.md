@@ -120,7 +120,7 @@ The official 450-episode Push-T evaluation remains pending. The full JEPA-WAM LI
 - **Training and records**: 15/15 model fits, 960/960 intervention rows, and 440/440 episode rows completed. The raw rows have no recorded failures or missing outcomes.
 - **CUDA**: all three learned model families trained on the RTX 5070; the full protocol hash matched the passing VISReg-style pilot.
 - **Notebook pipeline**: the pilot and full run executed on the E:-hosted Python 3.10.12 environment. The earlier CPU smoke checked the short pipeline on reserved seeds; it is not part of this comparison.
-- **Focused unit checks**: 23 tests passed with `uv run --locked --no-sync python -m unittest discover -s tests -v`.
+- **Focused unit checks**: 24 tests passed with `uv run --locked --no-sync python -m unittest discover -s tests -v` after the baseline-seed evidence correction.
 - **Test runner note**: `pytest` is not installed in the locked environment; the repository's standard-library `unittest` suite is the test runner used here.
 - **Code and package checks**: Ruff passed on the changed source, tests, and figure generator. `uv build` produced the source distribution and wheel; build outputs were written to E:.
 - **Notebook and evidence checks**: Notebook JSON is valid and all nine code cells compile. The recorded pilot hash matches the current training cells and objective modules. The final evidence contains 15 model fits, 960 paired interventions, and 440 episode records with no recorded failures or missing outcomes. The portfolio figure generator rebuilt all four figures from the evidence files.
@@ -130,4 +130,4 @@ The official 450-episode Push-T evaluation remains pending. The full JEPA-WAM LI
 
 ## Reproduction
 
-Use the project setup in the [README](../../README.md), then open [Notebook 22](../../notebooks/22_visual_jepa_decision_usefulness.ipynb). The locked CPU environment remains supported. On a compatible CUDA host, the notebook probes CUDA and uses it when a synchronization check succeeds; otherwise it falls back to CPU. Set `JEPA_RUN_OUTPUT_DIR` to an E: or D: folder to keep run outputs away from the system drive. No external data, checkpoint, or robot hardware was used.
+Use the project setup in the [README](../../README.md), then follow the [feature quickstart](../../specs/028-visual-jepa-decisions/quickstart.md). Set `JEPA_OBJECTIVE=visreg_style` for both the validation pilot and full run; the recorded comparison used that objective, while the default SIGReg pilot collapsed. Full mode requires a passing pilot with a matching protocol hash, settings, split, seeds, and device. Set `JEPA_RUN_OUTPUT_DIR` to an E: or D: folder to keep run outputs away from the system drive. The locked CPU path remains supported, but the reported five-seed comparison ran on CUDA. No external data, checkpoint, or robot hardware was used.

@@ -13,7 +13,8 @@ Keep the environment, uv cache, model caches, and larger run outputs on E: or D:
 export UV_CACHE_DIR=/mnt/e/codex-research/jepa-world-models-tutorial/uv-cache
 export UV_PROJECT_ENVIRONMENT=/mnt/e/codex-research/jepa-world-models-tutorial/.venv
 export JEPA_ASSETS_DIR=/mnt/e/codex-research/jepa-world-models-assets
-mkdir -p "$UV_CACHE_DIR" "$JEPA_ASSETS_DIR"
+export JEPA_RUN_OUTPUT_DIR=/mnt/e/codex-research/jepa-world-models-tutorial/run-output
+mkdir -p "$UV_CACHE_DIR" "$JEPA_ASSETS_DIR" "$JEPA_RUN_OUTPUT_DIR"
 uv sync --locked
 ```
 
@@ -31,14 +32,25 @@ Check the selected runtime:
 
 ## Run the lesson
 
+The recorded five-seed comparison uses the `visreg_style` objective. Set it for both runs below. The notebook defaults to SIGReg; its recorded default-objective pilot collapsed and cannot open the full-run gate.
+
 Start in validation-only pilot mode. This trains one development seed on the fixed 16/4 episode split, writes a pilot record with a training-code hash, and does not collect final intervention or episode cases.
 
 ```bash
+export JEPA_OBJECTIVE=visreg_style
 export JEPA_RUN_MODE=pilot
 "$UV_PROJECT_ENVIRONMENT/bin/python" -m jupyter lab
 ```
 
-Open `notebooks/22_visual_jepa_decision_usefulness.ipynb` and run all cells from a fresh kernel. Read the collapse status in the run report. If the pilot passes, restart the kernel with `JEPA_RUN_MODE=full` and run the notebook again. Full mode checks that the pilot hash, objective, split, seeds, and device match. If the pilot fails or is missing, full mode skips final model training and evaluation.
+Open `notebooks/22_visual_jepa_decision_usefulness.ipynb` and run all cells from a fresh kernel. Read the collapse status in the run report. If the pilot passes, stop Jupyter, then relaunch it with the same objective and `JEPA_RUN_MODE=full`:
+
+```bash
+export JEPA_OBJECTIVE=visreg_style
+export JEPA_RUN_MODE=full
+"$UV_PROJECT_ENVIRONMENT/bin/python" -m jupyter lab
+```
+
+Full mode checks that the pilot hash, objective, split, seeds, and device match. If the pilot fails or is missing, full mode skips final model training and evaluation.
 
 For a short pipeline check, use `JEPA_RUN_MODE=smoke`. Smoke mode uses separate reserved seeds and does not satisfy the research comparison. To force CPU on a host with CUDA, set `CUDA_VISIBLE_DEVICES=""` before launching Jupyter.
 

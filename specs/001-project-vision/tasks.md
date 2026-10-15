@@ -267,7 +267,7 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 - [x] T085 Run one fixed-split, 35-epoch validation-only CUDA pilot on seeds 1000/2021. Record settings, components, device, time, memory, and collapse status. Do not collect held-out outcomes. The pilot passed the fixed spread screen.
 - [x] T086 After the matching pilot passed, train the replacement final pairs 7221/5100, 7227/5101, 7239/5102, 7253/5103, and 7263/5104 for each learned baseline. Record prediction, spread, device, time, and memory. Exclude pre-gate pairs 2121/1100, 2127/1101, 2139/1102, 2153/1103, and 2163/1104.
 - [x] T087 After training, run the fixed held-out action interventions and paired closed-loop conditions. Preserve all 960 intervention rows and 440 episode rows. Label privileged state access, native scoring spaces, and compute; all rows completed without errors.
-- [x] T088 Complete the feature report, align the README, curriculum, roadmap, reproduction matrix, and project records with the measured results, then run focused checks and Spec Kit analysis/convergence. The report records 23 passing unit tests, Ruff, package build, notebook and evidence checks, and a clean Spec Kit review; the full CPU comparison and paper-scale benchmarks remain unrun.
+- [x] T088 Complete the feature report, align the README, curriculum, roadmap, reproduction matrix, and project records with the measured results, then run focused checks and Spec Kit analysis/convergence. The report records 24 passing unit tests, Ruff, package build, notebook and evidence checks, and a clean Spec Kit review; the full CPU comparison and paper-scale benchmarks remain unrun.
 
 ## Dependencies and Execution Order
 

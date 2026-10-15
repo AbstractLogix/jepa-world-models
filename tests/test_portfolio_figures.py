@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 import json
 import sys
 import unittest
@@ -83,6 +84,16 @@ class PortfolioEvidenceTests(unittest.TestCase):
             {key: (row["successes"], row["total"]) for key, row in summary["baselines"].items()},
             {"oracle_state_cem": (0, 20), "direct_visual_momentum": (20, 20)},
         )
+
+    def test_notebook_22_untrained_baselines_have_no_model_seed(self) -> None:
+        with (ROOT / "docs/evidence/visual-jepa-episodes.csv").open(
+            newline="", encoding="utf-8"
+        ) as handle:
+            rows = list(csv.DictReader(handle))
+        for method in ("oracle_state_cem", "direct_visual_momentum"):
+            baseline_rows = [row for row in rows if row["method"] == method]
+            self.assertEqual(len(baseline_rows), 20)
+            self.assertTrue(all(row["model_seed"] == "" for row in baseline_rows))
 
     def test_manifest_paths_and_accessibility_fields_exist(self) -> None:
         manifest = json.loads((ROOT / "docs/portfolio/project.json").read_text(encoding="utf-8"))

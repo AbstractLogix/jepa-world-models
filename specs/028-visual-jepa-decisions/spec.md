@@ -11,7 +11,7 @@
 
 A learner wants to compare an action-conditioned JEPA with other dynamics models when the observation is an image.
 
-**Why this priority**: The project has action-conditioned planning analogues, but it does not yet evaluate a trained visual JEPA. This lesson fills that central evidence gap.
+**Why this priority**: The project has action-conditioned planning analogues and now has a bounded learned visual JEPA comparison. This lesson tests the gap between prediction, action ranking, and closed-loop decisions; its local synthetic task does not replace a paper benchmark.
 
 **Independent Test**: A fresh project kernel on CPU or a supported CUDA device produces held-out action-intervention records for each model, keeps all actions from one starting state together, and reports prediction and ranking measures.
 
@@ -73,6 +73,7 @@ A contributor wants to rerun the lesson without private data, robot hardware, or
 - **FR-009**: The report MUST keep training variation separate from evaluation-case variation, identify privileged state access, and avoid claims of advantage when compute or observation budgets differ.
 - **FR-010**: The lesson MUST use the project evaluation protocol and MUST add no dependency, downloaded dataset, external checkpoint, or robot-hardware requirement. It MUST select CUDA when an installed PyTorch build supports the visible GPU, and otherwise run on CPU. GPU use MUST remain optional.
 - **FR-011**: The README, curriculum coverage, research roadmap, reproduction matrix, project alignment, remaining-work inventory, and project task ledger MUST describe the lesson and its evidence boundary consistently.
+- **FR-012**: The collapse diagnosis MAY add one independently implemented VISReg-style regularizer pilot. It MUST derive only from the published equations, state that it adapts multi-view image regularization to temporal prediction, and MUST NOT reuse code or weights. The pilot MUST use one predeclared configuration (`lambda=0.6`, scale/shape/center weights `1`, 128 projections, 32 dimensions), the fixed 16/4 development split, and the existing pilot seeds and 35 epochs. It MUST report each regularizer component, use validation data only for the fixed collapse screen, and MUST NOT trigger a parameter sweep or open held-out cases. It is not a VISReg paper reproduction and cannot validate VISReg's claims.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -90,7 +91,7 @@ A contributor wants to rerun the lesson without private data, robot hardware, or
 - **SC-002**: The lesson records at least 20 paired closed-loop outcomes for every method and every planned training seed, or labels the comparison partial and lists each missing run.
 - **SC-003**: The trained-model comparison contains at least five independent training seeds per trained method; it reports seed-level results separately from variation across evaluation starts.
 - **SC-004**: The report gives prediction diagnostics, task success and return, paired differences, compute counts, elapsed time, and observation and compute differences.
-- **SC-005**: A fresh CPU project environment completes the lesson without downloading a dataset or checkpoint. A supported CUDA setup uses the GPU for model training and planning. Every notebook and report claim is limited to the stated local task and protocol.
+- **SC-005**: The CPU smoke path completes without downloading a dataset or checkpoint. A supported CUDA setup uses the GPU for model training and planning. The report states when the full protocol has not been run on CPU. Every notebook and report claim is limited to the stated local task and protocol.
 - **SC-006**: All seven project records named in FR-011 link to the same lesson and state whether its evidence is smoke, exploratory, comparison, or incomplete.
 
 ## Assumptions
@@ -110,5 +111,6 @@ A contributor wants to rerun the lesson without private data, robot hardware, or
 
 - [V-JEPA 2](https://arxiv.org/abs/2506.09985) motivates action-conditioned prediction in visual latent space. This lesson does not reproduce its model or robot benchmarks.
 - [LeJEPA](https://arxiv.org/abs/2511.08544) motivates a predictive objective with representation regularization. The lesson's compact setup is a teaching implementation, not the paper's scale or full training recipe.
+- [VISReg](https://arxiv.org/abs/2606.02572) motivates a separate variance and sliced-Wasserstein regularizer. Any local temporal-prediction adaptation is an independent implementation from the paper equations, not a VISReg reproduction or a test of its reported claims.
 - [V-JEPA 2.1](https://arxiv.org/abs/2603.14482) studies dense and temporally consistent video features. [RoboJEPA](https://arxiv.org/abs/2610.10515) reports scaling trends for a large multi-embodiment world model. Both are research context only; this local study cannot validate their benchmark or scaling claims.
 - The project's [evaluation protocol](../../docs/EVALUATION_PROTOCOL.md) and [decision-usefulness lesson](../../notebooks/14_decision_usefulness.ipynb) define the local evidence and comparison boundaries.

@@ -1,4 +1,4 @@
-"""Build portfolio figures from retained Notebook 14, 16, and 17 evidence."""
+"""Build portfolio figures from retained experiment evidence."""
 
 from __future__ import annotations
 
@@ -184,6 +184,98 @@ def summarize_calibration() -> dict[tuple[str, str], dict[str, float]]:
     return summaries
 
 
+def summarize_visual_jepa_rankings() -> dict[str, list[dict[str, Any]]]:
+    rows = _csv_rows(ROOT / "docs/evidence/visual-jepa-interventions.csv")
+    grouped: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        if row["status"] != "complete" or row["error"]:
+            raise ValueError("all visual JEPA intervention rows must be complete")
+        grouped[(row["method"], row["model_seed"], row["start_id"])].append(row)
+
+    per_seed: dict[tuple[str, str], list[int]] = defaultdict(lambda: [0, 0])
+    starts_per_seed: dict[tuple[str, str], set[str]] = defaultdict(set)
+    for (method, model_seed, _), case_rows in grouped.items():
+        starts_per_seed[(method, model_seed)].add(case_rows[0]["start_id"])
+        if len(case_rows) != 3 or {row["action"] for row in case_rows} != {"-1.0", "0.0", "1.0"}:
+            raise ValueError("each intervention start must include all three actions")
+        for index, left in enumerate(case_rows):
+            for right in case_rows[index + 1 :]:
+                actual_delta = float(left["observed_score"]) - float(right["observed_score"])
+                if abs(actual_delta) < 1e-8:
+                    continue
+                predicted_delta = float(left["predicted_score"]) - float(right["predicted_score"])
+                per_seed[(method, model_seed)][1] += 1
+                per_seed[(method, model_seed)][0] += actual_delta * predicted_delta > 0
+
+    result: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for (method, seed), (correct, total) in sorted(per_seed.items()):
+        if total == 0:
+            raise ValueError("each model seed must have non-tied action pairs")
+        result[method].append({
+            "seed": seed,
+            "correct": correct,
+            "total": total,
+            "accuracy": correct / total,
+        })
+    expected = {"oracle": 1, "state_model": 5, "image_reconstruction": 5, "jepa": 5}
+    if {method: len(values) for method, values in result.items()} != expected:
+        raise ValueError("visual JEPA action-ranking evidence has unexpected seed coverage")
+    if any(len(starts) != 20 for starts in starts_per_seed.values()):
+        raise ValueError("each intervention seed group must contain 20 starts")
+    return dict(result)
+
+
+def summarize_visual_jepa_episodes() -> dict[str, Any]:
+    rows = _csv_rows(ROOT / "docs/evidence/visual-jepa-episodes.csv")
+    grouped: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        if row["status"] != "complete" or row["error"]:
+            raise ValueError("all visual JEPA episode rows must be complete")
+        grouped[(row["method"], row["model_seed"])].append(row)
+
+    summaries: dict[str, Any] = {"trained": defaultdict(list), "baselines": {}}
+    trained_methods = {
+        "state_model_cem",
+        "image_reconstruction_cem",
+        "jepa_uniform_cem",
+        "jepa_momentum_prior_cem",
+    }
+    for (method, seed), method_rows in sorted(grouped.items()):
+        successes = sum(int(row["success"]) for row in method_rows)
+        total = len(method_rows)
+        if method in trained_methods:
+            if total != 20:
+                raise ValueError(f"expected 20 paired episodes for {method} seed {seed}")
+            summaries["trained"][method].append({
+                "seed": seed,
+                "successes": successes,
+                "total": total,
+                "rate": successes / total,
+            })
+        else:
+            if method in summaries["baselines"] or total != 20:
+                raise ValueError(f"expected one 20-start baseline group for {method}")
+            low, high = wilson_interval(successes, total)
+            summaries["baselines"][method] = {
+                "successes": successes,
+                "total": total,
+                "rate": successes / total,
+                "wilson_low": low,
+                "wilson_high": high,
+            }
+    if {method: len(values) for method, values in summaries["trained"].items()} != {
+        "state_model_cem": 5,
+        "image_reconstruction_cem": 5,
+        "jepa_uniform_cem": 5,
+        "jepa_momentum_prior_cem": 5,
+    }:
+        raise ValueError("visual JEPA episode evidence has unexpected model-seed coverage")
+    if set(summaries["baselines"]) != {"oracle_state_cem", "direct_visual_momentum"}:
+        raise ValueError("visual JEPA episode evidence has unexpected baselines")
+    summaries["trained"] = dict(summaries["trained"])
+    return summaries
+
+
 def _plot_success_panel(ax: Any, title: str, note: str, summary: dict[str, dict[str, Any]], order: list[str]) -> None:
     y_values = list(reversed(range(len(order))))
     for y, method in zip(y_values, order):
@@ -311,9 +403,147 @@ def plot_uncertainty_calibration(output_dir: Path) -> Path:
     return target
 
 
+def plot_visual_jepa_action_ranking(output_dir: Path) -> Path:
+    summary = summarize_visual_jepa_rankings()
+    methods = ["state_model", "image_reconstruction", "jepa"]
+    labels = ["Privileged state model", "Image reconstruction", "Action-conditioned JEPA"]
+    colors = ["#0072B2", "#D55E00", "#009E73"]
+    fig, ax = plt.subplots(figsize=(9.5, 5.0))
+    for y, (method, label, color) in enumerate(zip(methods, labels, colors)):
+        values = summary[method]
+        accuracies = [row["accuracy"] for row in values]
+        jitter = [((index - 2) * 0.055) for index in range(len(values))]
+        ax.scatter(
+            accuracies,
+            [y + offset for offset in jitter],
+            color=color,
+            marker="o",
+            edgecolor="black",
+            linewidth=0.5,
+            s=55,
+            zorder=3,
+            label=None,
+        )
+        average = mean(accuracies)
+        ax.scatter(
+            [average],
+            [y],
+            marker="D",
+            s=82,
+            color="#202938",
+            edgecolor="white",
+            linewidth=0.7,
+            zorder=4,
+        )
+        total_correct = sum(row["correct"] for row in values)
+        total_pairs = sum(row["total"] for row in values)
+        ax.text(1.01, y, f"{total_correct}/{total_pairs}", va="center", fontsize=9)
+
+    ax.axvline(0.5, color="#687386", linestyle="--", linewidth=1, label="50% reference")
+    ax.set_yticks(range(len(labels)), labels)
+    ax.set_xlim(0.0, 1.12)
+    ax.set_xticks([0.25, 0.5, 0.75, 1.0], ["25%", "50%", "75%", "100%"])
+    ax.set_xlabel("Correct ranking of non-tied action pairs")
+    ax.set_title("Held-out action ranking varies across model seeds", loc="left", fontweight="bold")
+    ax.grid(axis="x", color="#d8dee4", linewidth=0.8)
+    ax.set_axisbelow(True)
+    ax.spines[["top", "right", "left"]].set_visible(False)
+    ax.tick_params(axis="y", length=0, pad=8)
+    fig.text(0.02, 0.13, "Each colored dot is one trained seed; the diamond is the mean across five seeds.", fontsize=9)
+    fig.text(0.02, 0.07, "Scores use different spaces (state, pixel, latent); compare within a method, not across methods.", fontsize=9)
+    fig.tight_layout(rect=(0.02, 0.23, 0.99, 0.98))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    target = output_dir / "visual-jepa-intervention-ranking.png"
+    fig.savefig(target, dpi=160, facecolor="white", metadata={"Software": "Matplotlib"})
+    plt.close(fig)
+    return target
+
+
+def plot_visual_jepa_success(output_dir: Path) -> Path:
+    summary = summarize_visual_jepa_episodes()
+    trained = summary["trained"]
+    baseline = summary["baselines"]
+    methods = [
+        ("state_model_cem", "Learned state CEM", "#0072B2"),
+        ("image_reconstruction_cem", "Image reconstruction CEM", "#D55E00"),
+        ("jepa_uniform_cem", "JEPA uniform-start CEM", "#009E73"),
+        ("jepa_momentum_prior_cem", "JEPA momentum-prior CEM", "#785EF0"),
+    ]
+    fig, axes = plt.subplots(1, 2, figsize=(13.0, 6.0), sharex=True)
+    for y, (method, label, color) in enumerate(methods):
+        values = trained[method]
+        jitter = [((index - 2) * 0.055) for index in range(len(values))]
+        rates = [row["rate"] for row in values]
+        axes[0].scatter(
+            rates,
+            [y + offset for offset in jitter],
+            color=color,
+            marker="o",
+            edgecolor="black",
+            linewidth=0.5,
+            s=52,
+            zorder=3,
+        )
+        axes[0].scatter([mean(rates)], [y], marker="D", color="#202938", edgecolor="white", s=78, zorder=4)
+    axes[0].set_yticks(range(len(methods)), [entry[1] for entry in methods])
+    axes[0].set_title("Trained methods", loc="left", fontweight="bold")
+
+    baselines = [
+        ("oracle_state_cem", "Exact-dynamics CEM", "#0072B2"),
+        ("direct_visual_momentum", "Direct visual momentum", "#666666"),
+    ]
+    for y, (method, label, color) in enumerate(baselines):
+        row = baseline[method]
+        axes[1].errorbar(
+            row["rate"],
+            y,
+            xerr=[[row["rate"] - row["wilson_low"]], [row["wilson_high"] - row["rate"]]],
+            fmt="o",
+            markersize=8,
+            capsize=4,
+            elinewidth=1.6,
+            color=color,
+            markeredgecolor="black",
+            markeredgewidth=0.5,
+        )
+        axes[1].text(row["rate"], y + (0.16 if row["rate"] < 0.5 else -0.16), f"{row['successes']}/{row['total']}", ha="center", va="center", fontsize=9)
+    axes[1].set_yticks(range(len(baselines)), [entry[1] for entry in baselines])
+    axes[1].set_title("Fixed-start baselines", loc="left", fontweight="bold")
+
+    for ax in axes:
+        ax.set_xlim(-0.04, 1.08)
+        ax.set_xticks([0, 0.25, 0.5, 0.75, 1.0], ["0%", "25%", "50%", "75%", "100%"])
+        ax.set_xlabel("Goal success rate")
+        ax.grid(axis="x", color="#d8dee4", linewidth=0.8)
+        ax.set_axisbelow(True)
+        ax.spines[["top", "right", "left"]].set_visible(False)
+        ax.tick_params(axis="y", length=0, pad=8)
+    fig.suptitle("Policy guidance changed the local planning outcome", x=0.02, ha="left", fontweight="bold")
+    fig.text(0.02, 0.17, "Trained methods: each dot is one model seed; each seed uses the same 20 starts.", fontsize=8.5)
+    fig.text(0.52, 0.17, "Baselines: one controller per method; 95% Wilson intervals over 20 starts.", fontsize=8.5)
+    fig.text(
+        0.02,
+        0.055,
+        "Synthetic MountainCar. The direct visual-momentum controller uses the same hand-written prior as JEPA momentum-prior CEM. The result does not isolate added value from JEPA.",
+        fontsize=8.5,
+        wrap=True,
+    )
+    fig.tight_layout(rect=(0.02, 0.25, 0.99, 0.9), w_pad=2.2)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    target = output_dir / "visual-jepa-success.png"
+    fig.savefig(target, dpi=160, facecolor="white", metadata={"Software": "Matplotlib"})
+    plt.close(fig)
+    return target
+
+
 def main() -> None:
     output_dir = ROOT / "docs/portfolio/figures"
-    for path in (plot_decision_usefulness(output_dir), plot_uncertainty_calibration(output_dir)):
+    for path in (
+        plot_decision_usefulness(output_dir),
+        plot_uncertainty_calibration(output_dir),
+        plot_visual_jepa_action_ranking(output_dir),
+        plot_visual_jepa_success(output_dir),
+    ):
         print(path.relative_to(ROOT))
 
 

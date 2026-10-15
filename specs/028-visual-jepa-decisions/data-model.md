@@ -23,7 +23,7 @@ The saved intervention rows use the fixed method names `oracle`, `state_model`, 
 
 ## Model run
 
-One trained state or visual model, stored in `docs/evidence/visual-jepa-model-runs.csv`. It records method, training seed, training-data seed, objective, package versions, device, precision, training time, peak allocated GPU memory when available, final losses, embedding spread, collapse status, and run status. The fixed `1e-3` low-variance threshold is defined in the feature spec and is not repeated in each CSV row. A collapsed or non-finite JEPA does not count as a successful model run.
+One trained state or visual model, stored in `docs/evidence/visual-jepa-model-runs.csv`. It records method, training seed, training-data seed, objective name and settings, package versions, device, precision, training time, peak allocated GPU memory when available, final losses, embedding spread, collapse status, and run status. SIGReg fields remain specific to SIGReg. A VISReg-style row records its mix weight, scale/shape/center weights, projection count, epsilon, total regularizer, and component losses in separately named fields. The fixed `1e-3` low-variance threshold is defined in the feature spec and is not repeated in each CSV row. A collapsed or non-finite JEPA does not count as a successful model run.
 
 ## Evaluation episode
 
@@ -36,6 +36,6 @@ The planner record identifies the model, candidate source (`uniform` or `scripte
 
 ## Validation-only pilot record
 
-A pilot record captures one predeclared development data/model pair, objective, split, device, versions, runtime, memory, validation prediction loss, embedding spread, and collapse status. It MUST state that no intervention or evaluation data were used. It also stores a hash of the training notebook code cells and model/loss modules. Full mode accepts only the latest record that matches the current protocol hash and locked settings and has `collapsed=false`. A missing, stale, or failed record keeps final training and evaluation closed.
+A pilot record captures one predeclared development data/model pair, run status, objective name and settings, split, device, versions, runtime, memory, validation prediction loss, regularizer and component losses where applicable, embedding spread, and collapse status. It MUST state that no intervention or evaluation data were used. It also stores a hash of the training notebook code cells and model/loss modules. Full mode accepts only the latest record that matches the current protocol hash and locked settings and has `run_status=complete` and `collapsed=false`. A missing, stale, or failed record keeps final training and evaluation closed.
 
 Historical diagnostic rows without a protocol hash remain in the pilot ledger for provenance. They are ineligible to open the full-mode gate.

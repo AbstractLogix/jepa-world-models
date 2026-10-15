@@ -1,95 +1,132 @@
 # Learned Visual JEPA Decision-Usefulness Lesson
 
-**Evidence status**: exploratory validation only; the planned comparison is not run.
+**Evidence status**: Five-seed local comparison complete. This is an exploratory MountainCar study, not a paper reproduction.
 **Reviewed**: 2026-10-15
 
-## Question
+## Research question
 
-Does an action-conditioned visual predictor help choose actions in MountainCar, and how does its prediction quality relate to action ranking and closed-loop results?
+Does an action-conditioned visual predictor improve action choice, and when does accurate prediction fail to improve closed-loop decisions?
 
-Notebook 22 defines a local comparison between oracle dynamics, a privileged state model, a pixel-reconstructing latent model, an action-conditioned visual JEPA, direct control, and JEPA planning. The small study is not a reproduction of V-JEPA 2, LeJEPA, or another paper.
+Notebook 22 compares exact simulator dynamics, a privileged state model, a pixel-reconstructing visual model, an action-conditioned visual JEPA, direct visual-momentum control, and two JEPA CEM planners. It uses synthetic rendered MountainCar frames. It does not reproduce V-JEPA 2, LeJEPA, VISReg, or another paper.
 
-## Validation-only GPU run
+## Protocol and validation gate
 
-The first full-size model run used the fixed training and validation split. It did not use intervention or evaluation starts.
+The notebook used `MountainCarContinuous-v0`, goal position 0.45, a 300-step limit, two 48 × 128 RGB frames, 20 generated training episodes per data seed, and a fixed split of 16 train episodes (4,800 rows) and 4 validation episodes (1,200 rows). The full run used five paired training-data/model seeds, 35 epochs, float32, a 10-step CEM horizon, 24 candidates, four elites, and two CEM updates. It evaluated 20 held-out intervention starts under actions {-1, 0, 1}, then 20 shared episode starts per learned model seed.
 
-| Item | Value |
-| --- | --- |
-| Environment | Synthetic MountainCarContinuous frames |
-| Training data seed / model seed | 1000 / 2021 |
-| Split | 16 training episodes / 4 validation episodes |
-| Rows | 4,800 training / 1,200 validation |
-| Model and objective | 32-dimensional visual encoder; predictive MSE plus Epps–Pulley SIGReg, weight 0.1 and 128 projections |
-| Training | 35 epochs, batch size 256, float32 |
-| Device | NVIDIA RTX 5070, CUDA 12.8; PyTorch 2.10.0+cu128 |
-| Training time / peak allocated GPU memory | 13.02 s / 509.0 MiB |
-| Validation prediction MSE | 0.001351 |
-| Validation embedding spread | Mean per-dimension standard deviation 0.0000739; all 32 dimensions were below the fixed `1e-3` threshold |
-| Collapse screen | Failed; the representation is collapsed under the predeclared rule |
+Before opening those cases, the protocol-matched validation pilot had to pass the fixed `1e-3` embedding-spread screen. The VISReg-style pilot used data/model seeds 1000/2021 and the same split. It passed the screen: mean per-dimension validation standard deviation was 0.005110, with 0/32 dimensions below threshold. Validation prediction MSE was 0.0005685. Training took 13.56 seconds and used 508.54 MiB peak GPU memory on an RTX 5070 (PyTorch 2.10.0+cu128, CUDA 12.8).
 
-The prediction loss is low, but the representation fails the collapse screen. This run does not support a claim that the learned JEPA predicts useful features. A low prediction loss alone is not enough. The full model record is in [visual-jepa-model-runs.csv](../evidence/visual-jepa-model-runs.csv).
+The regularizer mix was 0.6, with scale, shape, and center weights set to 1, 128 projections, and epsilon `1e-4`. The pilot's mean regularizer was 33.085: scale 0.990, shape 0.096, and center 31.999. The pass means only that this one predeclared configuration cleared the fixed collapse threshold. The spread remained small, and the center term dominated. It is not evidence of a useful representation.
 
-A second full-size validation-only pilot used a temporary copy of Notebook 22's training path with SIGReg replaced by a local VICReg-style variance and covariance penalty. The published notebook was not changed. The pilot used the same data split, one training seed, and 35 epochs on the RTX 5070. It also collapsed: all 32 dimensions were below the threshold, with mean standard deviation `0.0001205`; validation prediction MSE was `0.05560`. Training took 11.13 seconds and used 389.6 MiB peak GPU memory. This is an exploratory adaptation, not a VICReg or LeJEPA reproduction. Both full-size pilot records are in [visual-jepa-validation-pilots.csv](../evidence/visual-jepa-validation-pilots.csv).
+The objective is an independent **VISReg-style temporal-prediction adaptation** based on the paper equations. The paper uses multi-view image augmentations. This notebook uses temporal prediction. It reuses no paper code or weights and does not test the paper's claims. The matching pilot's training protocol hash was `1ef7779c4df06084166b434ffc76b7d80560b9fc62f619b10ff52329c80ae13e`.
 
-The validation-only probes also tried SIGReg weights 1 and 10, a non-affine output normalization, a variance-floor term with weight 1, learning rates `5e-4` and `2e-4`, and adaptive max pooling. These small runs also collapsed. Their records are in [visual-jepa-validation-pilots.csv](../evidence/visual-jepa-validation-pilots.csv). They use the same data seed and model seed for diagnosis. They are not independent training runs and are not a hyperparameter comparison.
+Earlier SIGReg, VICReg-style, and pre-gate runs remain in the evidence ledger. The SIGReg pilot and temporary VICReg-style probe collapsed; the five earlier training pairs ran before the pilot gate and stay excluded from the final comparison. The gradient diagnosis found a zero SIGReg input gradient at exact zero embeddings but no confirmed implementation defect.
 
-## Pre-gate exploratory five-seed CUDA run
+## Full-run evidence
 
-This run used the planned seed groups before I noticed the project ledger requires a passing pilot before final training. Preserve it as exploratory evidence and exclude all 15 rows from any final comparison. The five data/model pairs each used 20 generated episodes, with 16 training episodes (4,800 rows) and 4 validation episodes (1,200 rows). All 15 fits completed on the RTX 5070 with float32. The run did not use intervention or episode cases.
+All five paired data/model seed groups completed for the state model, image-reconstruction model, and JEPA. All 15 model records use CUDA. The five JEPA seeds used the VISReg-style adaptation and passed the fixed screen, with mean validation spread from 0.00279 to 0.00574 and no dimension below `1e-3`.
 
-| Model seed / data seed | JEPA validation prediction MSE | Mean validation embedding standard deviation | Collapse screen |
+| Model | Training time across five fits | Peak memory | Recorded validation diagnostics |
 | --- | ---: | ---: | --- |
-| 2121 / 1100 | 0.003267 | 0.0000109 | Failed; 32/32 dimensions below `1e-3` |
-| 2127 / 1101 | 0.002780 | 0.0000116 | Failed; 32/32 dimensions below `1e-3` |
-| 2139 / 1102 | 0.001170 | 0.0000813 | Failed; 32/32 dimensions below `1e-3` |
-| 2153 / 1103 | 0.000965 | 0.0000550 | Failed; 32/32 dimensions below `1e-3` |
-| 2163 / 1104 | 0.001448 | 0.0000580 | Failed; 32/32 dimensions below `1e-3` |
+| Privileged state model | 25.62 s total | 224.73 MiB | Total loss: `8.85e-7` to `1.38e-5` |
+| Image reconstruction | 58.54 s total | 549.81 MiB | Total loss: 0.00110 to 0.00161; pixel loss: 0.00439 to 0.00645 |
+| Action-conditioned JEPA | 59.95 s total | 524.67 MiB | Prediction MSE: `3.44e-5` to `8.65e-4`; spread: 0.00279 to 0.00574; 0/32 low-variance dimensions in each run |
 
-| Model | Sum of per-model training time across five seeds | Peak allocated GPU memory |
+The validation metrics use different spaces and objectives. Do not compare their values as one shared prediction score. The learned state model also receives simulator state, so it is a privileged reference rather than a matched visual baseline.
+
+### Changed-action ranking
+
+The notebook tested three actions at each of 20 held-out starts. The evidence contains 960 complete rows: 60 oracle rows and 300 rows for each learned method. Ranking uses each model's own score space and excludes actual-score ties.
+
+| Method | Correct non-tied action pairs | Interpretation |
+| --- | ---: | --- |
+| Exact simulator dynamics | 60/60 | Privileged reference |
+| Learned state model | 248/300 (82.7%) | Simulator-state score |
+| Image reconstruction model | 124/255 (48.6%) | Pixel-goal score; 45 ties excluded |
+| Action-conditioned JEPA | 153/295 (51.9%) | Latent-goal score; 5 ties excluded |
+
+The state, pixel, and latent scores have different units. These percentages are descriptive and are not a direct cross-model metric. JEPA ranking varied across training seeds from 33.3% to 66.7%; the pooled ratio does not replace the five seed-level results.
+
+### Closed-loop outcomes
+
+All 440 episode rows completed without an error. The 20 evaluation seeds were shared across methods. Each learned model seed used the same 20 starts. Direct visual control and oracle CEM have no training seed and ran once on those 20 starts.
+
+| Method | Successes | Per-seed detail |
+| --- | ---: | --- |
+| Oracle-state CEM | 0/20 | Exact dynamics did not make this CEM setup succeed |
+| Learned-state CEM | 18/100 | 18/20 on seed 7239; 0/20 on each other model seed |
+| Image-reconstruction CEM | 0/100 | 0/20 for all five model seeds |
+| JEPA uniform-start CEM | 0/100 | 0/20 for all five model seeds |
+| JEPA momentum-prior CEM | 100/100 | 20/20 for all five model seeds |
+| Direct visual-momentum control | 20/20 | One controller on the shared 20 starts |
+
+The momentum prior starts CEM from the action sign estimated from recent visual motion. The direct controller uses that same hand-written visual-momentum rule without CEM. Since direct control already solved all 20 starts, the result does not establish that JEPA improved decisions. The prior-guided JEPA planner had a mean return of 91.95 across its 100 rows; the direct controller had 89.34 across its 20 rows. This small, unbalanced descriptive difference is not an isolated or independent JEPA effect.
+
+The notebook also paired each learned planner row with the direct controller's return on the same evaluation start. Mean return differences were -81.34 for state CEM, -93.54 for image-reconstruction CEM, -102.54 for uniform-start JEPA CEM, and +2.62 for momentum-prior JEPA CEM. Each direct-control row is reused across five learned-model seeds, so the 100 differences per trained method are paired descriptive records, not 100 independent baseline runs.
+
+The unrestricted JEPA planner succeeded on 0/100 starts. Oracle CEM also succeeded on 0/20 starts. Together these outcomes show that the planner setup can fail even with exact dynamics, and that the hand-written prior strongly shapes the result. The run does not isolate planner search error from horizon, objective, or model error.
+
+## Compute and storage
+
+The full model training used the RTX 5070 with PyTorch 2.10.0+cu128, CUDA 12.8, and float32. Total recorded training time across all 15 fits was about 144.11 seconds, excluding data generation. The highest recorded model allocation was 549.81 MiB. The notebook ran all model predictions and CEM planning on CUDA; simulator stepping and rendering remain environment work outside the learned model.
+
+Average per-episode planning time and model-step calls were:
+
+| Method | Planning seconds | Model-step calls |
 | --- | ---: | ---: |
-| Privileged state model | 24.65 s | 224.7 MiB |
-| Image reconstruction model | 58.23 s | 549.8 MiB |
-| Action-conditioned JEPA | 56.72 s | 526.2 MiB |
+| Oracle-state CEM | 2.507 | 144,000 |
+| Learned-state CEM | 2.874 | 135,869 |
+| Image-reconstruction CEM | 2.273 | 144,000 |
+| JEPA uniform-start CEM | 1.894 | 144,000 |
+| JEPA momentum-prior CEM | 0.746 | 55,685 |
+| Direct visual-momentum control | 0 | 0 |
 
-Training-time sums exclude data generation. Validation losses use different objectives and units across model families. The five JEPA rows show a repeated local training failure, not a decision-usefulness result. These seeds are now excluded from the final protocol because their results have been observed before the pilot gate passed. Their records are in [visual-jepa-training-diagnostics.csv](../evidence/visual-jepa-training-diagnostics.csv); the earlier development pilot remains in [visual-jepa-model-runs.csv](../evidence/visual-jepa-model-runs.csv).
+The learned methods use different architectures and scoring spaces. These local latency and call counts are workload measurements, not a general hardware comparison.
 
-The pre-gate run used no intervention or episode cases. After the gate was implemented, a matching CUDA pilot record was added with training protocol hash `e4df0f738d2ea537c92ffc008ff1c8d49e4238a3798be8812390937359113ba4`; it failed. A fresh full-mode setup check recognized that row and skipped all final training and evaluation. Historical probe rows without a protocol hash remain in the ledger but cannot open the gate. The final seed groups remain unopened.
+The executed notebook, runtime cache, and generated arrays remain on the E: drive at `E:\codex-research\jepa-world-models-tutorial\visreg-style-full-20261015`. The repository retains the small model, intervention, and episode CSV files and the two portfolio figures. No dataset or checkpoint download was needed.
 
-## Instrumented gradient diagnosis
+## What the evidence supports
 
-A validation-only replay of the development seed on CUDA found that mean validation embedding spread fell from `0.002110` at initialization to `0.000131` after one epoch. All dimensions then failed the collapse screen. At epoch 35, mean spread was `0.0000739`. On the fixed training batch, the weighted SIGReg encoder-gradient norm exceeded the prediction-loss encoder-gradient norm at each inspected point. A separate synthetic check found zero SIGReg input gradient for exactly constant zero embeddings and a smaller gradient as the embedding perturbation approached zero.
+- Clearing a spread threshold is a training diagnostic, not proof that the representation ranks useful actions.
+- In this run, JEPA's one-step predictive loss and non-collapsed status did not produce reliable three-action ranking or successful uniform-start CEM.
+- The hand-written visual-momentum prior changed JEPA CEM from 0/100 to 100/100, but its direct-control version also reached 20/20. This shows the value of the prior in this task, not an isolated gain from JEPA.
+- Exact dynamics with the chosen CEM setup also failed on 0/20 starts. Planner initialization, horizon, and objective need separate controls before assigning the failure to a learned model.
+- One-step losses, action-ranking scores, success, and compute answer different questions. None alone validates a useful world model.
 
-This diagnosis does not identify a confirmed defect or explain the full training collapse. The local objective differs from LeJEPA's published multi-view invariance setup and uses a different Epps–Pulley frequency range. Do not generalize this result to SIGReg or JEPA methods. The fixed gate remains closed until a matching validation-only pilot passes. The protocol-hashed CUDA pilot rerun produced the same collapse status and no final cases.
+## Research context and limits
 
-## Interpretation and limits
+LeJEPA reports a predictive objective with SIGReg. Its official implementation uses multi-view invariance and a different Epps–Pulley frequency range; this notebook uses a smaller temporal-prediction objective. The local objective studies in Notebooks 02 and 03 are small CIFAR-10 studies, not the paper's benchmarks. The official V-JEPA 2.1 checkpoint path in Notebook 09 verifies loading and feature extraction on one synthetic clip; it does not test action selection.
 
-- No final-protocol intervention set or 20-start paired closed-loop comparison was run. A CPU smoke emitted 48 intervention rows and 12 episode rows on reserved smoke seeds; these are pipeline checks and do not meet the feature's evidence thresholds.
-- The pre-gate training diagnostic is complete, but it cannot satisfy the final training stage. All five JEPA runs collapsed. The final training seeds, held-out intervention set, and paired planner evaluation remain open behind the pilot gate.
-- The state model receives simulator state. It is a privileged reference, not a matched-observation baseline.
-- Pixel, latent, and simulator-state scores have different units. Their values must not be pooled.
-- All runs use one synthetic renderer and one simulator. The development pair is 2021/1000; smoke uses 9021/9000. The pre-gate diagnostic pairs 2121/1100, 2127/1101, 2139/1102, 2153/1103, and 2163/1104 are excluded. The reserved final pairs are 7221/5100, 7227/5101, 7239/5102, 7253/5103, and 7263/5104; they have not been run.
-- GPU training works on the RTX 5070, but GPU availability does not make the failed representation valid evidence for decision quality.
+VISReg motivates a variance and sliced-Wasserstein regularizer. The local adaptation is separate from the paper's image-view setup. Its pilot passed a fixed spread screen, but the final JEPA models still had low spread and near-chance aggregate action ranking. These measurements do not validate VISReg or establish a general JEPA result. See the [LeJEPA paper](https://arxiv.org/abs/2511.08544), [official implementation](https://github.com/galilai-group/stable-pretraining/blob/main/stable_pretraining/methods/lejepa.py), [VICReg paper](https://arxiv.org/abs/2105.04906), and [VISReg preprint](https://arxiv.org/abs/2606.02572).
 
-## Research follow-up
+The experiment uses one small synthetic renderer, one simulator, a limited action set, and five training seeds. It does not include an independently trained direct policy, a learned-policy prior, calibrated model uncertainty, held-out tasks, or an official benchmark. It is a controlled local tutorial result, not a paper reproduction.
 
-LeJEPA reports a predictive objective with SIGReg, while its official implementation uses multi-view invariance and a different Epps–Pulley frequency range. This small temporal-prediction setup is only LeJEPA-inspired. VICReg uses variance and covariance terms to discourage collapsed embeddings; the local VICReg-style pilot also collapsed, so it does not validate that paper's method or claims. A 2026 VISReg preprint reports that SIGReg can have vanishing gradients near collapse and proposes separate variance and sketching terms. That is a relevant future lesson, not an explanation proven by these local runs. The paper's linked code destination returned 404 during this review; the [public checkpoint card](https://huggingface.co/BooBooWu/visreg) lists CC BY-NC 4.0. No code or weights were reused. See the [LeJEPA paper](https://arxiv.org/abs/2511.08544), [VICReg paper](https://arxiv.org/abs/2105.04906), and [VISReg paper](https://arxiv.org/abs/2606.02572).
+## Prioritized next research
 
-The SIGReg and VICReg-style adaptations failed on the fixed split. The local gradient diagnosis found a zero input gradient at exact constant zero embeddings but did not identify a confirmed code defect. The official LeJEPA implementation uses multi-view invariance and a different Epps–Pulley frequency range; this notebook is not that objective. Do not start another broad objective sweep. Any future configuration must pass a protocol-matched, validation-only pilot before the reserved final model, intervention, or episode seeds are used. Preserve failures and report training-seed variation separately from evaluation-start variation.
+The next study should isolate representation value from the hand-coded prior and CEM setup. Use a fixed policy and the same training data to compare:
 
-The `1e-3` collapse threshold was set before the pilot. The decision to stop before full intervention and episode evaluation follows the pilot result; this report and the feature spec now make that stop rule explicit for future runs. No held-out intervention or episode results were used to choose the objective.
+1. Oracle simulator dynamics.
+2. Learned state-space dynamics.
+3. Learned visual latent dynamics.
+4. Action-conditioned JEPA dynamics.
+5. Direct policy without a learned world model.
+6. The same policy as a prior for model-based search, with unconstrained search as a separate condition.
+
+Before execution, fix the task, data split, test starts, seeds, model and planner budgets, primary outcome, and compute limit. Compare one-step accuracy, action interventions, ranking, closed-loop outcomes, uncertainty, model calls, latency, and training cost. Require full raw rows, matching access conditions, a predeclared analysis, and an independent regeneration before making a research claim. Do not use this MountainCar outcome as evidence for a larger benchmark.
+
+The official 450-episode Push-T evaluation remains pending. The full JEPA-WAM LIBERO-Plus benchmark remains out of scope for this run.
 
 ## Local validation status
 
-- **Fresh CPU smoke after the record-contract update**: passed on 2026-10-15 in a fresh Jupyter kernel. It executed all notebook code cells with training-data/model seeds `9000/9021`, intervention seed `2900`, and episode seeds `3900/3901`. It wrote 3 complete model records, 48 complete intervention records, and 12 complete episode records to `E:\codex-research\jepa-world-models-tutorial\smoke-contract`. The intervention rows record prediction space, scoring space, and device. These are pipeline checks only.
-- **Seed isolation correction**: the first smoke used intervention seed `2000` and episode seeds `3000/3001`, which overlapped an early draft of the final ranges. Only row counts and completion statuses were checked; outcome values were not inspected or used for objective selection. Those outputs are excluded. The pre-gate training pairs are also excluded; replacement final ranges are disjoint from development, smoke, and pre-gate runs.
-- **CUDA validation pilot**: the protocol-hashed pilot mode ran on the RTX 5070 with PyTorch 2.10.0+cu128/CUDA 12.8. It used the fixed 16/4 split for 35 epochs; all 32 embedding dimensions failed the collapse screen. It appended a validation-only record and collected no intervention or evaluation cases. The full-mode gate check then skipped final training and evaluation. The earlier pre-gate five-seed run is excluded. The VICReg-style probe used a temporary notebook copy.
-- **Focused unit checks**: 12 passed, including validation of complete, incomplete, empty, malformed, duplicate, and unpaired intervention records.
-- **Notebook and evidence checks**: the notebook JSON parsed and all 9 code cells compiled. The validator accepted all 48 smoke intervention rows, including the method-specific space and device labels. The saved evidence contains 1 development model row, 15 excluded pre-gate training-diagnostic rows, and 11 validation-pilot rows. All 15 diagnostic rows have `final_comparison_eligible=false`; the latest pilot row stores the current protocol hash and failed the collapse screen.
-- **Lint and packaging**: Ruff passed on the changed source and test files. `uv build` passed; the wheel and source archive were written to `E:\codex-research\jepa-world-models-tutorial\package-check-final`.
-- **Portfolio checks**: the manifest parsed and its local paths resolved. All local Markdown links in the case study and portfolio README resolved. Both figures were regenerated to E: and matched the tracked images pixel for pixel. The full locked test suite passed (17 tests); a direct system-Python test invocation first failed because that interpreter did not include Matplotlib, then passed under the project `uv` environment. The final package build was written to `E:\codex-research\jepa-world-models-tutorial\package-check-portfolio-update`.
-- **Spec Kit cross-artifact check**: all 11 functional requirements and 6 success criteria are represented in the 21 tasks. No constitution conflict was found. Convergence found one untracked evidence step: the final 20-start, three-action intervention set. It is now tracked as T021. T006, T007, T012, T013, and T021 remain open behind the failed pilot gate.
-- **Not run**: final training on the reserved replacement seeds, the held-out intervention set, the 20-start paired comparison, and CUDA planner evaluation. The protocol-hashed pilot failed the collapse screen, so full mode skips final model training and evaluation.
+- **Training and records**: 15/15 model fits, 960/960 intervention rows, and 440/440 episode rows completed. The raw rows have no recorded failures or missing outcomes.
+- **CUDA**: all three learned model families trained on the RTX 5070; the full protocol hash matched the passing VISReg-style pilot.
+- **Notebook pipeline**: the pilot and full run executed on the E:-hosted Python 3.10.12 environment. The earlier CPU smoke checked the short pipeline on reserved seeds; it is not part of this comparison.
+- **Focused unit checks**: 23 tests passed with `uv run --locked --no-sync python -m unittest discover -s tests -v`.
+- **Code and package checks**: Ruff passed on the changed source, tests, and figure generator. `uv build` produced the source distribution and wheel; build outputs were written to E:.
+- **Notebook and evidence checks**: Notebook JSON is valid and all nine code cells compile. The recorded pilot hash matches the current training cells and objective modules. The final evidence contains 15 model fits, 960 paired interventions, and 440 episode records with no recorded failures or missing outcomes. The portfolio figure generator rebuilt all four figures from the evidence files.
+- **Documentation and repository checks**: the portfolio manifest paths and accessibility fields passed their unit checks. Local Markdown links and `git diff --check` passed. Spec Kit analysis covered 12 functional requirements, six success criteria, three stories, and 26 tasks; it found no remaining coverage or constitution issues. Convergence found no unbuilt work and appended no task.
+- **CPU scope**: the earlier CPU smoke checked the short pipeline with reserved seeds. The full five-seed comparison was not run on CPU; the measured full run used CUDA.
+- **Paper-scale benchmarks**: the 450-episode Push-T run and 2,402-task JEPA-WAM benchmark were not run.
 
 ## Reproduction
 
-Use the project setup in the [README](../../README.md), then open [Notebook 22](../../notebooks/22_visual_jepa_decision_usefulness.ipynb). The locked CPU environment remains supported. On a compatible CUDA host, the notebook probes CUDA and uses it when an operation succeeds; otherwise it falls back to CPU. The tested project environment and pilot outputs were stored under E: to avoid filling the system drive. No external data, checkpoint, or robot hardware was used.
+Use the project setup in the [README](../../README.md), then open [Notebook 22](../../notebooks/22_visual_jepa_decision_usefulness.ipynb). The locked CPU environment remains supported. On a compatible CUDA host, the notebook probes CUDA and uses it when a synchronization check succeeds; otherwise it falls back to CPU. Set `JEPA_RUN_OUTPUT_DIR` to an E: or D: folder to keep run outputs away from the system drive. No external data, checkpoint, or robot hardware was used.

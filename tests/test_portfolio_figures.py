@@ -14,6 +14,8 @@ from generate_portfolio_figures import (  # noqa: E402
     summarize_action_video,
     summarize_calibration,
     summarize_decision_usefulness,
+    summarize_visual_jepa_episodes,
+    summarize_visual_jepa_rankings,
     wilson_interval,
 )
 
@@ -49,6 +51,38 @@ class PortfolioEvidenceTests(unittest.TestCase):
         self.assertAlmostEqual(summary[("in_distribution_test", "velocity")]["mean"], 0.9034, places=4)
         self.assertAlmostEqual(summary[("policy_shift_test", "velocity")]["mean"], 0.8919, places=4)
         self.assertAlmostEqual(summary[("policy_shift_test", "position")]["lower_95"], 0.8224, places=4)
+
+    def test_notebook_22_action_rankings_preserve_per_seed_counts(self) -> None:
+        summary = summarize_visual_jepa_rankings()
+        self.assertEqual(
+            [(row["correct"], row["total"]) for row in summary["jepa"]],
+            [(36, 60), (38, 57), (38, 59), (20, 60), (21, 59)],
+        )
+        self.assertEqual(
+            (sum(row["correct"] for row in summary["jepa"]), sum(row["total"] for row in summary["jepa"])),
+            (153, 295),
+        )
+        self.assertEqual(
+            (sum(row["correct"] for row in summary["state_model"]), sum(row["total"] for row in summary["state_model"])),
+            (248, 300),
+        )
+        self.assertEqual(
+            (sum(row["correct"] for row in summary["image_reconstruction"]), sum(row["total"] for row in summary["image_reconstruction"])),
+            (124, 255),
+        )
+
+    def test_notebook_22_episode_summary_keeps_model_seeds_separate(self) -> None:
+        summary = summarize_visual_jepa_episodes()
+        trained = summary["trained"]
+        self.assertEqual(len(trained["state_model_cem"]), 5)
+        self.assertEqual(sum(row["successes"] for row in trained["state_model_cem"]), 18)
+        self.assertEqual(sum(row["successes"] for row in trained["image_reconstruction_cem"]), 0)
+        self.assertEqual(sum(row["successes"] for row in trained["jepa_uniform_cem"]), 0)
+        self.assertEqual(sum(row["successes"] for row in trained["jepa_momentum_prior_cem"]), 100)
+        self.assertEqual(
+            {key: (row["successes"], row["total"]) for key, row in summary["baselines"].items()},
+            {"oracle_state_cem": (0, 20), "direct_visual_momentum": (20, 20)},
+        )
 
     def test_manifest_paths_and_accessibility_fields_exist(self) -> None:
         manifest = json.loads((ROOT / "docs/portfolio/project.json").read_text(encoding="utf-8"))

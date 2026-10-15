@@ -14,6 +14,7 @@ from jepa_tutorial.action_conditioned_visual import (
     select_device,
 )
 from jepa_tutorial.evidence_validation import validate_intervention_records
+from jepa_tutorial.visreg_style import visreg_style_regularization_loss
 
 
 def _complete_intervention_record(method: str, model_seed: int | str, action: float) -> dict[str, object]:
@@ -125,6 +126,63 @@ class VisualDynamicsTests(unittest.TestCase):
 
         self.assertEqual(device, torch.device("cpu"))
         self.assertTrue(any("using CPU" in str(item.message) for item in caught))
+
+
+class VisRegStyleLossTests(unittest.TestCase):
+    def test_returns_finite_components_and_gradients(self) -> None:
+        embeddings = torch.randn(16, 8, requires_grad=True)
+
+        total, components = visreg_style_regularization_loss(
+            embeddings,
+            generator=torch.Generator().manual_seed(17),
+        )
+        total.backward()
+
+        self.assertEqual(set(components), {"scale_loss", "shape_loss", "center_loss"})
+        self.assertTrue(torch.isfinite(total))
+        self.assertTrue(all(torch.isfinite(value) for value in components.values()))
+        self.assertTrue(torch.isfinite(embeddings.grad).all())
+
+    def test_shape_term_breaks_an_exact_constant_batch(self) -> None:
+        embeddings = torch.zeros(16, 8, requires_grad=True)
+
+        _, components = visreg_style_regularization_loss(
+            embeddings,
+            generator=torch.Generator().manual_seed(23),
+        )
+        components["shape_loss"].backward()
+
+        self.assertTrue(torch.isfinite(embeddings.grad).all())
+        self.assertGreater(float(embeddings.grad.norm()), 0.0)
+
+    def test_seeded_projection_directions_are_reproducible(self) -> None:
+        embeddings = torch.randn(12, 5)
+        first, first_components = visreg_style_regularization_loss(
+            embeddings,
+            generator=torch.Generator().manual_seed(29),
+        )
+        second, second_components = visreg_style_regularization_loss(
+            embeddings,
+            generator=torch.Generator().manual_seed(29),
+        )
+
+        self.assertTrue(torch.equal(first, second))
+        for name in first_components:
+            self.assertTrue(torch.equal(first_components[name], second_components[name]))
+
+    def test_rejects_invalid_inputs_and_settings(self) -> None:
+        with self.assertRaisesRegex(ValueError, "at least 2 rows"):
+            visreg_style_regularization_loss(torch.ones(1, 4))
+        with self.assertRaisesRegex(ValueError, "floating-point"):
+            visreg_style_regularization_loss(torch.ones(4, 4, dtype=torch.int64))
+        with self.assertRaisesRegex(ValueError, "finite values"):
+            visreg_style_regularization_loss(torch.tensor([[0.0], [float("nan")]]))
+        with self.assertRaisesRegex(ValueError, "num_projections"):
+            visreg_style_regularization_loss(torch.ones(4, 4), num_projections=0)
+        with self.assertRaisesRegex(ValueError, "at least one"):
+            visreg_style_regularization_loss(
+                torch.ones(4, 4), scale_weight=0, shape_weight=0, center_weight=0
+            )
 
 
 class InterventionEvidenceValidationTests(unittest.TestCase):

@@ -11,7 +11,7 @@ Add a small visual action-conditioned JEPA lesson to the existing MountainCar pl
 **Language/Version**: Python 3.10–3.13
 **Primary Dependencies**: Existing project dependencies: PyTorch, NumPy, Gymnasium, Pillow, Matplotlib. No new dependency.
 **Storage**: Generate transitions in memory. Keep small CSV evidence in `docs/evidence/`. Keep model weights, caches, and any larger outputs on E: or D: through the existing asset and uv path settings.
-**Testing**: Standard-library unit tests for model shape, finite losses, collapse diagnostics, and CPU fallback; execute the notebook end-to-end; validate CSV pairing and record counts; run existing documentation and packaging checks requested for this project.
+**Testing**: Standard-library unit tests for model shape, finite losses, collapse diagnostics, CPU fallback, and the VISReg-style regularizer's component values and gradients; validate the notebook source, CSV schemas, and pilot gate. Use one CUDA validation-only pilot for the predeclared objective setting. Do not run a parameter sweep or held-out evaluation during collapse diagnosis.
 **Target Platform**: Python on Windows or Linux/WSL. CPU is supported. A compatible CUDA device is optional.
 **Project Type**: Python package and Jupyter tutorials.
 **Performance Goals**: Bound the study to generated MountainCar data, five training seeds for each learned model, 20 paired evaluation starts, and a fixed CEM budget. Use GPU batches for model training and planning when available. Report measured runtime and memory; set no unverified speed target.
@@ -21,7 +21,7 @@ Add a small visual action-conditioned JEPA lesson to the existing MountainCar pl
 
 **Before design**: Pass. The scope is bounded, local, and evidence-led. The base CPU setup remains usable. The GPU path is optional and uses the project's existing CUDA wheel override. Paper findings and local measurements remain separate. The no-checkpoint and no-dataset decision avoids the compute and access requirements of released large models.
 
-**After design**: Pass. The implementation adds one focused visual-dynamics module, one notebook, focused unit checks, and a small run report. It uses the existing SIGReg helper and evaluation rules. It does not alter the established notebook sequence or claim a paper reproduction.
+**After design**: Pass. The implementation adds one focused visual-dynamics module, one notebook, focused unit checks, and a small run report. SIGReg remains available. The collapse diagnosis adds a separate VISReg-style adaptation from published equations and a single gated GPU pilot. It does not claim a paper reproduction.
 
 ## Design Decisions
 
@@ -32,6 +32,7 @@ Add a small visual action-conditioned JEPA lesson to the existing MountainCar pl
 5. Select CUDA only after a small tensor operation and synchronization succeed. Record PyTorch/CUDA versions, device, precision, training and evaluation time, and peak allocated GPU memory. Fall back to CPU if CUDA is absent or incompatible. Use float32 for this comparison.
 6. Keep the five-seed comparison fixed. Pilot mode uses data/model seeds 1000/2021; smoke mode uses 9000/9021. A pre-gate exploratory run used 1100–1104 and 2121, 2127, 2139, 2153, and 2163 before the project-level prerequisite was noticed; exclude those groups permanently. Reserve final data seeds 5100–5104 and model seeds 7221, 7227, 7239, 7253, and 7263. A protocol-hash-matched validation-only pilot on the same device must pass before final model training, intervention collection, or episode evaluation starts. If it fails or is missing, full mode skips all final training and evaluation. Once the gate passes, preserve every planned seed, including failed or collapsed runs. A resource limit may stop the run, but does not lower the comparison threshold.
 7. Keep the dependency-free intervention-record validator in `src/jepa_tutorial/evidence_validation.py`, separate from model primitives. Call it before the notebook writes intervention CSV files and unit-check its method, seed, pairing, status, and finite-metric rules.
+8. For the bounded collapse diagnosis, implement a separate VISReg-style loss from the paper equations: center the combined current/target embeddings; compute the scale penalty from per-dimension standard deviation; divide centered values by stop-gradient standard deviation plus `1e-4`; compare sorted projections along 128 seeded random unit directions with fixed midpoint quantiles of a standard Gaussian; and penalize the squared batch mean. Use component weights 1 and the paper's small-dataset starting mix `lambda=0.6` with the existing temporal prediction MSE. Keep this a local temporal-prediction adaptation, not the paper's multi-view recipe. Hash the objective module and notebook settings. Run only the fixed validation-only pilot on the existing development split; a matching pass opens, but does not prove, the predeclared comparison.
 
 ## Project Structure
 

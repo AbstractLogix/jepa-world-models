@@ -71,6 +71,10 @@ The papers report results for their own data, tasks, and run settings. Those res
 
 Priority reflects learning value and prerequisites, not a claim about publication rank. Use the [paper-reproduction matrix](REPRODUCTION_MATRIX.md) to select and scope local attempts. Apply the evaluation protocol before each comparison. The V-JEPA 2.1 feature lesson is available as an optional inspection path; its synthetic clip does not reproduce a paper result.
 
+## Priority experiment: learned JEPA versus direct policy
+
+The next major decision study should compare oracle dynamics, learned state-space dynamics, learned visual latent dynamics, action-conditioned JEPA dynamics, a direct policy, and policy-guided planning over the same fixed task cases. Choose the task only after data access, model terms, simulator support, and compute are confirmed. Use shared training data, paired evaluation starts, predeclared seed and case counts, and report prediction, action interventions, closed-loop outcomes, uncertainty, model calls, latency, and total compute. Keep unconstrained and policy-guided search separate. A claim requires complete planned runs, retained per-seed and per-case evidence, no test-set tuning, and independent regeneration. A preflight or toy analogue is not evidence for the learned-JEPA comparison. See the [portfolio case study](portfolio/CASE_STUDY.md#prioritized-future-research) for the proposed baseline set and claim gates.
+
 ## Source notes
 
 - **V-JEPA 2** reports video pretraining and post-training an action-conditioned model with less than 62 hours of unlabeled DROID robot video. This is the paper's reported setup, not a general data requirement.

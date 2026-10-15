@@ -2,7 +2,7 @@
 
 **From predictive representations to action selection.** This course uses runnable notebooks to teach JEPA ideas, explore recent research, and measure what a model can and cannot do.
 
-[Start learning](CURRICULUM_GUIDE.md) · [Browse lessons](docs/CURRICULUM_COVERAGE.md) · [Explore the research roadmap](docs/ROADMAP.md) · [Read the reproduction matrix](docs/REPRODUCTION_MATRIX.md)
+[Start learning](CURRICULUM_GUIDE.md) · [Browse lessons](docs/CURRICULUM_COVERAGE.md) · [Read the research case study](docs/portfolio/CASE_STUDY.md) · [Explore the research roadmap](docs/ROADMAP.md) · [Read the reproduction matrix](docs/REPRODUCTION_MATRIX.md)
 
 This repository has 21 notebooks. It separates paper-reported results from local measurements and teaching analogies. A toy result is never presented as a paper reproduction.
 
@@ -78,7 +78,7 @@ Each result has an explicit status:
 - **Illustrative** — a teaching example, not a paper result.
 - **Not run** — no local execution evidence is available.
 
-Use the [evaluation protocol](docs/EVALUATION_PROTOCOL.md) before making a comparison. The [research roadmap](docs/ROADMAP.md) and [reproduction matrix](docs/REPRODUCTION_MATRIX.md) track current sources, planned lessons, resource needs, and open reproduction work. The full [documentation index](docs/index.md) links to reports and evidence records.
+Use the [evaluation protocol](docs/EVALUATION_PROTOCOL.md) before making a comparison. The [research case study](docs/portfolio/CASE_STUDY.md) summarizes the strongest local findings and their limits. The [research roadmap](docs/ROADMAP.md) and [reproduction matrix](docs/REPRODUCTION_MATRIX.md) track current sources, planned lessons, resource needs, and open reproduction work. The full [documentation index](docs/index.md) links to reports and evidence records.
 
 ## Contribute
 

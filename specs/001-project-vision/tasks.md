@@ -214,6 +214,14 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 - [x] T074 Deliver feature 023's CPU-only Notebook 21 and local report; align the README, curriculum, roadmap, reproduction matrix, project research, and remaining-work record.
 - [x] T075 Apply the shared evaluation protocol to Notebook 21, extend the protocol audit, and analyze and converge feature 023. Keep the paper reproduction not run until author-linked artifacts are available.
 
+## Phase 26: Align the shared protocol with Notebook 09 evidence
+
+**Goal**: Record the fresh V-JEPA 2.1 checkpoint inspection as a bounded illustrative measurement in the shared protocol and its audit.
+
+**Independent Test**: The protocol, audit, curriculum coverage, roadmap, and project alignment all describe the same Notebook 09 evidence and state that it does not establish general feature quality or reproduce a paper benchmark.
+
+- [x] T076 Add Notebook 09 to the protocol audit and align its evidence boundary across the protocol, curriculum, roadmap, and project records.
+
 ## Dependencies and Execution Order
 
 - Setup and foundational tasks are complete.
@@ -237,6 +245,7 @@ T070 corrects stale notebook counts in the project plan and alignment record; it
 T071 migrates the project Python environment to uv and amends constitution version 2.0.0 to record the CPU-lock/CUDA-override boundary. The E:-hosted Python 3.13 environment installs from the lock and imports the project, PyTorch, TorchVision, TorchCodec, and timm. The CUDA 12.8 override passes a matrix operation on the RTX 5070. The pre-existing repository `.venv` remains intact.
 T072 adds one local analogy and its evidence; it does not reproduce the LeWAM diffusion-steering paper. T073 applies the existing protocol to its paired starts, compute record, and claim boundary. The five seed groups are evaluation variation, not model-training runs.
 T074 adds a second planning analogy: 100 shared starts and five evaluation groups for RRT, KPIECE, and CEM. Its success, transition-call, runtime, and failure counts apply only to the known toy point-mass task. T075 applies the protocol and convergence workflow; the paper evaluation remains not run.
+T076 adds Notebook 09's fresh checkpoint-path evidence to the protocol inventory. The comparison uses one synthetic clip and has no pass threshold; it remains illustrative and does not establish general feature quality or a paper benchmark.
 
 ### Parallel opportunities
 

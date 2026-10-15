@@ -1,11 +1,11 @@
 # Evaluation Protocol Application Audit
 
 **Reviewed**: 2026-10-15
-**Scope**: Report fields and claim labels for Notebook 14, Notebook 16, Notebook 17, Notebook 20, Notebook 21, and the LeHami comparison; verify the saved or regenerated records available for each.
+**Scope**: Report fields and claim labels for Notebook 09, Notebook 14, Notebook 16, Notebook 17, Notebook 20, Notebook 21, and the LeHami comparison; verify the saved or regenerated records available for each.
 
 ## Result
 
-The shared protocol fits these six examples. Each report states its task, method and data, run scope, metric, compute conditions, evidence level, and claim limits. The required fields are sometimes split between a results table and nearby run conditions. Section 9 allows that layout while requiring each field to remain explicit and easy to find.
+The shared protocol fits these seven examples. Each report states its task, method and data, run scope, metric, compute conditions, evidence level, and claim limits. The required fields are sometimes split between a results table and nearby run conditions. Section 9 allows that layout while requiring each field to remain explicit and easy to find. Notebook 09 is a single-clip illustrative measurement, so this audit checks its execution record and claim boundary; it does not treat it as a performance comparison or general feature evaluation.
 
 This audit checks the reports and the saved or freshly regenerated local records available for each example. It does not independently verify the paper's results or the external LeHami output files.
 
@@ -13,6 +13,7 @@ This audit checks the reports and the saved or freshly regenerated local records
 
 | Example | Protocol fit | Records checked |
 | --- | --- | --- |
+| [Notebook 09 report](vjepa21-local-run.md) | Correctly labeled local checkpoint execution on a synthetic clip. It records the input, pinned code and checkpoint hash, output shape, simple baseline, runtime, memory, and the absence of a pass threshold. | The fresh CPU-kernel repeat found the expected checkpoint hash and finite `[1, 8, 24, 24, 768]` features, completed without cell errors, and returned the recorded one-cell correspondence for both methods. |
 | [Notebook 14 report](../reproductions/decision-usefulness.md) | Correctly labeled illustrative. It fixes disjoint training, intervention, and evaluation seed groups; reports paired cases, intervention errors, closed-loop outcomes, actual compute, and limits. It states peak memory was not measured. | The saved notebook output has 60 intervention rows and 40 paired episode rows. |
 | [Notebook 16 report](../reproductions/action-video-planning.md) | Correctly labeled exploratory. It reports one fitted model, episode-level intervals, and limits on training-run variation and paper claims. | The episode CSV has 60 complete rows: 20 for each of three methods. The intervention CSV has 60 rows. |
 | [Notebook 17 report](../reproductions/model-uncertainty-planning.md) | Reports five independent model seeds, disjoint data seed groups, paired evaluation starts, run-level Student-t intervals, compute, and its simulator-analogue limit. | The run CSV has five complete runs; calibration has 60,000 rows; plans have 200 complete rows; episodes have 220 complete rows, including the 20 direct-policy episodes. |

@@ -18,7 +18,7 @@ The local lesson does not use the paper's code, model, data, flow-matching polic
 - **Methods**: Best-of-N raw-action sampling, best-of-N policy-noise sampling, and a direct state-feedback rule.
 - **Paired evaluation**: Five declared evaluation seeds (`101`, `202`, `303`, `404`, `505`), 20 common start positions per seed, 100 paired starts total. The methods use the same 128 candidate plans per decision, horizon 3, score, and episode limit. No model is trained; seed variation is from sampled starts and planner proposals, not training runs.
 - **Metrics**: Closed-loop success, steps, forward-model calls, selected-action prediction error, and fraction of selected planner actions outside the toy policy support. Candidate evaluation counts use the same budget per decision; total calls differ because episodes stop at success or the step limit.
-- **Compute**: Python 3.13.14, Linux WSL2, CPU, standard library only. The evaluation loop completed in 0.301 seconds. No data or model files were downloaded or written.
+- **Compute**: Python 3.13.14, Linux WSL2, CPU, standard library only. The fresh run used for the saved records completed its evaluation loop in 0.295 seconds. No data or model files were downloaded; the notebook writes a small local evidence CSV.
 
 ## Results
 
@@ -48,4 +48,4 @@ In this constructed case, the raw-action planner often selected actions outside 
 
 This result shows the behavior of the chosen toy functions only. The model error was inserted by design; the policy was not trained; the task is one-dimensional; the noise input is a scalar sigmoid map; and the planner uses one random-shooting pass rather than the paper's algorithms. The five evaluation-seed groups do not measure training-run variation. These values do not reproduce or validate the paper's reported results.
 
-The notebook regenerates the run from its fixed seeds. Raw per-episode outputs are not committed, in line with the project rule for generated outputs.
+The notebook regenerates the run from its fixed seeds and writes all 300 per-episode rows to [policy-noise-episodes.csv](../evidence/policy-noise-episodes.csv). The file records the method, evaluation seed, paired start, success, steps, model calls, final position, selected-action error, and off-support fraction. Blank metric fields mean that a metric does not apply to direct control.

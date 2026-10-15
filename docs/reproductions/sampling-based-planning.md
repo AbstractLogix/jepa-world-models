@@ -19,7 +19,7 @@
 | Episode limit | 80 valid executed environment steps |
 | Primary metric | Closed-loop success: enter the goal radius while below the speed limit |
 | Other metrics | Executed steps, planner transition calls, per-episode runtime, five group rates, missing/error counts |
-| Runtime | Fresh CPU kernel in the existing E:-hosted uv environment; Python 3.13.14, NumPy 2.5.4, Matplotlib 3.11.2; no GPU |
+| Runtime | Fresh CPU kernel in the checkout's `.venv` on WSL; Python 3.13.14, NumPy 2.2.6, Matplotlib 3.10.8; no GPU |
 | External assets | None downloaded; no new dependency added |
 
 ## Locally measured outcomes
@@ -28,9 +28,9 @@ The notebook completed 100 planned episodes per method, 300 total. All methods u
 
 | Method | Success | Group SD | Mean steps | Mean transition calls / episode | Mean planner time / episode | Errors | Missing |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| RRT | 89/100 (89%) | 12.4 percentage points | 26.45 | 2,792.88 | 0.115 s | 0 | 0 |
-| KPIECE | 26/100 (26%) | 9.6 percentage points | 18.26 | 2,758.66 | 0.065 s | 0 | 0 |
-| CEM | 43/100 (43%) | 21.4 percentage points | 65.40 | 6,129.12 | 0.137 s | 0 | 0 |
+| RRT | 89/100 (89%) | 12.4 percentage points | 26.45 | 2,792.88 | 0.117 s | 0 | 0 |
+| KPIECE | 26/100 (26%) | 9.6 percentage points | 18.26 | 2,758.66 | 0.072 s | 0 | 0 |
+| CEM | 43/100 (43%) | 21.4 percentage points | 65.40 | 6,129.12 | 0.158 s | 0 | 0 |
 
 Group SD is the sample standard deviation of the five group success rates, not a confidence interval or training-seed variation.
 
@@ -57,4 +57,4 @@ The paper reports that its methods use a frozen DINO-WM predictor with image fea
 - The outcomes depend on this task, grid width, action set, horizon, goal bias, CEM population, and seeds. The five group rates do not establish a general planner ranking.
 - The arXiv submission is listed as under review. The author lab page links a PDF and video, but this review found no official code or checkpoint link. Keep paper reproduction **not run** until the exact author artifacts, task data, evaluation settings, and license terms are available and reviewed.
 
-The fresh-kernel evidence is recorded for the notebook cells and the generated in-memory episode table. Raw episode rows are not committed.
+The notebook writes all 300 per-episode rows to [sampling-based-episodes.csv](../evidence/sampling-based-episodes.csv). The CSV records method, group seed, paired start, start coordinates, success and status, steps, transition calls, runtime, and final coordinates. Runtime is an observed value and can differ across executions.

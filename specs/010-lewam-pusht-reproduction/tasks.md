@@ -15,8 +15,8 @@ description: "Tasks for the official LeWAM Push-T checkpoint evaluation"
 **Purpose**: Confirm that the full attempt can run safely outside the project source tree.
 
 - [X] T001 Check free storage, Python 3.11 setup, CPU/GPU runtime, and headless MuJoCo support. Record the preflight outcome in `docs/reproductions/lewam-pusht.md`.
-- [ ] T002 Create an isolated checkout of `MinghaoFu/lewam` at commit `60732e25ba172b117d0d0a476d3a9dcd5d30c03b` and install only its declared environment under `/tmp/jepa-lewam-pusht/`.
-- [ ] T003 Download model revision `d8e7039c6e3d8eaec320ba0d0122a5e9c9ce23c2` and dataset revision `63346c94f4dbe62b4744261c6c99d63cbff3f6e6` into the external run root, verify both SHA-256 hashes, and prepare the HDF5 file.
+- [ ] T002 Create an isolated checkout of `MinghaoFu/lewam` at commit `60732e25ba172b117d0d0a476d3a9dcd5d30c03b` under `$LEWAM_RUN_ROOT/code` and install only its declared environment under `$LEWAM_RUN_ROOT/conda-envs`, with package caches under the same E: or D: run root.
+- [ ] T003 Download the model under `$STABLEWM_HOME/checkpoints` and dataset under `$STABLEWM_HOME/datasets` at revisions `d8e7039c6e3d8eaec320ba0d0122a5e9c9ce23c2` and `63346c94f4dbe62b4744261c6c99d63cbff3f6e6`; verify both SHA-256 hashes and prepare the HDF5 file on the selected E: or D: drive.
 
 ## Phase 2: User Story 1 - Re-evaluate the released Push-T checkpoint (Priority: P1)
 
@@ -24,9 +24,9 @@ description: "Tasks for the official LeWAM Push-T checkpoint evaluation"
 
 **Independent Test**: Confirm that each of the three modes has 50 episode outcomes for seeds 42, 0, and 1, with the official 25-step goal offset and 50-action budget.
 
-- [ ] T004 [US1] Run the official reactive policy for seeds 42, 0, and 1; save all 150 episode results under `/tmp/jepa-lewam-pusht/results/`.
-- [ ] T005 [US1] Run the official best-of-32 planner for seeds 42, 0, and 1; save all 150 episode results under `/tmp/jepa-lewam-pusht/results/`.
-- [ ] T006 [US1] Run the official gradient planner for seeds 42, 0, and 1; save all 150 episode results under `/tmp/jepa-lewam-pusht/results/`.
+- [ ] T004 [US1] Run the official reactive policy for seeds 42, 0, and 1; save all 150 episode results under `$STABLEWM_HOME/eval/` on the selected E: or D: drive.
+- [ ] T005 [US1] Run the official best-of-32 planner for seeds 42, 0, and 1; save all 150 episode results under `$STABLEWM_HOME/eval/` on the selected E: or D: drive.
+- [ ] T006 [US1] Run the official gradient planner for seeds 42, 0, and 1; save all 150 episode results under `$STABLEWM_HOME/eval/` on the selected E: or D: drive.
 
 ## Phase 3: User Story 2 - Record provenance and limits (Priority: P2)
 

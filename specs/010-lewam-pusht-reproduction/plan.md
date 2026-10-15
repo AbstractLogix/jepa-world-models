@@ -10,7 +10,7 @@ Re-evaluate the official LeWAM Push-T checkpoint with the authors' evaluation co
 
 **Language/Version**: Python 3.11 as requested by the official installer  
 **Primary Dependencies**: The pinned LeWAM repository environment, PyTorch, MuJoCo, Gymnasium, HDF5 support, and the official stable-worldmodel environment  
-**Storage**: Keep the code checkout, 13.8 GB compressed dataset, expanded 43.1 GiB HDF5 file, 64 MB checkpoint, logs, videos, and temporary results outside the project repository  
+**Storage**: Keep the code checkout, research environment, package caches, 13.8 GB compressed dataset, expanded 43.1 GiB HDF5 file, 64 MB checkpoint, logs, videos, and temporary results under a user-selected E: or D: drive run root, outside the project repository
 **Testing**: Preflight environment and artifact hashes; execute the full official evaluator; check that all 450 episode results are present and summarize by seed  
 **Target Platform**: Linux x86-64; official evaluator code has a CPU fallback, but the runtime and throughput must be checked before the full run  
 **Project Type**: Isolated scientific reproduction using official research code  
@@ -31,7 +31,7 @@ Re-evaluate the official LeWAM Push-T checkpoint with the authors' evaluation co
 1. Pin the official code at `60732e25ba172b117d0d0a476d3a9dcd5d30c03b`.
 2. Pin `LeWAM/lewam-pusht` at revision `d8e7039c6e3d8eaec320ba0d0122a5e9c9ce23c2`. Verify `lewam_best.pt` SHA-256 `e649a703b224e4144fa068b73ae6ab3735cf60b81ed2ffe36898c1e26474d5fb`.
 3. Pin dataset `LeWAM/lewam-pusht` at revision `63346c94f4dbe62b4744261c6c99d63cbff3f6e6`. Verify `pusht.h5.zst` SHA-256 `a075dcd49120844a1720cd3f650519f934a632b5c3e9a5a4e413ba8b020aaa43`.
-4. Set `STABLEWM_HOME` to a temporary or external path. Keep the official clone and generated logs out of the tutorial repository.
+4. Set `LEWAM_RUN_ROOT` to a directory on E: or D: and set `STABLEWM_HOME` to that root. Put the official clone, Conda environment, Conda and pip caches, Hugging Face cache, temporary files, and evaluator outputs under the same root. In WSL, `E:\codex-research\jepa-lewam-pusht` maps to `/mnt/e/codex-research/jepa-lewam-pusht`; use the equivalent `/mnt/d/...` path when D: is selected.
 5. Run the exact three evaluation modes from the official reproduction guide for seeds 42, 0, and 1. Use the official Push-T goal offset of 25 steps and budget of 50 actions.
 6. Use the HDF5 data path or the official default only after checking its memory and disk needs. Do not create the 352 GB image-decompression cache for evaluation unless the official config requires it.
 7. Save the report at `docs/reproductions/lewam-pusht.md` and update the reproduction matrix only after the actual run or a specific failure is recorded.
@@ -57,12 +57,18 @@ docs/reproductions/lewam-pusht.md
 ### External run files
 
 ```text
-/tmp/jepa-lewam-pusht/
-├── code/        # detached official code checkout
-├── data/        # official dataset and decompressed HDF5 file
-├── checkpoints/ # released checkpoint and config
-└── results/     # raw evaluator outputs and videos
+${LEWAM_RUN_ROOT}/
+├── code/          # detached official code checkout
+├── conda-envs/    # isolated official research environment
+├── conda-pkgs/    # Conda package cache
+├── cache/         # pip, Hugging Face, and XDG caches
+├── tmp/           # temporary files
+├── datasets/      # compressed archive and expanded HDF5 file
+├── checkpoints/   # released checkpoint and config
+└── eval/          # official raw evaluator outputs and videos
 ```
+
+Set `CONDA_ENVS_PATH`, `CONDA_PKGS_DIRS`, `PIP_CACHE_DIR`, `HF_HOME`, `XDG_CACHE_HOME`, and `TMPDIR` under this run root before installing or downloading. The official evaluator writes under `$STABLEWM_HOME/eval/`; keep that path on the selected drive.
 
 **Structure Decision**: Use the official repository as the evaluator. This project records the protocol and measured evidence; it does not copy or vendor the research implementation.
 

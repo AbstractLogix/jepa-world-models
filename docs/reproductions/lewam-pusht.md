@@ -44,7 +44,7 @@ No local mean can be compared with the paper's reported one-standard-deviation r
 
 ## Resume conditions
 
-Before evaluation, create the isolated Python 3.11 environment from the pinned official repository, install its declared dependencies outside this project, and verify MuJoCo headless support and evaluator startup. Keep the archive, checkpoint, source checkout, and generated outputs outside the Git worktree. Do not start the archive transfer or 450-episode run until the pending scope is reopened.
+Before evaluation, select a run root on E: or D: (for example, WSL `/mnt/e/codex-research/jepa-lewam-pusht`, matching `E:\codex-research\jepa-lewam-pusht`). Set `STABLEWM_HOME` to this root. Place the pinned source checkout, Conda environment and package cache, pip and Hugging Face caches, temporary files, dataset, checkpoint, and evaluator outputs under it. The official evaluator writes results under `$STABLEWM_HOME/eval/`. Then verify the install, MuJoCo headless support, and evaluator startup. No archive, checkpoint, source checkout, or result has been moved or downloaded as part of this path update. Do not start the archive transfer or 450-episode run until the pending scope is reopened.
 
 ## Sources
 

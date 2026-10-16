@@ -86,6 +86,16 @@ The v1 outcome remains partial and exploratory because of low spread, the missin
 
 Evidence: [Notebook 22](../../notebooks/22_visual_jepa_decision_usefulness.ipynb) · [Notebook 22 report](../reproductions/visual-jepa-decision-usefulness.md) · [Notebook 23](../../notebooks/23_visual_jepa_decision_study.ipynb) · [v1 report and paired analysis](../reproductions/visual-jepa-decision-study-v1.md) · [frozen protocol](../reproductions/protocols/visual-jepa-decision-study-v1.md) · [v1 evidence](../evidence/visual-jepa-decision-study-v1-analysis.json)
 
+### 6. V2 recovered visual state information, but no learned model passed action-fidelity gates
+
+The v2 study compared three validation seeds for each of three action-conditioned JEPA objectives. It also ran exact simulator, handcrafted visual, supervised visual, and privileged state-space controls. The deterministic frame audit recovered current and next position and velocity on all training and validation episodes. The simulator matched the stored labels within 6×10⁻⁸. The handcrafted visual estimate followed by exact dynamics had about 0.0037 position MAE and less than 0.00008 velocity MAE on 60 validation action contexts.
+
+The supervised visual model failed the frozen gate on all three seeds: position MAE was 0.026–0.080 against a 0.02 limit, and action-contrast error exceeded the 0.25 limit in at least one coordinate for each seed. All nine JEPA fits also failed. SIGReg and the variance/covariance control had 32/32 low-spread dimensions in every seed. VISReg-style training cleared spread and effective-rank screens, but velocity-probe R² remained 0.008–0.018 and action effects were inaccurate. No objective was selected. The independent test set, multi-step rollout stage, and planner remained closed.
+
+This result narrows the diagnosis: the rendered frames and labels are sufficient, but the tested learned visual training recipes did not recover reliable velocity and action effects. It does not identify a general JEPA limitation or the causal role of any one loss term. The comparison is validation-only, synthetic, and not a reproduction of LeJEPA, VISReg, or a planning paper.
+
+Evidence: [technical report](../TECHNICAL_REPORT.md) · [root-cause investigation](../reproductions/visual-jepa-action-fidelity-v2-investigation.md) · [frozen v2 protocol](../reproductions/protocols/visual-jepa-action-fidelity-v2.md) · [v2 evidence manifest](../evidence/visual-jepa-action-fidelity-v2-evidence-manifest.json) · [observation audit](../evidence/visual-jepa-action-fidelity-v2-observation-control.csv)
+
 ## Figures
 
 ![Two separate MountainCar comparisons show low planner success despite perfect action-pair ranking in the local state and rendered-feature models.](figures/decision-usefulness.png)
@@ -106,6 +116,24 @@ The original chart generator reads Notebook 14's saved episode table and the raw
 
 **Figure 4.** The diagram describes the local synthetic study, not a published-paper implementation. The direct visual-momentum controller is handcrafted. State-space and exact-dynamics controls use privileged state. The SVG includes a title and description for assistive technology.
 
+![Validation-only action-effect plots show raw JEPA and supervised visual predictions beside simulator changes for actions −1, 0, and +1. The panels separate SIGReg, VISReg-style, variance/covariance, exact, handcrafted, state-space, and supervised visual controls; all three seeds appear in each learned-model panel.](figures/visual-jepa-action-fidelity-v2/figure-a2-v2-validation-action-fidelity.png)
+
+**Figure 5.** V2 action-effect fidelity on 20 validation contexts per data seed. Dashed lines show simulator changes; colored lines show raw model predictions before state clipping. The true single-step action effects are small, while several learned models predict much larger or incorrectly directed changes. This is validation evidence only; held-out evaluation stayed closed. The figure includes 420 method-seed/context groups and is available as [SVG](figures/visual-jepa-action-fidelity-v2/figure-a2-v2-validation-action-fidelity.svg). See the [figure manifest](figures/visual-jepa-action-fidelity-v2/figure-manifest.json) and [figure guide](figures/visual-jepa-action-fidelity-v2/README.md).
+
+![V2 representation-health plots show embedding spread, low-spread dimension counts, effective rank, and position and velocity probe R-squared for each completed seed. VISReg-style embeddings pass spread checks but retain weak velocity probes; SIGReg and variance/covariance embeddings remain low-spread.](figures/visual-jepa-action-fidelity-v2/figure-b2-v2-validation-representation-health.png)
+
+**Figure 6.** Representation diagnostics for nine JEPA fits and three supervised visual fits. Each point is a seed. The probe is fit on training embeddings and evaluated on validation data. The figure is available as [SVG](figures/visual-jepa-action-fidelity-v2/figure-b2-v2-validation-representation-health.svg).
+
+![V2 objective comparison shows effective rank, velocity-probe R-squared, and normalized action-contrast error for each JEPA seed and the supervised visual control. All seed points remain visible; none of the JEPA objectives is selected.](figures/visual-jepa-action-fidelity-v2/figure-d-objective-comparison.png)
+
+**Figure 7.** Objective and positive-control results under the frozen validation protocol. This is a descriptive comparison, not a causal attribution, because the supervised visual control failed its gate. It is available as [SVG](figures/visual-jepa-action-fidelity-v2/figure-d-objective-comparison.svg).
+
+![Architecture diagram of the local experiment: rendered frames enter a visual encoder; actions enter a predictor; a frozen state readout feeds a planner; environment feedback supplies new frames.](figures/visual-jepa-action-fidelity-v2/figure-f-action-conditioned-architecture.png)
+
+**Figure 8.** The local synthetic MountainCar experiment path. The readout is a diagnostic linear probe, not a pixel decoder. The diagram is available as [accessible SVG](figures/visual-jepa-action-fidelity-v2/figure-f-action-conditioned-architecture.svg).
+
+The v2 figure package also includes separate historical v1 action and representation figures. It does not include Figure C (multi-step rollout) or Figure E (planning outcomes): their validation gates did not open. All generated v2 figures have high-resolution PNG and SVG versions with title and description text. Rebuild with `uv run --locked --no-sync python scripts/analyze_visual_jepa_action_fidelity_v2.py --output-dir docs/portfolio/figures/visual-jepa-action-fidelity-v2`; then add `--verify-determinism` to verify two fresh regenerations.
+
 ## Official V-JEPA checkpoint check
 
 Notebook 09 loaded an official V-JEPA 2.1 ViT-B/384 checkpoint on CPU from a deterministic synthetic 16-frame clip. The output had shape `[1, 8, 24, 24, 768]` and finite values. Retrieval selected a patch one grid cell from the known synthetic patch; a mean-RGB baseline selected the same patch. The run confirms local checkpoint loading and feature extraction only. It does not establish general correspondence quality, planning value, or a paper benchmark result.
@@ -117,7 +145,7 @@ Evidence: [Notebook 09](../../notebooks/09_vjepa21_dense_features.ipynb) · [che
 - The core environment is defined by `pyproject.toml` and `uv.lock`. Use `uv sync --locked` for the default CPU environment. Apply `requirements-torch.txt` only when a CUDA 12.8 setup is intended.
 - Keep downloaded data, checkpoints, and package caches on E: or D: by setting `JEPA_ASSETS_DIR`, `UV_CACHE_DIR`, `HF_HUB_CACHE`, `HF_ASSETS_CACHE`, and `TORCH_HOME` before setup. The README gives a WSL example.
 - Notebooks 14 and 16 use CPU and no external assets. Notebook 17 uses CPU and retains 60,000 calibration rows, 200 selected plans, 220 episode outcomes, and five run records.
-- Notebooks 22 and 23 used CUDA on an RTX 5070. Notebook 22 retained 15 model-fit rows, 960 intervention rows, and 440 episode rows. Notebook 23 completed 15 model fits, 960 interventions, and 660 episode rows; every v1 episode passed validation, while the low-spread rule keeps JEPA outcomes exploratory. The executed notebook and runtime files stay on E:; small audit records and figures are in the repository.
+- Notebooks 22 and 23 used CUDA on an RTX 5070. Notebook 22 retained 15 model-fit rows, 960 intervention rows, and 440 episode rows. Notebook 23 v1 completed 15 model fits, 960 interventions, and 660 episode rows; its evidence remains unchanged and its JEPA outcomes remain exploratory. The separate v2 validation completed 15 fits and 1,260 action-triplet rows in 14.28 GPU-minutes, with 482.33 MiB maximum allocated memory. Its test, rollout, and planning stages stayed closed. The executed notebooks, v2 checkpoints, and full transient run files remain on E:; compact audit records and figures are in the repository.
 - Notebook 09's checkpoint is about 1.66 GB and its license terms must be checked before redistribution. The notebook does not redistribute weights.
 - The repository has a focused unit-test suite for the new portfolio evidence summaries. The evidence validator for Notebooks 20 and 21 checks record structure; it does not rerun notebooks or validate scientific claims.
 - `pyproject.toml` declares MIT, but the repository has no root `LICENSE` file. Maintainers should confirm the rights holder and add the license text before describing the repository as MIT-licensed.
@@ -126,15 +154,15 @@ Notebook 22 used the RTX 5070 for its validation pilot and all 15 model fits. No
 
 ## Technical challenges and limits
 
-The main challenge is a mismatch between model diagnostics and decisions. A short one-step test can hide compounding errors, poor search, a mismatched objective, or a policy that does not need a model. Model calls and wall time also vary sharply between a planner and a direct rule.
+The main challenge is a mismatch between representation health, action effects, and decisions. V2 found that one objective could pass spread and rank checks while velocity probes and action effects remained poor. It also found that a supervised visual model failed its action-fidelity gate even though a fixed visual estimator recovered state accurately. This points to an unresolved learning or loss-scale problem under the frozen recipe; it does not isolate its cause. No v2 multi-step result is available because the model failed validation. Model calls and wall time also vary sharply between a planner and a direct rule.
 
 The action-ranking checks cover three candidate actions at sampled states. They do not certify every action sequence. Finite-horizon CEM can miss useful sequences because of its candidate budget, horizon, or rollout objective. The current experiments do not isolate planner optimization failure from model error.
 
-The strongest decision findings are small simulator studies. Notebook 14 uses one state model; Notebook 16 uses one fixed-feature visual analogue; Notebook 17 uses five state-model fits but one task; Notebooks 22 and 23 use learned visual models on one synthetic task, with a hand-written controller prior. Notebook 23's five JEPA fits triggered low spread and had no successful planner episodes; these remain exploratory. None establishes a general learned-JEPA advantage. The SIGReg and RDMReg studies use small data subsets and local CNNs. The official V-JEPA run verifies inference on one synthetic clip, not downstream benefit.
+The strongest decision findings are small simulator studies. Notebook 14 uses one state model; Notebook 16 uses one fixed-feature visual analogue; Notebook 17 uses five state-model fits but one task; Notebooks 22 and 23 use learned visual models on one synthetic task, with a hand-written controller prior. Notebook 23's five JEPA fits triggered low spread and had no successful planner episodes; these remain exploratory. V2 adds a validation-only negative result: no learned candidate passed, and no planner result was collected. None establishes a general learned-JEPA advantage. The SIGReg and RDMReg studies use small data subsets and local CNNs. The official V-JEPA run verifies inference on one synthetic clip, not downstream benefit.
 
 ## Prioritized future research
 
-The project's next major research result should be a genuine learned-JEPA-versus-direct-policy comparison. Select one visual control task only after its data, checkpoint, license, simulator, and compute requirements are confirmed. Do not report a result from a toy analogy as that comparison.
+The next study should first address the failed visual positive-control gate under a new preregistration. Keep the current validation results closed to tuning. Change one documented factor at a time, such as per-coordinate state-loss scaling or a target that makes small action effects measurable. Open a fresh independent test split only after the supervised visual control passes. Then run a genuine learned-JEPA-versus-direct-policy comparison. Select one visual control task only after its data, checkpoint, license, simulator, and compute requirements are confirmed. Do not report a result from a toy analogy as that comparison.
 
 Compare these systems on the same fixed cases:
 
@@ -143,7 +171,8 @@ Compare these systems on the same fixed cases:
 3. **Learned visual latent dynamics** — visual encoder plus latent transition predictor.
 4. **Action-conditioned JEPA dynamics** — the target predictive representation model, with exact paper/code revisions recorded.
 5. **Direct policy** — policy trained from the same allowed data and observation stream, without planning through a learned model.
-6. **Policy-guided planning** — use that direct policy to initialize or constrain search over the learned model. Keep this separate from unconstrained planning.
+6. **Prior-only planning** — use the same controller prior without learned JEPA dynamics, so the planner's gain from the prior is visible.
+7. **Policy-guided JEPA planning** — use the same direct policy to initialize or constrain search over the learned JEPA model, with and without that prior. Keep these arms separate from unconstrained planning.
 
 Before execution, preregister the task, train/validation/test split, fixed evaluation starts, seed count, stopping rules, primary outcome, and compute budget. Use shared training data and paired evaluation starts. Record one-step prediction, changed-action intervention fidelity, action-ranking agreement, closed-loop success and return, policy-ranking agreement, calibration and failures, model calls, elapsed latency, and training/evaluation compute. Report each training seed and each test case. Select sample counts from a precision target or power analysis; do not choose them after seeing results.
 

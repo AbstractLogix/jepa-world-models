@@ -1,0 +1,137 @@
+{
+  "all_five_jepa_models_complete": true,
+  "all_five_recorded_low_spread_all_dimensions": true,
+  "episode_successes": {
+    "direct_visual_momentum/direct": {
+      "episodes": 20,
+      "successes": 20
+    },
+    "image_reconstruction_cem/momentum_prior": {
+      "episodes": 100,
+      "successes": 17
+    },
+    "image_reconstruction_cem/uniform": {
+      "episodes": 100,
+      "successes": 2
+    },
+    "jepa_cem/momentum_prior": {
+      "episodes": 100,
+      "successes": 0
+    },
+    "jepa_cem/uniform": {
+      "episodes": 100,
+      "successes": 0
+    },
+    "oracle_cem/momentum_prior": {
+      "episodes": 20,
+      "successes": 20
+    },
+    "oracle_cem/uniform": {
+      "episodes": 20,
+      "successes": 0
+    },
+    "state_model_cem/momentum_prior": {
+      "episodes": 100,
+      "successes": 99
+    },
+    "state_model_cem/uniform": {
+      "episodes": 100,
+      "successes": 0
+    }
+  },
+  "jepa_action_triplet_starts": 100,
+  "jepa_intervention_rows": 300,
+  "jepa_model_rows": 5,
+  "post_clamp_action_spans_by_model_seed": {
+    "7401": {
+      "position": {
+        "full_position_range_start_count": 20,
+        "maximum": 1.8000000715255737,
+        "median": 1.8000000715255737,
+        "minimum": 1.8000000715255737,
+        "zero_start_count": 0
+      },
+      "velocity": {
+        "full_position_range_start_count": 0,
+        "maximum": 0.07000000029802322,
+        "median": 0.07000000029802322,
+        "minimum": 0.07000000029802322,
+        "zero_start_count": 0
+      }
+    },
+    "7402": {
+      "position": {
+        "full_position_range_start_count": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "zero_start_count": 20
+      },
+      "velocity": {
+        "full_position_range_start_count": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "zero_start_count": 20
+      }
+    },
+    "7403": {
+      "position": {
+        "full_position_range_start_count": 20,
+        "maximum": 1.8000000715255737,
+        "median": 1.8000000715255737,
+        "minimum": 1.8000000715255737,
+        "zero_start_count": 0
+      },
+      "velocity": {
+        "full_position_range_start_count": 0,
+        "maximum": 0.07000000029802322,
+        "median": 0.07000000029802322,
+        "minimum": 0.07000000029802322,
+        "zero_start_count": 0
+      }
+    },
+    "7404": {
+      "position": {
+        "full_position_range_start_count": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "zero_start_count": 20
+      },
+      "velocity": {
+        "full_position_range_start_count": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "zero_start_count": 20
+      }
+    },
+    "7405": {
+      "position": {
+        "full_position_range_start_count": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "zero_start_count": 20
+      },
+      "velocity": {
+        "full_position_range_start_count": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0,
+        "zero_start_count": 20
+      }
+    }
+  },
+  "recorded_position_probe_r2_max": 0.9963621055616102,
+  "recorded_position_probe_r2_min": 0.9729116502793528,
+  "recorded_velocity_probe_r2_max": 0.09502004822479737,
+  "recorded_velocity_probe_r2_min": -0.011875851912782176,
+  "source_files": {
+    "episodes_sha256": "3074dd2e1ef7c52d6c1aa6c031de85de3017cc809ae50403a7f2f4afe7906282",
+    "interventions_sha256": "a4fdf7fce466018a7b9cdca327f673ff924aedea48d4c393fb51ec967e168ee8",
+    "model_runs_sha256": "92f354873d1a34d531fb03bcfb5752f20608b1024ae1ab6e19aba2e72e4f8c63",
+    "probe_test_sha256": "2b24686210dcb780008312097483ab26bbc6fb86c533435b513fc668afd7d98f"
+  }
+}

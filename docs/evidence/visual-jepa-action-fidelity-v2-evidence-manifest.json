@@ -1,0 +1,72 @@
+{
+  "files": [
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-model-runs.csv",
+      "sha256": "44d6a4040eef273ae920a703a7876c04307b01d61dd5043788867119d74e8d45",
+      "size_bytes": 14506
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-training-history.csv",
+      "sha256": "a0978cb0c36f7c5e4d9a28145c6b58bc1e361a7faf851550d86a97edefbfe729",
+      "size_bytes": 99958
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-gradient-diagnostics.csv",
+      "sha256": "274f831a841cf7f3def7dfe66b8caf831851bf1307865223e1565b7dbda11b13",
+      "size_bytes": 24077
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-action-triplets.csv",
+      "sha256": "30145fc042428b4b3a7f56dca1e256bc737f762af35119996fd5e1eb7a4595a1",
+      "size_bytes": 438578
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-action-summary.csv",
+      "sha256": "207ffaee605f2977dff5f3c8e2ca59ad0eab3e019c5b51ea4db16742f7b2a6fd",
+      "size_bytes": 4364
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-data-splits.json",
+      "sha256": "6c668aa4adaddd0acb5c135e5d688e4be4b1ea28f0bae4aa3fd36bf96bebd56b",
+      "size_bytes": 2631
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-summary.json",
+      "sha256": "f0884d0c74669ec0b214738d2735b4ff4a1d1378853b70cef5f53b859087351b",
+      "size_bytes": 1773
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-heldout-summary.json",
+      "sha256": "49bad4342880da0afeebf3a49758549579ef714a73f6f4ed4d6876ae3867fbfd",
+      "size_bytes": 225
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-v1-checkpoint-audit.csv",
+      "sha256": "eff0383f9c1ece42f82315071a20388d5ead3fc3ba7cf08bd81012f866d09978",
+      "size_bytes": 5426
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-v1-gradient-diagnostics.csv",
+      "sha256": "fe97fc8c835a2602cafcf0d8d4e68f04e90aa74a8ea4ebebc7a827da53e82cec",
+      "size_bytes": 1266
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-v1-action-triplets-replayed.csv",
+      "sha256": "5459c0d87a9b3ad5f72dd69b1b9101fb255ab622c45bcc9c77ebc2accf94e673",
+      "size_bytes": 103069
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-v1-raw-evidence-audit.json",
+      "sha256": "b933d43c73ba43cf7157ef1ca0bf7979d609bc9f48271a59750bd1fdcfb97b27",
+      "size_bytes": 3735
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-protocol-lock.json",
+      "sha256": "c9c178ca487a60e24faafe46c96a3dcbd4950d106a9c846098c0f9a58bf4e84b",
+      "size_bytes": 3362
+    }
+  ],
+  "protocol_version": "visual-jepa-action-fidelity-v2",
+  "retained_from_run_dir": "external research drive; exact path omitted",
+  "schema_version": 1
+}

@@ -1,0 +1,8 @@
+{
+  "planning_open": false,
+  "protocol_version": "visual-jepa-action-fidelity-v2",
+  "reason": "visual positive control failed",
+  "stage": "heldout",
+  "status": "closed_by_validation",
+  "test_seed_groups_opened": false
+}

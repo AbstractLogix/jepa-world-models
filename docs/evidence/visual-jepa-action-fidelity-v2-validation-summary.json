@@ -1,0 +1,67 @@
+{
+  "device": "cuda",
+  "device_name": "NVIDIA GeForce RTX 5070",
+  "failed_fits": 0,
+  "failure_reason": "visual positive control failed",
+  "heldout_open": false,
+  "max_peak_allocated_mib": 482.33154296875,
+  "model_fit_count": 15,
+  "objective_families": [
+    {
+      "eligible": false,
+      "family_valid_starts_position": 60,
+      "family_valid_starts_velocity": 60,
+      "objective": "sigreg",
+      "passing_seeds": 0,
+      "seed_rows": 3
+    },
+    {
+      "eligible": false,
+      "family_valid_starts_position": 60,
+      "family_valid_starts_velocity": 60,
+      "objective": "visreg_style",
+      "passing_seeds": 0,
+      "seed_rows": 3
+    },
+    {
+      "eligible": false,
+      "family_valid_starts_position": 60,
+      "family_valid_starts_velocity": 60,
+      "objective": "variance_cov",
+      "passing_seeds": 0,
+      "seed_rows": 3
+    }
+  ],
+  "objective_selection": [],
+  "planning_open": false,
+  "protocol_lock": "docs/evidence/visual-jepa-action-fidelity-v2-protocol-lock.json",
+  "protocol_version": "visual-jepa-action-fidelity-v2",
+  "selected_objective": null,
+  "simulator_checks": [
+    {
+      "data_seed": 9301,
+      "exact_match": true,
+      "max_abs_error": 5.960464477539063e-08,
+      "rows_checked": 500
+    },
+    {
+      "data_seed": 9302,
+      "exact_match": true,
+      "max_abs_error": 5.960464477539063e-08,
+      "rows_checked": 500
+    },
+    {
+      "data_seed": 9303,
+      "exact_match": true,
+      "max_abs_error": 5.960464477539063e-08,
+      "rows_checked": 500
+    }
+  ],
+  "stage": "validation",
+  "status": "complete",
+  "successful_fits": 15,
+  "test_seed_groups_opened": false,
+  "total_wall_seconds": 902.2253399589972,
+  "training_seconds": 856.6708693700057,
+  "visual_positive_control_pass": false
+}

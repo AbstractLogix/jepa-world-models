@@ -17,6 +17,7 @@ flowchart LR
 | Learn the core path | [Curriculum guide](../CURRICULUM_GUIDE.md) and the [README quick start](../README.md) |
 | See what each notebook proves | [Curriculum coverage](CURRICULUM_COVERAGE.md) |
 | Read the research case study | [Portfolio case study](portfolio/CASE_STUDY.md) and [website manifest](portfolio/project.json) |
+| Review the latest action-fidelity result | [Technical report](TECHNICAL_REPORT.md), [root-cause investigation](reproductions/visual-jepa-action-fidelity-v2-investigation.md), and [frozen v2 protocol](reproductions/protocols/visual-jepa-action-fidelity-v2.md) |
 | Explore new research | [Research roadmap](ROADMAP.md) |
 | Check or reproduce a claim | [Evaluation protocol](EVALUATION_PROTOCOL.md) and [reproduction matrix](REPRODUCTION_MATRIX.md) |
 | Find a local result | [Evidence records](evidence/) and [reproduction reports](reproductions/) |

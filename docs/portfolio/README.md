@@ -29,7 +29,7 @@ Render `pendingWork` as an open or gated item. Keep it separate from `verifiedFi
 | Notebook 22 local comparison | [Notebook 22 report](../reproductions/visual-jepa-decision-usefulness.md), [model records](../evidence/visual-jepa-model-runs.csv), [interventions](../evidence/visual-jepa-interventions.csv), and [episodes](../evidence/visual-jepa-episodes.csv) | The VISReg-style adaptation passed its fixed spread screen. Uniform-start JEPA CEM succeeded on 0/100 starts; momentum-prior JEPA CEM succeeded on 100/100, while the direct hand-written prior succeeded on 20/20. Do not attribute the outcome to JEPA alone. |
 | Notebook 23 matched study | [v1 study report](../reproductions/visual-jepa-decision-study-v1.md), [frozen protocol](../reproductions/protocols/visual-jepa-decision-study-v1.md), [660 episode rows](../evidence/visual-jepa-decision-study-v1-episodes.csv), [paired analysis](../evidence/visual-jepa-decision-study-v1-analysis.json), and [validator](../../scripts/validate_visual_jepa_decision_study.py) | The matrix is complete and validated. Publish the local success counts and paired analysis with the synthetic task, privileged-state, compute, gate, paired-seed, and low-spread limits. Keep the claim partial and JEPA outcomes exploratory. Prior-only CEM and a learned direct policy were not run. |
 
-“Verified” in the manifest means the value was checked against local records. It does not mean an independent party repeated the experiment. PRs #1–#4 are merged into `main`; this case study uses a separate draft PR.
+“Verified” in the manifest means the value was checked against local records. It does not mean an independent party repeated the experiment.
 
 ## Rebuild and validate
 

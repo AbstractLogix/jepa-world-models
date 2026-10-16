@@ -277,7 +277,7 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 
 - [x] T089 Complete the locked CUDA episode matrix, validate all v1 evidence, and retain the report and corrected paired analysis. Preserve the low-spread status as partial even if every episode record completes.
 - [x] T090 Add reproducible accessible study figures and update the case study, project manifest, README, curriculum, protocol, reproduction matrix, roadmap, and remaining-work record using only validated results.
-- [ ] T091 Run focused tests, CPU smoke, Ruff, package build, notebook/evidence/figure/link checks, and Spec Kit analysis/convergence; review the diff and publish a draft PR without merging.
+- [x] T091 Run focused tests, CPU smoke, Ruff, package build, notebook/evidence/figure/link checks, and Spec Kit analysis/convergence; review the diff and publish a draft PR without merging.
 
 ## Dependencies and Execution Order
 

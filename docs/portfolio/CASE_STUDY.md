@@ -114,7 +114,6 @@ Evidence: [Notebook 09](../../notebooks/09_vjepa21_dense_features.ipynb) · [che
 
 ## Reproducibility and compute
 
-- The `uv` migration and portfolio case study are in `main`; PRs [#1](https://github.com/AbstractLogix/jepa-world-models/pull/1)–[#4](https://github.com/AbstractLogix/jepa-world-models/pull/4) are merged. This case study uses a separate draft PR.
 - The core environment is defined by `pyproject.toml` and `uv.lock`. Use `uv sync --locked` for the default CPU environment. Apply `requirements-torch.txt` only when a CUDA 12.8 setup is intended.
 - Keep downloaded data, checkpoints, and package caches on E: or D: by setting `JEPA_ASSETS_DIR`, `UV_CACHE_DIR`, `HF_HUB_CACHE`, `HF_ASSETS_CACHE`, and `TORCH_HOME` before setup. The README gives a WSL example.
 - Notebooks 14 and 16 use CPU and no external assets. Notebook 17 uses CPU and retains 60,000 calibration rows, 200 selected plans, 220 episode outcomes, and five run records.

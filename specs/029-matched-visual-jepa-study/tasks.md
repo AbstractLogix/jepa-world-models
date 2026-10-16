@@ -62,7 +62,7 @@
 - [x] T024 Update README, curriculum guide/coverage, evaluation protocol, reproduction matrix, roadmap, portfolio case study/manifest, and the project-vision alignment, remaining-work, and task ledger only with verified study status and findings.
 - [x] T025 Run focused unit and CPU smoke checks, Ruff, package build, notebook, evidence, figure, Markdown-link, and diff checks. Record each pass, failure, and not-run check in the report.
 - [x] T026 Run Spec Kit convergence against the completed implementation and tasks. Append any remaining implementation work, complete it, and repeat until converged.
-- [ ] T027 Review the final diff for historical evidence preservation and claim scope, push the focused branch, and open a draft PR. Do not merge.
+- [x] T027 Review the final diff for historical evidence preservation and claim scope, push the focused branch, and open a draft PR. Do not merge.
 
 ## Dependencies and execution order
 

@@ -33,7 +33,7 @@
 - [x] T017 [P] Update docs/ROADMAP.md, docs/EVALUATION_PROTOCOL.md, and docs/REPRODUCTION_MATRIX.md
 - [x] T018 [P] Update docs/TECHNICAL_REPORT.md, docs/portfolio/CASE_STUDY.md, and docs/portfolio/project.json
 - [x] T019 Run unit tests, Ruff, package build, evidence validation, CPU smoke, figure regeneration, and git diff checks; record exact results (66 unit tests passed; Ruff and package build passed; 15/15 CUDA fits validated with held-out closed; CPU smoke passed 10/10 fits; deterministic regeneration passed for six figures A1, A2, B1, B2, D, and F; evidence integrity and git diff checks passed.)
-- [ ] T020 Open a draft PR based on PR #5 and attach it to this task; do not merge
+- [x] T020 Open and attach [draft PR #6](https://github.com/AbstractLogix/jepa-world-models/pull/6) based on PR #5; do not merge
 
 ## Dependencies
 

@@ -1,0 +1,73 @@
+{
+  "files": {
+    "action-summary.csv": {
+      "bytes": 55310,
+      "sha256": "e1eb45ad4935d753c738100f83633af06971296f6be50ab5125ff245472b755a"
+    },
+    "action-triplets.csv": {
+      "bytes": 122451,
+      "sha256": "0a6e7ff1578bbe6666c482b9c5fb4d6b958099fe5585cca94cfc8c7bca13ea01"
+    },
+    "data-path-action-summary.csv": {
+      "bytes": 27063,
+      "sha256": "c76cdf528b90598070d44e28bb0f7afdbba6b4e5ef282575d3b28320ac7a5d3e"
+    },
+    "data-path.csv": {
+      "bytes": 1308,
+      "sha256": "40e4848d363d4e717d4c9b4fa88764610e769fadc7a884c7a66ffcdf473775dd"
+    },
+    "embedding-diagnostics.csv": {
+      "bytes": 7,
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c"
+    },
+    "gradient-diagnostics.csv": {
+      "bytes": 7,
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c"
+    },
+    "handcrafted-action-triplets.csv": {
+      "bytes": 61344,
+      "sha256": "9c547e555f3f619c8c923fbc2a8077b48103f75f80faf208aedccc08f0904c38"
+    },
+    "learning-curves.csv": {
+      "bytes": 7,
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c"
+    },
+    "linear-probes.csv": {
+      "bytes": 7,
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c"
+    },
+    "model-runs.csv": {
+      "bytes": 10028,
+      "sha256": "06907bb8a29476043c8025a2f71a8fcc842cda437e979b7830ead7ea878812dd"
+    },
+    "partition-map.csv": {
+      "bytes": 1121729,
+      "sha256": "12ef9ef6c4780fbef53b91840bf13148ff5f9fb52f0f7bfaa1a9e86298fd3085"
+    },
+    "protocol-lock.json": {
+      "bytes": 1773,
+      "sha256": "b9ccfa232cd6b3479e52f325d0845ece24259f9f0bfb36f752f2f5c9dd5e140a"
+    },
+    "ridge-models.json": {
+      "bytes": 1808,
+      "sha256": "48f4ad3d735127143f2639bac66dce5688a9f850de4f64ddfb761f94be5d5588"
+    },
+    "run-summary.json": {
+      "bytes": 1726,
+      "sha256": "f5af032f74b07fbfdf24690e1af67cf237b2928f6be74411c583a45e64ab4125"
+    },
+    "target-scales.csv": {
+      "bytes": 6899,
+      "sha256": "c1caed9db5273b8cde7eeea37accd7bc44a905ac1ac1853bdf9a68c0ce39b67a"
+    },
+    "validation-gates.csv": {
+      "bytes": 7,
+      "sha256": "410f0d9cd0f7d301a94ed7fe486e60b5ee007fca5b7fc1e6bda3dc8475e7525c"
+    },
+    "validation-predictions.csv": {
+      "bytes": 1687052,
+      "sha256": "b15e8ee009e8ccfe0b403ec21e6a2e45e4247b2d149e96235d90ce201c90385a"
+    }
+  },
+  "protocol_version": "visual-jepa-supervised-positive-control-v3"
+}

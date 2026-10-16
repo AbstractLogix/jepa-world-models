@@ -1,6 +1,6 @@
 # Tutorial Evaluation Protocol
 
-**Reviewed**: 2026-10-15
+**Reviewed**: 2026-10-16
 
 Use this protocol for new measurements and when a lesson makes a performance comparison. It does not certify results that were produced before this protocol. Paper results and local results must stay separate.
 
@@ -107,5 +107,7 @@ The protocol has these current applications:
 - **Notebook 15** passed a full CPU-kernel run of its oscillator example. This confirms local execution only; it is illustrative and does not measure the LeHami model.
 - **Notebook 20** compares raw-action and policy-noise sampling in a hand-authored toy task. It uses 100 paired starts across five evaluation-seed groups, equal candidate counts and horizons, a direct state-feedback reference, actual model-call counts, selected-action prediction error, and policy-support checks. The model error is constructed, and seed variation is not training variation. It is illustrative and does not test LeWAM; its 300 rows are retained in the [episode CSV](evidence/policy-noise-episodes.csv).
 - **Notebook 21** compares simplified RRT, KPIECE, and CEM on a hand-authored point-mass detour task. It uses 100 shared starts across five groups, the same maximum of 256 one-step transition evaluations per planning decision, closed-loop execution, and reports success, steps, calls, runtime, group variation, and missing/error counts. It completed 300 episodes with no missing or errored records. Its known transition function is illustrative; it does not test DINO-WM, JEPA, or the paper's result. All 300 rows are retained in the [episode CSV](evidence/sampling-based-episodes.csv).
+- **Notebook 22** is a five-seed synthetic visual-JEPA study with 20 held-out intervention starts and 20 shared starts per trained model seed. It uses a VISReg-style temporal-prediction adaptation, not the paper's multi-view image objective. Its 0/100 uniform-start and 100/100 momentum-prior planner outcomes do not isolate JEPA value because the same handcrafted controller succeeds on 20/20 starts. Keep its results as historical evidence; do not combine them with Notebook 23.
+- **Notebook 23** adds a separately preregistered comparison with a development-tuned and held-out-gated oracle planner. Its 660 episode rows passed validation. The model and data seeds are paired, the direct controller is handcrafted, a prior-only CEM arm is absent, and all five JEPA fits triggered low spread. The JEPA outcomes remain exploratory and the claim status partial. The built-in bootstrap interval is supplemented by a corrected shared-start analysis because the original implementation does not preserve the pairing during start resampling. See the [v1 report](reproductions/visual-jepa-decision-study-v1.md).
 
 These examples do not retroactively certify earlier results. No exact paper reproduction or matched JEPA-versus-direct-policy comparison is complete. The report-field audit is in [evaluation-protocol-audit.md](evidence/evaluation-protocol-audit.md). See the [coverage map](CURRICULUM_COVERAGE.md) for current evidence limits and the [roadmap](ROADMAP.md) for future lessons.

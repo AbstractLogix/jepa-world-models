@@ -1,0 +1,13 @@
+{
+  "code_hash": "110ec08de75ebf6313e93fb0595141080e838aea65a9623494971dde4eff4a22",
+  "created_utc": "2026-10-16T00:54:16Z",
+  "experiment_version": "visual-jepa-decision-study-v1",
+  "preregistration_hash": "f44c8b16ef1cc5b297680aa50f61515c1928955a81c4ca95a5bbe3d626aef8ca",
+  "protocol_lock_hash": "029f41a70b457955894db2a661cf69a59d9e85067091bf32c564728fc293344f",
+  "schema_version": 1,
+  "status": "passed",
+  "successes": 20,
+  "threshold": 18,
+  "total": 20,
+  "transition_calls": 5963700
+}

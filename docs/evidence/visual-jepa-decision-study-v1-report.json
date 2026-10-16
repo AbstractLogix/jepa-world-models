@@ -1,0 +1,2251 @@
+{
+  "development_transition_calls": 38453690,
+  "experiment_version": "visual-jepa-decision-study-v1",
+  "final_transition_call_limit": 750000000,
+  "final_transition_calls": 408064200,
+  "intervention_action_ranking": {
+    "by_method": {
+      "image_reconstruction": {
+        "accuracy": 0.5155555555555555,
+        "correct": 116,
+        "total": 225
+      },
+      "jepa": {
+        "accuracy": 0.5822222222222222,
+        "correct": 131,
+        "total": 225
+      },
+      "oracle": {
+        "accuracy": 1.0,
+        "correct": 45,
+        "total": 45
+      },
+      "state_model": {
+        "accuracy": 0.5688888888888889,
+        "correct": 128,
+        "total": 225
+      }
+    },
+    "by_model_seed": {
+      "image_reconstruction|7401": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "image_reconstruction|7402": {
+        "accuracy": 0.26666666666666666,
+        "correct": 12,
+        "total": 45
+      },
+      "image_reconstruction|7403": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "image_reconstruction|7404": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "image_reconstruction|7405": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "jepa|7401": {
+        "accuracy": 0.4444444444444444,
+        "correct": 20,
+        "total": 45
+      },
+      "jepa|7402": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "jepa|7403": {
+        "accuracy": 0.7333333333333333,
+        "correct": 33,
+        "total": 45
+      },
+      "jepa|7404": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "jepa|7405": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "oracle|": {
+        "accuracy": 1.0,
+        "correct": 45,
+        "total": 45
+      },
+      "state_model|7401": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "state_model|7402": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "state_model|7403": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "state_model|7404": {
+        "accuracy": 0.5777777777777777,
+        "correct": 26,
+        "total": 45
+      },
+      "state_model|7405": {
+        "accuracy": 0.5333333333333333,
+        "correct": 24,
+        "total": 45
+      }
+    },
+    "per_start": {
+      "image_reconstruction|7401|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7401|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7401|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7401|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7401|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7401|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7401|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7401|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7401|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7401|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7401|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "image_reconstruction|7401|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7401|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7401|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7401|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7401|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7401|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7401|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7401|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7401|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "image_reconstruction|7402|8600-140": {
+        "correct": 1,
+        "total": 3
+      },
+      "image_reconstruction|7402|8600-190": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8600-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7402|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7402|8601-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8601-190": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8601-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8601-90": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8602-140": {
+        "correct": 1,
+        "total": 3
+      },
+      "image_reconstruction|7402|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7402|8602-40": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7402|8602-90": {
+        "correct": 0,
+        "total": 3
+      },
+      "image_reconstruction|7402|8603-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8603-190": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8603-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8603-90": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8604-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7402|8604-190": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8604-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7402|8604-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7403|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7403|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7403|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7403|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7403|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7403|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7403|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7403|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7403|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7403|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7403|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "image_reconstruction|7403|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7403|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7403|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7403|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7403|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7403|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7403|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7403|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7403|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "image_reconstruction|7404|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7404|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7404|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7404|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7404|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7404|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7404|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7404|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7404|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7404|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7404|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "image_reconstruction|7404|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7404|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7404|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7404|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7404|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7404|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7404|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7404|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7404|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "image_reconstruction|7405|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7405|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7405|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7405|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7405|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7405|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7405|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7405|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7405|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7405|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7405|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "image_reconstruction|7405|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "image_reconstruction|7405|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7405|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7405|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7405|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "image_reconstruction|7405|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "image_reconstruction|7405|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7405|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "image_reconstruction|7405|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "jepa|7401|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7401|8600-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7401|8600-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7401|8600-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7401|8601-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7401|8601-190": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7401|8601-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7401|8601-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7401|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7401|8602-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7401|8602-40": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7401|8602-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "jepa|7401|8603-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7401|8603-190": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7401|8603-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7401|8603-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7401|8604-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7401|8604-190": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7401|8604-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7401|8604-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7402|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7402|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7402|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7402|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7402|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7402|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7402|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7402|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7402|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7402|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7402|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "jepa|7402|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7402|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7402|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7402|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7402|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7402|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7402|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7402|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7402|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "jepa|7403|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7403|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7403|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7403|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8601-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7403|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7403|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "jepa|7403|8602-90": {
+        "correct": 3,
+        "total": 3
+      },
+      "jepa|7403|8603-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8603-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8603-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7403|8604-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8604-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7403|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "jepa|7404|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7404|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7404|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7404|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7404|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7404|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7404|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7404|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7404|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7404|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7404|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "jepa|7404|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7404|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7404|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7404|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7404|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7404|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7404|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7404|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7404|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "jepa|7405|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7405|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7405|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7405|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7405|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7405|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7405|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7405|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7405|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7405|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7405|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "jepa|7405|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "jepa|7405|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7405|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7405|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7405|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "jepa|7405|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "jepa|7405|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7405|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "jepa|7405|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "oracle||8600-140": {
+        "correct": 3,
+        "total": 3
+      },
+      "oracle||8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8600-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8600-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8601-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8602-140": {
+        "correct": 3,
+        "total": 3
+      },
+      "oracle||8602-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8602-40": {
+        "correct": 3,
+        "total": 3
+      },
+      "oracle||8602-90": {
+        "correct": 3,
+        "total": 3
+      },
+      "oracle||8603-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8603-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8603-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8604-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8604-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8604-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "oracle||8604-90": {
+        "correct": 3,
+        "total": 3
+      },
+      "state_model|7401|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7401|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7401|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7401|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7401|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7401|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7401|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7401|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7401|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7401|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7401|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "state_model|7401|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7401|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7401|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7401|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7401|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7401|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7401|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7401|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7401|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "state_model|7402|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7402|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7402|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7402|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7402|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7402|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7402|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7402|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7402|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7402|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7402|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "state_model|7402|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7402|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7402|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7402|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7402|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7402|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7402|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7402|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7402|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "state_model|7403|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7403|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7403|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7403|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7403|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7403|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7403|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7403|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7403|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7403|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7403|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "state_model|7403|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7403|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7403|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7403|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7403|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7403|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7403|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7403|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7403|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "state_model|7404|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7404|8600-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7404|8600-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7404|8600-90": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7404|8601-140": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7404|8601-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7404|8601-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7404|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7404|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7404|8602-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7404|8602-40": {
+        "correct": 1,
+        "total": 3
+      },
+      "state_model|7404|8602-90": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7404|8603-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7404|8603-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7404|8603-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7404|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7404|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7404|8604-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7404|8604-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7404|8604-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "state_model|7405|8600-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7405|8600-190": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7405|8600-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7405|8600-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7405|8601-140": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7405|8601-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7405|8601-40": {
+        "correct": 1,
+        "total": 2
+      },
+      "state_model|7405|8601-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7405|8602-140": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7405|8602-190": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7405|8602-40": {
+        "correct": 2,
+        "total": 3
+      },
+      "state_model|7405|8602-90": {
+        "correct": 1,
+        "total": 3
+      },
+      "state_model|7405|8603-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7405|8603-190": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7405|8603-40": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7405|8603-90": {
+        "correct": 2,
+        "total": 2
+      },
+      "state_model|7405|8604-140": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7405|8604-190": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7405|8604-40": {
+        "correct": 0,
+        "total": 2
+      },
+      "state_model|7405|8604-90": {
+        "correct": 0,
+        "total": 3
+      }
+    }
+  },
+  "limitations": [
+    "One local synthetic MountainCar task with generated images.",
+    "The visual momentum policy is handcrafted; state and oracle dynamics have privileged access.",
+    "The learned visual models are compact teaching analogues, not published-model reproductions.",
+    "The linear state readout is an auxiliary evaluator and contributes to visual-model planning.",
+    "Intervals and seed comparisons are descriptive; they do not support general JEPA claims."
+  ],
+  "method_summary": {
+    "direct_visual_momentum": {
+      "fixed_start_wilson_95_percent_interval": [
+        0.8388748419471806,
+        1.0
+      ],
+      "mean_elapsed_seconds": 0.11447191615079647,
+      "mean_planning_seconds": 0.0,
+      "mean_return": 89.29500000000003,
+      "mean_transition_calls": 0.0,
+      "n": 20,
+      "success_rate": 1.0,
+      "successes": 20
+    },
+    "image_reconstruction_cem": {
+      "by_model_seed": {
+        "7401": {
+          "mean_elapsed_seconds": 20.42668014877527,
+          "mean_planning_seconds": 20.14874311974745,
+          "mean_return": -0.10719308298250459,
+          "mean_transition_calls": 693000.0,
+          "n": 40,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7402": {
+          "mean_elapsed_seconds": 25.812984247324493,
+          "mean_planning_seconds": 25.51124534249484,
+          "mean_return": 26.027992052429408,
+          "mean_transition_calls": 596361.0,
+          "n": 40,
+          "success_rate": 0.475,
+          "successes": 19
+        },
+        "7403": {
+          "mean_elapsed_seconds": 30.571599114876335,
+          "mean_planning_seconds": 30.21733580663149,
+          "mean_return": -0.032678776432803466,
+          "mean_transition_calls": 693000.0,
+          "n": 40,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7404": {
+          "mean_elapsed_seconds": 22.743655917449722,
+          "mean_planning_seconds": 22.466973737606715,
+          "mean_return": -2.9734950893388494,
+          "mean_transition_calls": 693000.0,
+          "n": 40,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7405": {
+          "mean_elapsed_seconds": 20.76774907200015,
+          "mean_planning_seconds": 20.507219004203762,
+          "mean_return": -0.02096340424654889,
+          "mean_transition_calls": 693000.0,
+          "n": 40,
+          "success_rate": 0.0,
+          "successes": 0
+        }
+      },
+      "mean_elapsed_seconds": 24.064533700085192,
+      "mean_planning_seconds": 23.77030340213685,
+      "mean_return": 4.5787323398857405,
+      "mean_transition_calls": 673672.2,
+      "n": 200,
+      "success_rate": 0.095,
+      "successes": 19
+    },
+    "jepa_cem": {
+      "by_model_seed": {
+        "7401": {
+          "mean_elapsed_seconds": 20.309409750850136,
+          "mean_planning_seconds": 20.054308020530698,
+          "mean_return": -0.03585211487962564,
+          "mean_transition_calls": 693000.0,
+          "n": 40,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7402": {
+          "mean_elapsed_seconds": 19.43765931955004,
+          "mean_planning_seconds": 19.18782064230145,
+          "mean_return": -0.03258161844821736,
+          "mean_transition_calls": 693000.0,
+          "n": 40,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7403": {
+          "mean_elapsed_seconds": 19.37726793904985,
+          "mean_planning_seconds": 19.1275845160264,
+          "mean_return": -0.025812940746595826,
+          "mean_transition_calls": 693000.0,
+          "n": 40,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7404": {
+          "mean_elapsed_seconds": 19.25794803802437,
+          "mean_planning_seconds": 19.006113329143773,
+          "mean_return": -0.027615912730984786,
+          "mean_transition_calls": 693000.0,
+          "n": 40,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7405": {
+          "mean_elapsed_seconds": 18.966746753648657,
+          "mean_planning_seconds": 18.71797367288109,
+          "mean_return": -0.03114823797870179,
+          "mean_transition_calls": 693000.0,
+          "n": 40,
+          "success_rate": 0.0,
+          "successes": 0
+        }
+      },
+      "mean_elapsed_seconds": 19.46980636022461,
+      "mean_planning_seconds": 19.218760036176683,
+      "mean_return": -0.03060216495682508,
+      "mean_transition_calls": 693000.0,
+      "n": 200,
+      "success_rate": 0.0,
+      "successes": 0
+    },
+    "oracle_cem": {
+      "fixed_start_wilson_95_percent_interval": [
+        0.35199526933465386,
+        0.6480047306653461
+      ],
+      "mean_elapsed_seconds": 0.40642934217557924,
+      "mean_planning_seconds": 0.40507735710234555,
+      "mean_return": 48.13563676141122,
+      "mean_transition_calls": 494692.5,
+      "n": 40,
+      "success_rate": 0.5,
+      "successes": 20
+    },
+    "state_model_cem": {
+      "by_model_seed": {
+        "7401": {
+          "mean_elapsed_seconds": 12.724111691874896,
+          "mean_planning_seconds": 12.497340767650348,
+          "mean_return": 48.02035131010497,
+          "mean_transition_calls": 584437.5,
+          "n": 40,
+          "success_rate": 0.5,
+          "successes": 20
+        },
+        "7402": {
+          "mean_elapsed_seconds": 12.516668430274331,
+          "mean_planning_seconds": 12.292247858750489,
+          "mean_return": 48.01110015069528,
+          "mean_transition_calls": 578937.0,
+          "n": 40,
+          "success_rate": 0.5,
+          "successes": 20
+        },
+        "7403": {
+          "mean_elapsed_seconds": 13.14578217077451,
+          "mean_planning_seconds": 12.91650250877774,
+          "mean_return": 47.947880350504704,
+          "mean_transition_calls": 579805.5,
+          "n": 40,
+          "success_rate": 0.5,
+          "successes": 20
+        },
+        "7404": {
+          "mean_elapsed_seconds": 13.313249680975241,
+          "mean_planning_seconds": 13.076865287703367,
+          "mean_return": 45.39838839038187,
+          "mean_transition_calls": 580384.5,
+          "n": 40,
+          "success_rate": 0.475,
+          "successes": 19
+        },
+        "7405": {
+          "mean_elapsed_seconds": 11.88450150414992,
+          "mean_planning_seconds": 11.666808384383511,
+          "mean_return": 47.82548640386152,
+          "mean_transition_calls": 549987.0,
+          "n": 40,
+          "success_rate": 0.5,
+          "successes": 20
+        }
+      },
+      "mean_elapsed_seconds": 12.71686269560978,
+      "mean_planning_seconds": 12.489952961453092,
+      "mean_return": 47.440641321109666,
+      "mean_transition_calls": 574710.3,
+      "n": 200,
+      "success_rate": 0.495,
+      "successes": 99
+    }
+  },
+  "model_runs": [
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8300,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "state_model",
+      "model_seed": 7401,
+      "objective": "one_step_state_mse",
+      "peak_allocated_mib": 197.3359375,
+      "precision": "float32",
+      "status": "complete",
+      "test_seed": 8400,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 53.89758291700127,
+      "validation_loss": 5.957581834081794e-07,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8300,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "image_reconstruction",
+      "model_seed": 7401,
+      "objective": "latent_prediction_plus_0.25_pixel_l1",
+      "peak_allocated_mib": 535.37841796875,
+      "precision": "float32",
+      "probe_alpha": 1.0,
+      "probe_validation_mse": 8.209260707175361e-05,
+      "status": "complete",
+      "test_position_mae": 0.0093084640254577,
+      "test_position_r2": 0.9797508788422501,
+      "test_seed": 8400,
+      "test_velocity_mae": 0.006164511801296006,
+      "test_velocity_r2": 0.03371556167277279,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 55.40698479599814,
+      "validation_loss": 0.0010792993009090424,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8300,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_finite": true,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 6.652936281170696e-05,
+      "epochs": 35,
+      "error": "",
+      "method": "jepa",
+      "model_seed": 7401,
+      "objective": "lejepa_style_predictive_plus_0.1_sigreg",
+      "peak_allocated_mib": 508.552734375,
+      "precision": "float32",
+      "probe_alpha": 0.001,
+      "probe_validation_mse": 3.574325701489733e-05,
+      "status": "complete",
+      "test_position_mae": 0.0044594211876392365,
+      "test_position_r2": 0.9963621055616102,
+      "test_seed": 8400,
+      "test_velocity_mae": 0.00630098945178482,
+      "test_velocity_r2": -0.011875851912782176,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 60.04123746100231,
+      "validation_loss": 50.45352478027344,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8301,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "state_model",
+      "model_seed": 7402,
+      "objective": "one_step_state_mse",
+      "peak_allocated_mib": 197.3359375,
+      "precision": "float32",
+      "status": "complete",
+      "test_seed": 8401,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 44.65795869899739,
+      "validation_loss": 1.2698283171630464e-06,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8301,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "image_reconstruction",
+      "model_seed": 7402,
+      "objective": "latent_prediction_plus_0.25_pixel_l1",
+      "peak_allocated_mib": 535.37841796875,
+      "precision": "float32",
+      "probe_alpha": 1.0,
+      "probe_validation_mse": 0.00023760319249268368,
+      "status": "complete",
+      "test_position_mae": 0.011735028361280759,
+      "test_position_r2": 0.9600422634729543,
+      "test_seed": 8401,
+      "test_velocity_mae": 0.005825808860165731,
+      "test_velocity_r2": 0.054586479638651264,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 48.89989958600199,
+      "validation_loss": 0.0018973475554957986,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8301,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_finite": true,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 1.4204409126250539e-05,
+      "epochs": 35,
+      "error": "",
+      "method": "jepa",
+      "model_seed": 7402,
+      "objective": "lejepa_style_predictive_plus_0.1_sigreg",
+      "peak_allocated_mib": 508.552734375,
+      "precision": "float32",
+      "probe_alpha": 0.1,
+      "probe_validation_mse": 0.0001553500508667314,
+      "status": "complete",
+      "test_position_mae": 0.011015521720051765,
+      "test_position_r2": 0.9729116502793528,
+      "test_seed": 8401,
+      "test_velocity_mae": 0.005689961177838086,
+      "test_velocity_r2": 0.09502004822479737,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 49.04694929700054,
+      "validation_loss": 51.291385650634766,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8302,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "state_model",
+      "model_seed": 7403,
+      "objective": "one_step_state_mse",
+      "peak_allocated_mib": 197.3359375,
+      "precision": "float32",
+      "status": "complete",
+      "test_seed": 8402,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 45.954309007996926,
+      "validation_loss": 6.43710782242124e-06,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8302,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "image_reconstruction",
+      "model_seed": 7403,
+      "objective": "latent_prediction_plus_0.25_pixel_l1",
+      "peak_allocated_mib": 535.37841796875,
+      "precision": "float32",
+      "probe_alpha": 0.001,
+      "probe_validation_mse": 0.0001610705530467542,
+      "status": "complete",
+      "test_position_mae": 0.011310817040503025,
+      "test_position_r2": 0.9669836003878977,
+      "test_seed": 8402,
+      "test_velocity_mae": 0.005839305119336207,
+      "test_velocity_r2": 0.10168261283229207,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 50.32845638500294,
+      "validation_loss": 0.0015330973314121366,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8302,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_finite": true,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 6.076748468331061e-05,
+      "epochs": 35,
+      "error": "",
+      "method": "jepa",
+      "model_seed": 7403,
+      "objective": "lejepa_style_predictive_plus_0.1_sigreg",
+      "peak_allocated_mib": 508.552734375,
+      "precision": "float32",
+      "probe_alpha": 0.0,
+      "probe_validation_mse": 3.756945765704351e-05,
+      "status": "complete",
+      "test_position_mae": 0.004203778805832068,
+      "test_position_r2": 0.9888384030105187,
+      "test_seed": 8402,
+      "test_velocity_mae": 0.006172679271175336,
+      "test_velocity_r2": 0.042222763102133465,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 51.90156665100221,
+      "validation_loss": 52.61557846069336,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8303,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "state_model",
+      "model_seed": 7404,
+      "objective": "one_step_state_mse",
+      "peak_allocated_mib": 197.3359375,
+      "precision": "float32",
+      "status": "complete",
+      "test_seed": 8403,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 47.516003759999876,
+      "validation_loss": 6.77180860293447e-06,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8303,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "image_reconstruction",
+      "model_seed": 7404,
+      "objective": "latent_prediction_plus_0.25_pixel_l1",
+      "peak_allocated_mib": 535.37841796875,
+      "precision": "float32",
+      "probe_alpha": 1.0,
+      "probe_validation_mse": 0.0001105045169034048,
+      "status": "complete",
+      "test_position_mae": 0.011730126192172369,
+      "test_position_r2": 0.9782310879269531,
+      "test_seed": 8403,
+      "test_velocity_mae": 0.00730561347976618,
+      "test_velocity_r2": 0.05273000827467411,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 52.121583479995024,
+      "validation_loss": 0.001271371589973569,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8303,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_finite": true,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 0.00010723988816607744,
+      "epochs": 35,
+      "error": "",
+      "method": "jepa",
+      "model_seed": 7404,
+      "objective": "lejepa_style_predictive_plus_0.1_sigreg",
+      "peak_allocated_mib": 508.552734375,
+      "precision": "float32",
+      "probe_alpha": 0.0,
+      "probe_validation_mse": 4.8163895503596426e-05,
+      "status": "complete",
+      "test_position_mae": 0.006259475434819858,
+      "test_position_r2": 0.9945738066862249,
+      "test_seed": 8403,
+      "test_velocity_mae": 0.007516935686216432,
+      "test_velocity_r2": 0.01463500240499116,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 53.75335263599845,
+      "validation_loss": 51.87177429199219,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8304,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "state_model",
+      "model_seed": 7405,
+      "objective": "one_step_state_mse",
+      "peak_allocated_mib": 197.3359375,
+      "precision": "float32",
+      "status": "complete",
+      "test_seed": 8404,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 48.004514152999036,
+      "validation_loss": 1.200171658410909e-06,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8304,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "epochs": 35,
+      "error": "",
+      "method": "image_reconstruction",
+      "model_seed": 7405,
+      "objective": "latent_prediction_plus_0.25_pixel_l1",
+      "peak_allocated_mib": 535.37841796875,
+      "precision": "float32",
+      "probe_alpha": 1.0,
+      "probe_validation_mse": 0.0005157956927469351,
+      "status": "complete",
+      "test_position_mae": 0.021947474961479505,
+      "test_position_r2": 0.9154326009523422,
+      "test_seed": 8404,
+      "test_velocity_mae": 0.006998103756361767,
+      "test_velocity_r2": 0.04970342243400472,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 51.09137614100473,
+      "validation_loss": 0.0011017415206879377,
+      "validation_rows": 1200
+    },
+    {
+      "cuda_version": "12.8",
+      "data_seed": 8304,
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5070",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_finite": true,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 3.622844451456331e-05,
+      "epochs": 35,
+      "error": "",
+      "method": "jepa",
+      "model_seed": 7405,
+      "objective": "lejepa_style_predictive_plus_0.1_sigreg",
+      "peak_allocated_mib": 508.552734375,
+      "precision": "float32",
+      "probe_alpha": 0.01,
+      "probe_validation_mse": 6.940218072486088e-05,
+      "status": "complete",
+      "test_position_mae": 0.0054048466036717095,
+      "test_position_r2": 0.9959193309567954,
+      "test_seed": 8404,
+      "test_velocity_mae": 0.007044568535628666,
+      "test_velocity_r2": 0.04368400637801584,
+      "torch_version": "2.10.0+cu128",
+      "train_rows": 4800,
+      "train_seconds": 52.0393617410009,
+      "validation_loss": 51.0228385925293,
+      "validation_rows": 1200
+    }
+  ],
+  "oracle_gate": {
+    "code_hash": "110ec08de75ebf6313e93fb0595141080e838aea65a9623494971dde4eff4a22",
+    "created_utc": "2026-10-16T00:54:16Z",
+    "experiment_version": "visual-jepa-decision-study-v1",
+    "preregistration_hash": "f44c8b16ef1cc5b297680aa50f61515c1928955a81c4ca95a5bbe3d626aef8ca",
+    "protocol_lock_hash": "029f41a70b457955894db2a661cf69a59d9e85067091bf32c564728fc293344f",
+    "schema_version": 1,
+    "status": "passed",
+    "successes": 20,
+    "threshold": 18,
+    "total": 20,
+    "transition_calls": 5963700
+  },
+  "planner_config": {
+    "candidates": 48,
+    "elites": 8,
+    "horizon_steps": 60,
+    "initialization": "momentum_prior",
+    "replan_interval": 5,
+    "score_name": "cumulative_return",
+    "updates": 4
+  },
+  "preregistration_hash": "f44c8b16ef1cc5b297680aa50f61515c1928955a81c4ca95a5bbe3d626aef8ca",
+  "primary_comparison": {
+    "complete_seed_coverage": true,
+    "hierarchical_bootstrap_95_percent_interval": [
+      -89.38909263050479,
+      -89.32188352767886
+    ],
+    "interpretation": "descriptive local synthetic-task estimate; no significance claim",
+    "mean_seed_delta": -89.35600491443651,
+    "per_model_seed_mean_return_delta": {
+      "7401": [
+        -89.47989808787028,
+        -89.49383808107697,
+        -89.4507101230803,
+        -89.42837158509887,
+        -89.43242562414719,
+        -89.43072013365266,
+        -89.38359383907377,
+        -89.0819594990512,
+        -89.36405601220457,
+        -89.03945232289752,
+        -89.63443488852053,
+        -89.4946442389224,
+        -89.34958846789554,
+        -89.03702698311402,
+        -89.45282550020677,
+        -89.25042308729962,
+        -89.06182577330758,
+        -89.4343091491774,
+        -89.57275792500671,
+        -89.45738257385098
+      ],
+      "7402": [
+        -89.47446427750808,
+        -89.46438139757306,
+        -89.44573125287006,
+        -89.45888998095963,
+        -89.35970724062351,
+        -89.45987952320145,
+        -89.31633820589052,
+        -89.12707030266161,
+        -89.34714080971783,
+        -89.08239207131247,
+        -89.54471494430068,
+        -89.44492915188411,
+        -89.36201526023412,
+        -89.07346222223312,
+        -89.49018995069851,
+        -89.1505746611011,
+        -89.08595052913888,
+        -89.50041073339196,
+        -89.56566469854357,
+        -89.44539894365361
+      ],
+      "7403": [
+        -89.5818340714409,
+        -89.41422979528294,
+        -89.41153634629309,
+        -89.40917089799652,
+        -89.35175389897452,
+        -89.44205844830628,
+        -89.30934452329369,
+        -89.02786176554959,
+        -89.34165675020093,
+        -89.02554163457327,
+        -89.57011595641069,
+        -89.44490646338225,
+        -89.35310492195933,
+        -89.05908346212915,
+        -89.43572083165698,
+        -89.12942823362147,
+        -89.10965753488411,
+        -89.50578432698117,
+        -89.56240476410157,
+        -89.44313628970299
+      ],
+      "7404": [
+        -89.50375690073335,
+        -89.46370227630065,
+        -89.4626424469102,
+        -89.4642674888999,
+        -89.33861887741047,
+        -89.42482614992697,
+        -89.4046622013298,
+        -89.05869109171557,
+        -89.34725061225141,
+        -89.00467289354268,
+        -89.55009105970878,
+        -89.43351570204166,
+        -89.36281716240589,
+        -89.05993861250023,
+        -89.43489062407068,
+        -89.16139205121993,
+        -89.02668693358903,
+        -89.48452003975213,
+        -89.55023306742979,
+        -89.46352304642855
+      ],
+      "7405": [
+        -89.57175572334545,
+        -89.40881912443913,
+        -89.51481229278835,
+        -89.44267168597334,
+        -89.33192490514632,
+        -89.45408689351875,
+        -89.35600791114236,
+        -89.0863974744911,
+        -89.39420713813429,
+        -89.13616292089911,
+        -89.55937611916684,
+        -89.42818103059251,
+        -89.32108136295635,
+        -89.07469720639075,
+        -89.461583148558,
+        -89.11775488348306,
+        -89.05012914156092,
+        -89.41643037465812,
+        -89.54257341637458,
+        -89.47325848217085
+      ]
+    },
+    "status": "descriptive"
+  },
+  "probe_test": [
+    {
+      "alpha": 1.0,
+      "data_seed": 8300,
+      "family": "image_reconstruction",
+      "model_seed": 7401,
+      "position_mae": 0.0093084640254577,
+      "position_r2": 0.9797508788422501,
+      "test_seed": 8400,
+      "velocity_mae": 0.006164511801296006,
+      "velocity_r2": 0.03371556167277279
+    },
+    {
+      "alpha": 0.001,
+      "data_seed": 8300,
+      "family": "jepa",
+      "model_seed": 7401,
+      "position_mae": 0.0044594211876392365,
+      "position_r2": 0.9963621055616102,
+      "test_seed": 8400,
+      "velocity_mae": 0.00630098945178482,
+      "velocity_r2": -0.011875851912782176
+    },
+    {
+      "alpha": 1.0,
+      "data_seed": 8301,
+      "family": "image_reconstruction",
+      "model_seed": 7402,
+      "position_mae": 0.011735028361280759,
+      "position_r2": 0.9600422634729543,
+      "test_seed": 8401,
+      "velocity_mae": 0.005825808860165731,
+      "velocity_r2": 0.054586479638651264
+    },
+    {
+      "alpha": 0.1,
+      "data_seed": 8301,
+      "family": "jepa",
+      "model_seed": 7402,
+      "position_mae": 0.011015521720051765,
+      "position_r2": 0.9729116502793528,
+      "test_seed": 8401,
+      "velocity_mae": 0.005689961177838086,
+      "velocity_r2": 0.09502004822479737
+    },
+    {
+      "alpha": 0.001,
+      "data_seed": 8302,
+      "family": "image_reconstruction",
+      "model_seed": 7403,
+      "position_mae": 0.011310817040503025,
+      "position_r2": 0.9669836003878977,
+      "test_seed": 8402,
+      "velocity_mae": 0.005839305119336207,
+      "velocity_r2": 0.10168261283229207
+    },
+    {
+      "alpha": 0.0,
+      "data_seed": 8302,
+      "family": "jepa",
+      "model_seed": 7403,
+      "position_mae": 0.004203778805832068,
+      "position_r2": 0.9888384030105187,
+      "test_seed": 8402,
+      "velocity_mae": 0.006172679271175336,
+      "velocity_r2": 0.042222763102133465
+    },
+    {
+      "alpha": 1.0,
+      "data_seed": 8303,
+      "family": "image_reconstruction",
+      "model_seed": 7404,
+      "position_mae": 0.011730126192172369,
+      "position_r2": 0.9782310879269531,
+      "test_seed": 8403,
+      "velocity_mae": 0.00730561347976618,
+      "velocity_r2": 0.05273000827467411
+    },
+    {
+      "alpha": 0.0,
+      "data_seed": 8303,
+      "family": "jepa",
+      "model_seed": 7404,
+      "position_mae": 0.006259475434819858,
+      "position_r2": 0.9945738066862249,
+      "test_seed": 8403,
+      "velocity_mae": 0.007516935686216432,
+      "velocity_r2": 0.01463500240499116
+    },
+    {
+      "alpha": 1.0,
+      "data_seed": 8304,
+      "family": "image_reconstruction",
+      "model_seed": 7405,
+      "position_mae": 0.021947474961479505,
+      "position_r2": 0.9154326009523422,
+      "test_seed": 8404,
+      "velocity_mae": 0.006998103756361767,
+      "velocity_r2": 0.04970342243400472
+    },
+    {
+      "alpha": 0.01,
+      "data_seed": 8304,
+      "family": "jepa",
+      "model_seed": 7405,
+      "position_mae": 0.0054048466036717095,
+      "position_r2": 0.9959193309567954,
+      "test_seed": 8404,
+      "velocity_mae": 0.007044568535628666,
+      "velocity_r2": 0.04368400637801584
+    }
+  ],
+  "protocol_lock_hash": "029f41a70b457955894db2a661cf69a59d9e85067091bf32c564728fc293344f",
+  "schema_version": 1,
+  "software": {
+    "cuda": "12.8",
+    "device": "NVIDIA GeForce RTX 5070",
+    "gymnasium": "0.29.1",
+    "python": "3.10.12",
+    "torch": "2.10.0+cu128"
+  },
+  "status": "complete"
+}

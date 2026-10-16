@@ -5,8 +5,7 @@ Run from repo root after installing dependencies.
 
 from __future__ import annotations
 
-from planning.envs_utils import make_env, collect_random_rollout
-
+from planning.envs_utils import collect_random_rollout, make_env
 
 if __name__ == "__main__":
     env = make_env("CartPole-v1")

@@ -1,0 +1,526 @@
+{
+  "claim_status": "partial",
+  "claim_status_reason": "At least one JEPA seed triggered the predeclared embedding low-spread diagnostic. Keep its planner outcomes exploratory.",
+  "completed_episode_rows": 660,
+  "episode_rows": 660,
+  "experiment_version": "visual-jepa-decision-study-v1",
+  "jepa_action_effect_diagnostics": [
+    {
+      "held_out_starts": 20,
+      "model_seed": "7401",
+      "observed_position_span": 0.003000006079673767,
+      "observed_position_span_sd": 2.0511364984860578e-08,
+      "observed_velocity_span": 0.0029999999911524355,
+      "observed_velocity_span_sd": 3.7788998236363473e-10,
+      "predicted_position_span": 1.8000000715255737,
+      "predicted_position_span_sd": 0.0,
+      "predicted_velocity_span": 0.07000000029802322,
+      "predicted_velocity_span_sd": 0.0
+    },
+    {
+      "held_out_starts": 20,
+      "model_seed": "7402",
+      "observed_position_span": 0.003000006079673767,
+      "observed_position_span_sd": 2.0511364984860578e-08,
+      "observed_velocity_span": 0.0029999999911524355,
+      "observed_velocity_span_sd": 3.7788998236363473e-10,
+      "predicted_position_span": 0.0,
+      "predicted_position_span_sd": 0.0,
+      "predicted_velocity_span": 0.0,
+      "predicted_velocity_span_sd": 0.0
+    },
+    {
+      "held_out_starts": 20,
+      "model_seed": "7403",
+      "observed_position_span": 0.003000006079673767,
+      "observed_position_span_sd": 2.0511364984860578e-08,
+      "observed_velocity_span": 0.0029999999911524355,
+      "observed_velocity_span_sd": 3.7788998236363473e-10,
+      "predicted_position_span": 1.8000000715255737,
+      "predicted_position_span_sd": 0.0,
+      "predicted_velocity_span": 0.07000000029802322,
+      "predicted_velocity_span_sd": 0.0
+    },
+    {
+      "held_out_starts": 20,
+      "model_seed": "7404",
+      "observed_position_span": 0.003000006079673767,
+      "observed_position_span_sd": 2.0511364984860578e-08,
+      "observed_velocity_span": 0.0029999999911524355,
+      "observed_velocity_span_sd": 3.7788998236363473e-10,
+      "predicted_position_span": 0.0,
+      "predicted_position_span_sd": 0.0,
+      "predicted_velocity_span": 0.0,
+      "predicted_velocity_span_sd": 0.0
+    },
+    {
+      "held_out_starts": 20,
+      "model_seed": "7405",
+      "observed_position_span": 0.003000006079673767,
+      "observed_position_span_sd": 2.0511364984860578e-08,
+      "observed_velocity_span": 0.0029999999911524355,
+      "observed_velocity_span_sd": 3.7788998236363473e-10,
+      "predicted_position_span": 0.0,
+      "predicted_position_span_sd": 0.0,
+      "predicted_velocity_span": 0.0,
+      "predicted_velocity_span_sd": 0.0
+    }
+  ],
+  "jepa_representation_diagnostics": [
+    {
+      "data_seed": "8300",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 6.652936281170696e-05,
+      "model_seed": "7401",
+      "position_probe_r2": 0.9963621055616102,
+      "velocity_probe_r2": -0.011875851912782176
+    },
+    {
+      "data_seed": "8301",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 1.4204409126250539e-05,
+      "model_seed": "7402",
+      "position_probe_r2": 0.9729116502793528,
+      "velocity_probe_r2": 0.09502004822479737
+    },
+    {
+      "data_seed": "8302",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 6.076748468331061e-05,
+      "model_seed": "7403",
+      "position_probe_r2": 0.9888384030105187,
+      "velocity_probe_r2": 0.042222763102133465
+    },
+    {
+      "data_seed": "8303",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 0.00010723988816607744,
+      "model_seed": "7404",
+      "position_probe_r2": 0.9945738066862249,
+      "velocity_probe_r2": 0.01463500240499116
+    },
+    {
+      "data_seed": "8304",
+      "embedding_collapsed": true,
+      "embedding_dimension": 32,
+      "embedding_low_variance_dims": 32,
+      "embedding_mean_std": 3.622844451456331e-05,
+      "model_seed": "7405",
+      "position_probe_r2": 0.9959193309567954,
+      "velocity_probe_r2": 0.04368400637801584
+    }
+  ],
+  "method_summary": {
+    "direct_visual_momentum|direct": {
+      "by_seed_pair": {
+        "fixed": {
+          "mean_elapsed_seconds": 0.11447191615079647,
+          "mean_return": 89.29500000000003,
+          "mean_transition_calls": 0.0,
+          "n_episode_rows": 20,
+          "success_rate": 1.0,
+          "successes": 20
+        }
+      },
+      "mean_elapsed_seconds": 0.11447191615079647,
+      "mean_return": 89.29500000000003,
+      "mean_steps": 107.05,
+      "mean_transition_calls": 0.0,
+      "n_episode_rows": 20,
+      "success_rate": 1.0,
+      "successes": 20
+    },
+    "image_reconstruction_cem|momentum_prior": {
+      "by_seed_pair": {
+        "7401": {
+          "mean_elapsed_seconds": 21.867876576850175,
+          "mean_return": -0.2142058025156845,
+          "mean_transition_calls": 694800.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7402": {
+          "mean_elapsed_seconds": 24.36733643025,
+          "mean_return": 65.73164998684834,
+          "mean_transition_calls": 522258.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.85,
+          "successes": 17
+        },
+        "7403": {
+          "mean_elapsed_seconds": 31.584312969550957,
+          "mean_return": -0.0651700726165407,
+          "mean_transition_calls": 694800.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7404": {
+          "mean_elapsed_seconds": 23.16483839019893,
+          "mean_return": -5.591961786428283,
+          "mean_transition_calls": 694800.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7405": {
+          "mean_elapsed_seconds": 21.7687571910501,
+          "mean_return": -0.04173187785065994,
+          "mean_transition_calls": 694800.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        }
+      },
+      "mean_elapsed_seconds": 24.55062431158003,
+      "mean_return": 11.963716089487436,
+      "mean_steps": 284.76,
+      "mean_transition_calls": 660291.6,
+      "n_episode_rows": 100,
+      "success_rate": 0.17,
+      "successes": 17
+    },
+    "image_reconstruction_cem|uniform": {
+      "by_seed_pair": {
+        "7401": {
+          "mean_elapsed_seconds": 18.98548372070036,
+          "mean_return": -0.00018036344932464602,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7402": {
+          "mean_elapsed_seconds": 27.258632064398988,
+          "mean_return": -13.675665881989525,
+          "mean_transition_calls": 670464.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.1,
+          "successes": 2
+        },
+        "7403": {
+          "mean_elapsed_seconds": 29.558885260201713,
+          "mean_return": -0.00018748024906622523,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7404": {
+          "mean_elapsed_seconds": 22.322473444700517,
+          "mean_return": -0.35502839224941535,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7405": {
+          "mean_elapsed_seconds": 19.766740952950205,
+          "mean_return": -0.00019493064243784015,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        }
+      },
+      "mean_elapsed_seconds": 23.578443088590358,
+      "mean_return": -2.8062514097159537,
+      "mean_steps": 298.17,
+      "mean_transition_calls": 687052.8,
+      "n_episode_rows": 100,
+      "success_rate": 0.02,
+      "successes": 2
+    },
+    "jepa_cem|momentum_prior": {
+      "by_seed_pair": {
+        "7401": {
+          "mean_elapsed_seconds": 20.83587208070021,
+          "mean_return": -0.0715121947727143,
+          "mean_transition_calls": 694800.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7402": {
+          "mean_elapsed_seconds": 20.025899158749233,
+          "mean_return": -0.06496530787486286,
+          "mean_transition_calls": 694800.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7403": {
+          "mean_elapsed_seconds": 20.878161756800182,
+          "mean_return": -0.05141654583704071,
+          "mean_transition_calls": 694800.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7404": {
+          "mean_elapsed_seconds": 20.059983914799886,
+          "mean_return": -0.05503496190835253,
+          "mean_transition_calls": 694800.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7405": {
+          "mean_elapsed_seconds": 18.946314522848844,
+          "mean_return": -0.06209556178947828,
+          "mean_transition_calls": 694800.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        }
+      },
+      "mean_elapsed_seconds": 20.149246286779672,
+      "mean_return": -0.06100491443648973,
+      "mean_steps": 300.0,
+      "mean_transition_calls": 694800.0,
+      "n_episode_rows": 100,
+      "success_rate": 0.0,
+      "successes": 0
+    },
+    "jepa_cem|uniform": {
+      "by_seed_pair": {
+        "7401": {
+          "mean_elapsed_seconds": 19.782947421000063,
+          "mean_return": -0.00019203498653699137,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7402": {
+          "mean_elapsed_seconds": 18.849419480350843,
+          "mean_return": -0.00019792902157184526,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7403": {
+          "mean_elapsed_seconds": 17.876374121299524,
+          "mean_return": -0.00020933565615093816,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7404": {
+          "mean_elapsed_seconds": 18.455912161248854,
+          "mean_return": -0.00019686355361705414,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7405": {
+          "mean_elapsed_seconds": 18.987178984448473,
+          "mean_return": -0.00020091416792530887,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        }
+      },
+      "mean_elapsed_seconds": 18.79036643366955,
+      "mean_return": -0.00019941547716042753,
+      "mean_steps": 300.0,
+      "mean_transition_calls": 691200.0,
+      "n_episode_rows": 100,
+      "success_rate": 0.0,
+      "successes": 0
+    },
+    "oracle_cem|momentum_prior": {
+      "by_seed_pair": {
+        "fixed": {
+          "mean_elapsed_seconds": 0.23320542440087594,
+          "mean_return": 96.61640631612529,
+          "mean_transition_calls": 298185.0,
+          "n_episode_rows": 20,
+          "success_rate": 1.0,
+          "successes": 20
+        }
+      },
+      "mean_elapsed_seconds": 0.23320542440087594,
+      "mean_return": 96.61640631612529,
+      "mean_steps": 126.45,
+      "mean_transition_calls": 298185.0,
+      "n_episode_rows": 20,
+      "success_rate": 1.0,
+      "successes": 20
+    },
+    "oracle_cem|uniform": {
+      "by_seed_pair": {
+        "fixed": {
+          "mean_elapsed_seconds": 0.5796532599502825,
+          "mean_return": -0.34513279330286084,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        }
+      },
+      "mean_elapsed_seconds": 0.5796532599502825,
+      "mean_return": -0.34513279330286084,
+      "mean_steps": 300.0,
+      "mean_transition_calls": 691200.0,
+      "n_episode_rows": 20,
+      "success_rate": 0.0,
+      "successes": 0
+    },
+    "state_model_cem|momentum_prior": {
+      "by_seed_pair": {
+        "7401": {
+          "mean_elapsed_seconds": 11.628561229099068,
+          "mean_return": 96.41618505092163,
+          "mean_transition_calls": 477675.0,
+          "n_episode_rows": 20,
+          "success_rate": 1.0,
+          "successes": 20
+        },
+        "7402": {
+          "mean_elapsed_seconds": 11.542968691349234,
+          "mean_return": 96.39444949761881,
+          "mean_transition_calls": 466674.0,
+          "n_episode_rows": 20,
+          "success_rate": 1.0,
+          "successes": 20
+        },
+        "7403": {
+          "mean_elapsed_seconds": 11.709222662149841,
+          "mean_return": 96.2656224601819,
+          "mean_transition_calls": 468411.0,
+          "n_episode_rows": 20,
+          "success_rate": 1.0,
+          "successes": 20
+        },
+        "7404": {
+          "mean_elapsed_seconds": 11.82946351904975,
+          "mean_return": 91.17850495503555,
+          "mean_transition_calls": 469569.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.95,
+          "successes": 19
+        },
+        "7405": {
+          "mean_elapsed_seconds": 10.022006410399626,
+          "mean_return": 96.0066359000589,
+          "mean_transition_calls": 408774.0,
+          "n_episode_rows": 20,
+          "success_rate": 1.0,
+          "successes": 20
+        }
+      },
+      "mean_elapsed_seconds": 11.346444502409504,
+      "mean_return": 95.25227957276334,
+      "mean_steps": 195.85,
+      "mean_transition_calls": 458220.6,
+      "n_episode_rows": 100,
+      "success_rate": 0.99,
+      "successes": 99
+    },
+    "state_model_cem|uniform": {
+      "by_seed_pair": {
+        "7401": {
+          "mean_elapsed_seconds": 13.819662154650723,
+          "mean_return": -0.3754824307116947,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7402": {
+          "mean_elapsed_seconds": 13.490368169199428,
+          "mean_return": -0.37224919622824937,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7403": {
+          "mean_elapsed_seconds": 14.582341679399178,
+          "mean_return": -0.36986175917246167,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7404": {
+          "mean_elapsed_seconds": 14.797035842900732,
+          "mean_return": -0.3817281742717867,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        },
+        "7405": {
+          "mean_elapsed_seconds": 13.746996597900216,
+          "mean_return": -0.3556630923358576,
+          "mean_transition_calls": 691200.0,
+          "n_episode_rows": 20,
+          "success_rate": 0.0,
+          "successes": 0
+        }
+      },
+      "mean_elapsed_seconds": 14.087280888810055,
+      "mean_return": -0.37099693054401,
+      "mean_steps": 300.0,
+      "mean_transition_calls": 691200.0,
+      "n_episode_rows": 100,
+      "success_rate": 0.0,
+      "successes": 0
+    }
+  },
+  "methodology_limits": [
+    "Each model seed is paired to one training-data seed, so initialization and data variation are not separated.",
+    "A prior-only CEM arm was not included; direct control and prior-initialized learned-model planning do not replace it.",
+    "The direct controller has one outcome per shared evaluation start and must not be counted once per model seed.",
+    "The fixed momentum continuation is an evaluator-side simulator diagnostic, not a deployable learned reward model.",
+    "This study does not estimate calibrated model uncertainty.",
+    "Timing is measured on the recorded devices; model-transition calls do not equal hardware compute."
+  ],
+  "primary_comparison": {
+    "bootstrap": {
+      "method": "resample paired training-data/model seeds, then resample shared evaluation starts once per replicate",
+      "random_seed": 97531,
+      "replicates": 10000
+    },
+    "claim_limit": "descriptive estimate for one local synthetic task; no significance claim",
+    "contrast": "jepa_cem_momentum_prior_minus_direct_visual_momentum",
+    "hierarchical_bootstrap_95_percent_interval": [
+      -89.42756290488117,
+      -89.2788165874067
+    ],
+    "mean_across_seed_pair_means": -89.35600491443651,
+    "per_seed_pair_mean_return_delta": {
+      "7401": -89.36651219477275,
+      "7402": -89.35996530787489,
+      "7403": -89.34641654583707,
+      "7404": -89.35003496190838,
+      "7405": -89.35709556178952
+    },
+    "shared_evaluation_starts": 20,
+    "status": "descriptive",
+    "training_data_model_seed_pairs": 5
+  },
+  "schema_version": 1,
+  "source_files": {
+    "visual-jepa-decision-study-v1-episodes.csv": "3074dd2e1ef7c52d6c1aa6c031de85de3017cc809ae50403a7f2f4afe7906282",
+    "visual-jepa-decision-study-v1-interventions.csv": "a4fdf7fce466018a7b9cdca327f673ff924aedea48d4c393fb51ec967e168ee8",
+    "visual-jepa-decision-study-v1-model-runs.csv": "92f354873d1a34d531fb03bcfb5752f20608b1024ae1ab6e19aba2e72e4f8c63",
+    "visual-jepa-decision-study-v1-probe-test.csv": "2b24686210dcb780008312097483ab26bbc6fb86c533435b513fc668afd7d98f"
+  },
+  "uncertainty": "The interval is descriptive. No statistical significance or generalization claim is made."
+}

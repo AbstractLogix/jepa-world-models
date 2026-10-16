@@ -18,7 +18,7 @@ The course links three stages:
 
 1. **Learn representations.** Notebooks 02 and 03 compare LeJEPA-style SIGReg and Rectified LpJEPA-style RDMReg objectives on small CIFAR-10 subsets. Notebook 09 loads an official V-JEPA 2.1 checkpoint and inspects features from a deterministic synthetic video clip.
 2. **Predict action effects.** Notebooks 14 and 17 use state-space Ridge models. Notebook 16 renders MountainCar frames, extracts fixed color-moment features, and predicts action-conditioned state changes. Notebook 22 adds learned visual predictors on a synthetic MountainCar task; it is a separate local study, not a paper reproduction.
-3. **Measure decisions.** The notebooks compare CEM planners with direct momentum rules or a hand-written momentum prior. They measure intervention error, action ranking, closed-loop success, uncertainty coverage, model calls, and elapsed time.
+3. **Measure decisions.** Notebooks 14, 16, and 17 compare learned or fitted predictors with direct momentum rules and planner priors. Notebooks 22 and 23 add learned visual predictors. The studies measure intervention error, task-grounded action ranking, closed-loop success, uncertainty coverage, model calls, and elapsed time.
 
 The shared [evaluation protocol](../EVALUATION_PROTOCOL.md) keeps paper-reported, locally measured, illustrative, and not-run claims separate. The [reproduction matrix](../REPRODUCTION_MATRIX.md) records source, artifact, and compute gates for paper-level work.
 
@@ -32,7 +32,9 @@ Notebook 16 uses one fixed color-moment feature extractor and one fitted Ridge m
 
 Notebook 17 uses five independent state-space model fits with five bootstrap members each. It estimates 90% prediction intervals on calibration data, checks them on random-action and planner-shift data, and records 200 selected plans and 220 episode outcomes. Its intervals across model runs are 95% Student-t intervals. This is a MountainCar analogue, not a JEPA uncertainty result.
 
-Notebook 22 uses five training-data/model seed pairs, 20 held-out intervention starts, and 20 shared closed-loop starts per learned model seed. It uses a protocol-hashed validation-only pilot before opening those cases. The final run used a VISReg-style temporal-prediction adaptation, not the paper's multi-view image objective. It saved model, intervention, and episode rows for audit.
+Notebook 22 uses five training-data/model seed pairs, 20 held-out intervention starts, and 20 shared closed-loop starts per learned model seed. Notebook 23 adds a separate preregistered study with a development-tuned and held-out-gated oracle planner, state, image-reconstruction, and action-conditioned latent dynamics, and two CEM initializations. Notebook 22's final models use a VISReg-style temporal-prediction adaptation, not the paper's multi-view image objective. Notebook 23 uses a LeJEPA-style SIGReg term for action-conditioned prediction. Neither notebook implements the full objective of its cited paper. Both retain separate, versioned records.
+
+Notebook 23 uses five paired model/data seed groups. Each group supplies 4,800 training rows and 1,200 validation rows. It reserves distinct data for representation probes, action interventions, planner development, confirmation, and final starts. The exact simulator and learned state model see privileged state; the visual models receive generated frames. A train-fitted and validation-selected linear readout supports the shared task-return score. The same 20 final starts first test the exact-dynamics gate and then serve as shared comparison starts, so learned-method outcomes are conditional on that gate passing.
 
 ## Verified findings
 
@@ -74,13 +76,15 @@ The broad planner-shift intervals reflect only five independent fits. They do no
 
 Evidence: [Notebook 17](../../notebooks/17_model_uncertainty_planning.ipynb) · [calibration records](../evidence/model-uncertainty-calibration.csv) · [run report](../reproductions/model-uncertainty-planning.md)
 
-### 5. The visual JEPA result depended on a hand-written policy prior
+### 5. The visual JEPA studies did not establish a decision gain
 
-After a fixed validation pilot passed its spread screen, five action-conditioned JEPA models completed training. They ranked 153/295 non-tied held-out action pairs correctly (51.9%). Uniform-start JEPA CEM reached 0/100 goals. Momentum-prior JEPA CEM reached 100/100, but the same hand-written visual-momentum controller reached 20/20 without a model. Exact-dynamics CEM also reached 0/20.
+Notebook 22's five-seed study ranked 153/295 non-tied action pairs correctly (51.9%). Uniform-start JEPA CEM reached 0/100 goals; momentum-prior JEPA CEM reached 100/100, and the same hand-written direct controller reached 20/20. This showed that initialization changed outcomes, but did not isolate the JEPA model's added value.
 
-This local result shows that search initialization can dominate the outcome. It does not show that JEPA adds value beyond the controller prior. The experiment uses a small synthetic MountainCar task, one fixed scoring setup, and five model seeds. It is not a V-JEPA 2, LeJEPA, or VISReg reproduction.
+Notebook 23 used a separate preregistered protocol. Its JEPA ranked 131/225 non-tied pairs correctly (58.2%), but its CEM reached 0/100 goals with either Gaussian or momentum-prior initialization. The direct controller reached 20/20. All five JEPA fits triggered the low-spread warning; position probes were strong (R² 0.973–0.996), while velocity probes were weak (R² −0.012–0.095). The exact oracle also reached 0/20 starts with Gaussian initialization and 20/20 with the momentum prior.
 
-Evidence: [Notebook 22](../../notebooks/22_visual_jepa_decision_usefulness.ipynb) · [run report](../reproductions/visual-jepa-decision-usefulness.md) · [interventions](../evidence/visual-jepa-interventions.csv) · [episodes](../evidence/visual-jepa-episodes.csv)
+The v1 outcome remains partial and exploratory because of low spread, the missing prior-only CEM arm, paired model/data seeds, and the shared oracle gate. Notebook 22 and 23 use separate objectives and protocols. Neither is a V-JEPA 2, LeJEPA, or VISReg reproduction, and neither shows a general JEPA advantage.
+
+Evidence: [Notebook 22](../../notebooks/22_visual_jepa_decision_usefulness.ipynb) · [Notebook 22 report](../reproductions/visual-jepa-decision-usefulness.md) · [Notebook 23](../../notebooks/23_visual_jepa_decision_study.ipynb) · [v1 report and paired analysis](../reproductions/visual-jepa-decision-study-v1.md) · [frozen protocol](../reproductions/protocols/visual-jepa-decision-study-v1.md) · [v1 evidence](../evidence/visual-jepa-decision-study-v1-analysis.json)
 
 ## Figures
 
@@ -92,15 +96,15 @@ Evidence: [Notebook 22](../../notebooks/22_visual_jepa_decision_usefulness.ipynb
 
 **Figure 2.** Empirical coverage for 90% one-step prediction intervals. Points and 95% Student-t intervals summarize five independent state-space model fits. The planner-shift intervals are wide. This figure does not establish cross-task or JEPA calibration. Rebuild with the same command as Figure 1.
 
-The chart generator reads Notebook 14's saved episode table and the raw Notebook 16, 17, and 22 CSV records. Focused checks are in `tests/test_portfolio_figures.py`.
+The original chart generator reads Notebook 14's saved episode table and the raw Notebook 16, 17, and 22 CSV records. The v1 generator reads retained episode, model, probe, and intervention records. Neither v1 figure requires model training or external downloads.
 
-![Five model-seed points show that the action-conditioned JEPA's held-out non-tied action-ranking accuracy varied from 33% to 67%; the image-reconstruction baseline stayed near 49%.](figures/visual-jepa-intervention-ranking.png)
+![Four-panel results dashboard for separate Notebook 22 and 23 synthetic MountainCar studies. It shows planner outcomes, per-seed task-return action ranking, JEPA spread and probe diagnostics, and closed-loop success against model calls and elapsed time. All five v1 JEPA fits are marked low-spread.](figures/visual-jepa-decision-study-v1-overview.png)
 
-**Figure 3.** Correct ranking of non-tied action pairs within each method's own score space. State, pixel, and latent scores use different units, so cross-method differences are descriptive only. Each point is one trained model seed; the diamond is the mean across those five seeds.
+**Figure 3.** Notebook 22 and v1 results are shown separately. In v1, panel A shows 660 complete episodes and marks prior-only CEM as not run. Panel B uses 20 held-out states and three actions; ties are excluded. Panel C shows spread, probe scores, and predicted versus observed action effects. Panel D shows success against transition calls and elapsed time. The final starts also served as the oracle gate. All five JEPA fits triggered low spread; their outcomes are exploratory. The exact oracle ran on CPU and learned models ran on GPU, so compute is not matched. Rebuild with `uv run --locked --no-sync python scripts/generate_visual_jepa_decision_study_figures.py`.
 
-![Closed-loop success for exact-dynamics CEM, learned-model CEM, JEPA with and without a visual-momentum prior, and direct visual-momentum control.](figures/visual-jepa-success.png)
+![Architecture diagram of the local visual JEPA study, from generated frames through latent prediction and CEM planning, with direct-control and privileged-state baselines.](figures/visual-jepa-decision-study-v1-architecture.svg)
 
-**Figure 4.** Notebook 22's synthetic MountainCar results. The left panel shows one point per trained model seed, with 20 paired starts per seed. The right panel shows each fixed-start baseline with a 95% Wilson interval across 20 starts. The JEPA momentum-prior planner and direct controller use the same hand-written visual-momentum rule; both succeeded on all tested starts.
+**Figure 4.** The diagram describes the local synthetic study, not a published-paper implementation. The direct visual-momentum controller is handcrafted. State-space and exact-dynamics controls use privileged state. The SVG includes a title and description for assistive technology.
 
 ## Official V-JEPA checkpoint check
 
@@ -110,16 +114,15 @@ Evidence: [Notebook 09](../../notebooks/09_vjepa21_dense_features.ipynb) · [che
 
 ## Reproducibility and compute
 
-- The `uv` migration and portfolio case study are in `main` (PRs [#1](https://github.com/AbstractLogix/jepa-world-models/pull/1) and [#2](https://github.com/AbstractLogix/jepa-world-models/pull/2) are merged).
 - The core environment is defined by `pyproject.toml` and `uv.lock`. Use `uv sync --locked` for the default CPU environment. Apply `requirements-torch.txt` only when a CUDA 12.8 setup is intended.
 - Keep downloaded data, checkpoints, and package caches on E: or D: by setting `JEPA_ASSETS_DIR`, `UV_CACHE_DIR`, `HF_HUB_CACHE`, `HF_ASSETS_CACHE`, and `TORCH_HOME` before setup. The README gives a WSL example.
 - Notebooks 14 and 16 use CPU and no external assets. Notebook 17 uses CPU and retains 60,000 calibration rows, 200 selected plans, 220 episode outcomes, and five run records.
-- Notebook 22 used CUDA on an RTX 5070. It retained 15 model-fit rows, 960 intervention rows, 440 episode rows, and two figures. The executed notebook and runtime files stay on E:; the small audit records are in the repository.
+- Notebooks 22 and 23 used CUDA on an RTX 5070. Notebook 22 retained 15 model-fit rows, 960 intervention rows, and 440 episode rows. Notebook 23 completed 15 model fits, 960 interventions, and 660 episode rows; every v1 episode passed validation, while the low-spread rule keeps JEPA outcomes exploratory. The executed notebook and runtime files stay on E:; small audit records and figures are in the repository.
 - Notebook 09's checkpoint is about 1.66 GB and its license terms must be checked before redistribution. The notebook does not redistribute weights.
 - The repository has a focused unit-test suite for the new portfolio evidence summaries. The evidence validator for Notebooks 20 and 21 checks record structure; it does not rerun notebooks or validate scientific claims.
 - `pyproject.toml` declares MIT, but the repository has no root `LICENSE` file. Maintainers should confirm the rights holder and add the license text before describing the repository as MIT-licensed.
 
-Notebook 22 used the RTX 5070 for its validation pilot and all 15 model fits. The full JEPA-WAM LIBERO-Plus benchmark and the scoped 450-episode Push-T evaluation were not run. Rebuild the portfolio figures from the retained CSV evidence with `uv run --locked --no-sync python scripts/generate_portfolio_figures.py`.
+Notebook 22 used the RTX 5070 for its validation pilot and all 15 model fits. Notebook 23 used CUDA for five model/data seed groups across three model families and the 200 visual-model CEM episodes. The full JEPA-WAM LIBERO-Plus benchmark and the scoped 450-episode Push-T evaluation were not run. Rebuild the original figures with `uv run --locked --no-sync python scripts/generate_portfolio_figures.py`; rebuild the v1 overview and architecture with the command in Figure 3.
 
 ## Technical challenges and limits
 
@@ -127,7 +130,7 @@ The main challenge is a mismatch between model diagnostics and decisions. A shor
 
 The action-ranking checks cover three candidate actions at sampled states. They do not certify every action sequence. Finite-horizon CEM can miss useful sequences because of its candidate budget, horizon, or rollout objective. The current experiments do not isolate planner optimization failure from model error.
 
-The strongest decision findings are small simulator studies. Notebook 14 uses one state model; Notebook 16 uses one fixed-feature visual analogue; Notebook 17 uses five state-model fits but one task; Notebook 22 uses five learned visual model seeds but one synthetic task and a hand-written controller prior. None establishes a general learned-JEPA advantage. The SIGReg and RDMReg studies use small data subsets and local CNNs. The official V-JEPA run verifies inference on one synthetic clip, not downstream benefit.
+The strongest decision findings are small simulator studies. Notebook 14 uses one state model; Notebook 16 uses one fixed-feature visual analogue; Notebook 17 uses five state-model fits but one task; Notebooks 22 and 23 use learned visual models on one synthetic task, with a hand-written controller prior. Notebook 23's five JEPA fits triggered low spread and had no successful planner episodes; these remain exploratory. None establishes a general learned-JEPA advantage. The SIGReg and RDMReg studies use small data subsets and local CNNs. The official V-JEPA run verifies inference on one synthetic clip, not downstream benefit.
 
 ## Prioritized future research
 
@@ -146,7 +149,7 @@ Before execution, preregister the task, train/validation/test split, fixed evalu
 
 Make a research claim only when the exact learned models and baselines are identified, the full planned run set is retained, no evaluation data was used for tuning, results can be independently regenerated, and the conclusion is supported by decision outcomes as well as prediction metrics. If compute or source access blocks the plan, publish a preflight and mark the experiment pending.
 
-For current candidate papers and access gates, see the [research roadmap](../ROADMAP.md), especially its entries for [PiJEPA](https://arxiv.org/abs/2603.25981), [V-JEPA Policy](https://arxiv.org/abs/2609.37250), and [JEPA-WAM](https://arxiv.org/abs/2608.09381). The 2,402-task JEPA-WAM evaluation remains pending.
+For current candidate papers and access gates, see the [research roadmap](../ROADMAP.md), especially its entries for [PiJEPA](https://arxiv.org/abs/2603.25981), [V-JEPA Policy](https://arxiv.org/abs/2609.37250), [JEPA-WAM](https://arxiv.org/abs/2608.09381), [physical-state grounding](https://arxiv.org/abs/2608.06799), control-grounded [GA-WM](https://arxiv.org/abs/2609.03565), and [point-cloud JEPA](https://arxiv.org/abs/2608.29434). The large JEPA-WAM and 450-episode Push-T evaluations remain pending.
 
 ## Source and evidence links
 

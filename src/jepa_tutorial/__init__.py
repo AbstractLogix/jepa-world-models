@@ -10,10 +10,10 @@ from __future__ import annotations
 
 # make frequently used symbols available at package level
 from .eval_utils import embedding_stats, linear_probe_accuracy, tsne_2d
-from .sigreg import sigreg_loss
+from .lejepa_loss import lejepa_total_loss, predictive_loss
 from .rdmreg import rectified_distribution_matching_loss
+from .sigreg import sigreg_loss
 from .value_shaping import ValueHead, value_loss, value_shaped_distance
-from .lejepa_loss import predictive_loss, lejepa_total_loss
 
 __all__ = [
     "embedding_stats",

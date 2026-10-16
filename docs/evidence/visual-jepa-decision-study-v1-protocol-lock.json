@@ -1,0 +1,22 @@
+{
+  "code_hash": "110ec08de75ebf6313e93fb0595141080e838aea65a9623494971dde4eff4a22",
+  "confirmation_successes": 10,
+  "created_utc": "2026-10-16T00:54:07Z",
+  "development_gate_hash": "9fa5b45663d053cdc007381e514cf49feebd4db20afaa8d1a3a835519110079a",
+  "development_transition_calls": 38453690,
+  "experiment_version": "visual-jepa-decision-study-v1",
+  "overall_successes": 20,
+  "planner_config": {
+    "candidates": 48,
+    "elites": 8,
+    "horizon_steps": 60,
+    "initialization": "momentum_prior",
+    "replan_interval": 5,
+    "score_name": "cumulative_return",
+    "updates": 4
+  },
+  "preregistration_hash": "f44c8b16ef1cc5b297680aa50f61515c1928955a81c4ca95a5bbe3d626aef8ca",
+  "schema_version": 1,
+  "status": "locked",
+  "tuning_successes": 10
+}

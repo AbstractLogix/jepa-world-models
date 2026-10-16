@@ -3,7 +3,7 @@
   "slug": "jepa-world-models",
   "title": "JEPA World Models: From Prediction to Decisions",
   "summary": "An evidence-led tutorial that tests when predictive representations help action selection—and when accurate prediction is not enough.",
-  "description": "This research tutorial connects JEPA representation learning, action-conditioned prediction, planning, uncertainty, and decision evaluation. It includes small local LeJEPA objective studies, a verified inference check with an official V-JEPA 2.1 checkpoint, and clearly labeled MountainCar analogues that expose the gap between one-step prediction and closed-loop control. Toy results are not presented as paper reproductions. A genuine learned-JEPA-versus-direct-policy benchmark remains future work.",
+  "description": "This research tutorial connects JEPA representation learning, action-conditioned prediction, planning, uncertainty, and decision evaluation. It includes small local LeJEPA objective studies, a verified inference check with an official V-JEPA 2.1 checkpoint, and clearly labeled MountainCar analogues. Notebook 23 adds a preregistered 660-episode visual study; its decision result remains partial because all five JEPA seeds triggered a low-spread diagnostic. Toy results are not presented as paper reproductions. A genuine learned-JEPA-versus-direct-policy benchmark remains future work.",
   "categories": [
     "Applied AI Research",
     "Reproducible Machine Learning",
@@ -21,7 +21,7 @@
   ],
   "status": {
     "label": "Active research tutorial",
-    "summary": "Local lessons and evidence are available. Notebook 22's five-seed synthetic MountainCar comparison is complete; the added value of JEPA beyond a hand-written momentum prior remains unresolved. Large paper benchmarks remain pending.",
+    "summary": "Local lessons and evidence are available. Notebook 22 and the preregistered Notebook 23 matrix are complete. Notebook 23's JEPA outcomes remain exploratory because all five fits triggered low spread; a learned-JEPA-versus-direct-policy comparison and large paper benchmarks remain future work.",
     "license": "The package metadata declares MIT. No root LICENSE file is present; confirm rights-holder details before making a license claim."
   },
   "researchQuestion": "When do predictive representations actually improve action selection, and when does accurate prediction fail to translate into effective decisions?",
@@ -78,18 +78,22 @@
       ]
     },
     {
-      "id": "notebook-22-learned-visual-jepa-decision-comparison",
-      "title": "The hand-written prior changed visual JEPA planner outcomes",
+      "id": "visual-jepa-studies-decision-boundary",
+      "title": "Visual JEPA outcomes depended on protocol and representation diagnostics",
       "status": "locally measured exploratory analogue",
-      "summary": "Across five JEPA seeds, the model ranked 153/295 non-tied action pairs correctly (51.9%). Uniform-start JEPA CEM succeeded on 0/100 starts; momentum-prior JEPA CEM succeeded on 100/100. The same direct visual-momentum controller succeeded on 20/20 starts.",
-      "scope": "Synthetic MountainCarContinuous, 20 held-out intervention starts, five learned model seeds, and 20 shared evaluation starts per model seed.",
-      "claimBoundary": "The VISReg-style temporal-prediction adaptation is not a paper reproduction. The direct prior already succeeds, so the study does not establish that JEPA adds decision value.",
+      "summary": "Notebook 22 ranked 153/295 non-tied action pairs correctly; uniform-start JEPA CEM succeeded on 0/100 starts and momentum-prior CEM on 100/100, while direct control reached 20/20. In separate Notebook 23 v1, JEPA ranked 131/225 pairs correctly but succeeded on 0/100 starts with either initialization; all five JEPA fits triggered low spread. The direct controller reached 20/20, and the exact oracle reached 0/20 without the momentum prior and 20/20 with it.",
+      "scope": "Two separate synthetic MountainCar studies. Notebook 22 used five learned model seeds; v1 used five paired model/data seeds and 20 shared evaluation starts.",
+      "claimBoundary": "The studies use different objectives and protocols. All v1 JEPA fits triggered low spread, and v1 omitted prior-only CEM and a learned direct policy. These results do not establish a JEPA decision advantage or a general result, and are not paper reproductions.",
       "evidence": [
         "notebooks/22_visual_jepa_decision_usefulness.ipynb",
         "docs/reproductions/visual-jepa-decision-usefulness.md",
-        "docs/evidence/visual-jepa-model-runs.csv",
-        "docs/evidence/visual-jepa-interventions.csv",
-        "docs/evidence/visual-jepa-episodes.csv"
+        "notebooks/23_visual_jepa_decision_study.ipynb",
+        "docs/reproductions/visual-jepa-decision-study-v1.md",
+        "docs/evidence/visual-jepa-decision-study-v1-analysis.json",
+        "docs/evidence/visual-jepa-decision-study-v1-model-runs.csv",
+        "docs/evidence/visual-jepa-decision-study-v1-probe-test.csv",
+        "docs/evidence/visual-jepa-decision-study-v1-interventions.csv",
+        "docs/evidence/visual-jepa-decision-study-v1-episodes.csv"
       ]
     }
   ],
@@ -104,6 +108,17 @@
         "notebooks/22_visual_jepa_decision_usefulness.ipynb",
         "docs/reproductions/visual-jepa-decision-usefulness.md",
         "docs/ROADMAP.md"
+      ]
+    },
+    {
+      "id": "physical-state-grounding-jepa-evaluation",
+      "title": "Evaluate physical-state grounding in a released JEPA checkpoint",
+      "status": "future research",
+      "summary": "Assess latent probes, planning, and policy outcomes for PSG-JEPA using a verified task setup and its released LIBERO-Goal checkpoint.",
+      "claimBoundary": "The public release lists one training seed while the paper reports three-seed results. Check code, dataset, base-model, simulator, and checkpoint terms; a single checkpoint evaluation cannot reproduce the paper mean.",
+      "evidence": [
+        "docs/ROADMAP.md",
+        "docs/REPRODUCTION_MATRIX.md"
       ]
     }
   ],
@@ -176,6 +191,61 @@
       "label": "Notebook 22 closed-loop episodes",
       "path": "docs/evidence/visual-jepa-episodes.csv",
       "kind": "evidence"
+    },
+    {
+      "label": "Notebook 23: Matched visual JEPA decision study",
+      "path": "notebooks/23_visual_jepa_decision_study.ipynb",
+      "kind": "notebook"
+    },
+    {
+      "label": "Notebook 23 preregistered protocol",
+      "path": "docs/reproductions/protocols/visual-jepa-decision-study-v1.md",
+      "kind": "protocol"
+    },
+    {
+      "label": "Notebook 23 v1 report",
+      "path": "docs/reproductions/visual-jepa-decision-study-v1.md",
+      "kind": "evidence"
+    },
+    {
+      "label": "Notebook 23 held-out model records",
+      "path": "docs/evidence/visual-jepa-decision-study-v1-model-runs.csv",
+      "kind": "evidence"
+    },
+    {
+      "label": "Notebook 23 probe records",
+      "path": "docs/evidence/visual-jepa-decision-study-v1-probe-test.csv",
+      "kind": "evidence"
+    },
+    {
+      "label": "Notebook 23 action interventions",
+      "path": "docs/evidence/visual-jepa-decision-study-v1-interventions.csv",
+      "kind": "evidence"
+    },
+    {
+      "label": "Notebook 23 episode outcomes",
+      "path": "docs/evidence/visual-jepa-decision-study-v1-episodes.csv",
+      "kind": "evidence"
+    },
+    {
+      "label": "Notebook 23 paired analysis summary",
+      "path": "docs/evidence/visual-jepa-decision-study-v1-analysis.json",
+      "kind": "evidence"
+    },
+    {
+      "label": "Notebook 23 paired analysis command",
+      "path": "scripts/analyze_visual_jepa_decision_study.py",
+      "kind": "tool"
+    },
+    {
+      "label": "Notebook 23 results dashboard",
+      "path": "docs/portfolio/figures/visual-jepa-decision-study-v1-overview.png",
+      "kind": "figure"
+    },
+    {
+      "label": "Notebook 23 architecture diagram",
+      "path": "docs/portfolio/figures/visual-jepa-decision-study-v1-architecture.svg",
+      "kind": "figure"
     }
   ],
   "media": [
@@ -198,21 +268,23 @@
       ]
     },
     {
-      "path": "docs/portfolio/figures/visual-jepa-intervention-ranking.png",
-      "alt": "Action-pair ranking accuracy for five seeds of the state model, image-reconstruction model, and action-conditioned JEPA. Each dot is one training seed. JEPA accuracy ranges from 33% to 67%; its aggregate is 153 of 295 non-tied action pairs.",
-      "caption": "Held-out action-ranking accuracy within each model's own score space. State, pixel, and latent scores have different units and are not directly comparable.",
+      "path": "docs/portfolio/figures/visual-jepa-decision-study-v1-overview.png",
+      "alt": "Four-panel dashboard for two separate synthetic MountainCar studies. It shows historical and v1 planner success, per-seed action ranking on a shared task-return score, JEPA spread and probe diagnostics, and success against transition calls and elapsed time. All five v1 JEPA fits triggered low spread.",
+      "caption": "Notebook 22 and v1 are separate protocols. The v1 dashboard covers 660 episodes, 20 shared starts, five paired model/data seeds, and 960 interventions. JEPA outcomes are exploratory because all five v1 fits triggered low spread. Prior-only CEM was not run; oracle and learned methods used different devices.",
       "evidence": [
-        "docs/evidence/visual-jepa-interventions.csv",
-        "docs/reproductions/visual-jepa-decision-usefulness.md"
+        "docs/evidence/visual-jepa-decision-study-v1-analysis.json",
+        "docs/evidence/visual-jepa-decision-study-v1-episodes.csv",
+        "docs/evidence/visual-jepa-decision-study-v1-interventions.csv",
+        "docs/evidence/visual-jepa-episodes.csv"
       ]
     },
     {
-      "path": "docs/portfolio/figures/visual-jepa-success.png",
-      "alt": "Closed-loop MountainCar success: exact-dynamics CEM 0 of 20; learned state CEM 18 of 100; image-reconstruction CEM 0 of 100; uniform-start JEPA CEM 0 of 100; momentum-prior JEPA CEM 100 of 100; direct visual-momentum control 20 of 20.",
-      "caption": "Local synthetic MountainCar comparison. The direct controller uses the same hand-written visual-momentum prior as prior-guided JEPA CEM, so success does not show an isolated JEPA gain.",
+      "path": "docs/portfolio/figures/visual-jepa-decision-study-v1-architecture.svg",
+      "alt": "Architecture diagram of the local visual JEPA study, from generated frames through latent prediction and CEM planning, with direct-control and privileged-state baselines.",
+      "caption": "The diagram describes the local synthetic study, not a published-paper implementation. The SVG has a title and description for assistive technology.",
       "evidence": [
-        "docs/evidence/visual-jepa-episodes.csv",
-        "docs/reproductions/visual-jepa-decision-usefulness.md"
+        "docs/reproductions/protocols/visual-jepa-decision-study-v1.md",
+        "docs/reproductions/visual-jepa-decision-study-v1.md"
       ]
     }
   ]

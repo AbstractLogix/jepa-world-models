@@ -9,6 +9,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 import numpy as np
@@ -45,12 +46,17 @@ from jepa_tutorial.supervised_visual_v3 import (
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import run_visual_jepa_supervised_positive_control_v3 as runner_v3  # noqa: E402
+import validate_visual_jepa_supervised_positive_control_v3 as validator_v3  # noqa: E402
 from analyze_visual_jepa_supervised_positive_control_v3 import generate_figures  # noqa: E402
 from run_visual_jepa_supervised_positive_control_v3 import (  # noqa: E402
     StudyError,
     _clip_rollout_state,
 )
-from validate_visual_jepa_supervised_positive_control_v3 import validate_figures, validate_manifest  # noqa: E402
+from validate_visual_jepa_supervised_positive_control_v3 import (  # noqa: E402
+    validate_figures,
+    validate_manifest,
+    validate_study,
+)
 
 
 class VisualPositiveControlV3Tests(unittest.TestCase):
@@ -315,6 +321,131 @@ class VisualPositiveControlV3Tests(unittest.TestCase):
         validate_method_run_coverage(rows)
         with self.assertRaises(ValueError):
             validate_method_run_coverage(rows[:-1])
+
+    def test_data_path_failure_records_every_arm_and_stop_reason(self) -> None:
+        groups = []
+        for data_seed in (9701, 9702, 9703):
+            states = np.asarray(
+                [[-0.6, 0.0], [-0.5, 0.001], [-0.4, 0.002]], dtype=np.float32
+            )
+            data = SimpleNamespace(
+                actions=np.zeros((3, 1), dtype=np.float32),
+                next_states=np.asarray(
+                    [[-0.6, 0.0], [-0.5, 0.001], [-0.4, 0.002]], dtype=np.float32
+                ),
+            )
+            groups.append(
+                SimpleNamespace(
+                    data_seed=data_seed,
+                    train_indices=np.asarray([0, 1]),
+                    validation_indices=np.asarray([2]),
+                    handcrafted_states=states,
+                    data=data,
+                )
+            )
+
+        rows = runner_v3._data_path_failure_model_runs(
+            groups, "not run because the data-path gate failed"
+        )
+
+        validate_method_run_coverage(rows)
+        self.assertEqual(len(rows), 21)
+        exact_rows = [
+            row for row in rows if row["method"] == runner_v3.METHOD_HANDCRAFTED_EXACT
+        ]
+        stopped_rows = [
+            row for row in rows if row["method"] != runner_v3.METHOD_HANDCRAFTED_EXACT
+        ]
+        self.assertTrue(all(row["status"] == "complete" for row in exact_rows))
+        self.assertTrue(
+            all(
+                row["status"] == "not_run"
+                and row["error"] == "not run because the data-path gate failed"
+                for row in stopped_rows
+            )
+        )
+
+    def test_missing_scheduled_heldout_start_is_retained(self) -> None:
+        starts = [
+            {
+                "step": 40,
+                "start_id": "test-9911-step-40",
+                "state": np.asarray([-0.5, 0.001], dtype=np.float32),
+                "visual_state": np.asarray([-0.5, 0.001], dtype=np.float32),
+            }
+        ]
+
+        by_step, rows = runner_v3._scheduled_test_start_records(9911, starts)
+
+        self.assertEqual(set(by_step), {40})
+        self.assertEqual([row["step"] for row in rows], [40, 90, 140, 190])
+        self.assertEqual([row["status"] for row in rows], ["complete", "missing", "missing", "missing"])
+        self.assertTrue(all(row["reason"] for row in rows[1:]))
+
+    def test_data_path_failure_evidence_validator_requires_all_arm_statuses(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            evidence = Path(directory)
+            rows = []
+            for data_seed, model_seed in zip(
+                runner_v3.DATA_SEEDS, runner_v3.MODEL_SEEDS, strict=True
+            ):
+                rows.append(
+                    {
+                        "method": runner_v3.METHOD_HANDCRAFTED_EXACT,
+                        "data_seed": data_seed,
+                        "model_seed": 0,
+                        "status": "complete",
+                    }
+                )
+                rows.append(
+                    {
+                        "method": runner_v3.METHOD_RIDGE,
+                        "data_seed": data_seed,
+                        "model_seed": 0,
+                        "status": "not_run",
+                        "error": "data-path gate failed",
+                    }
+                )
+                rows.extend(
+                    {
+                        "method": method,
+                        "data_seed": data_seed,
+                        "model_seed": model_seed,
+                        "status": "not_run",
+                        "error": "data-path gate failed",
+                    }
+                    for method in runner_v3.NEURAL_METHODS
+                )
+            runner_v3.write_csv(evidence / "model-runs.csv", rows)
+            runner_v3.write_csv(evidence / "data-path.csv", [{"passed": False}])
+            runner_v3.write_csv(evidence / "validation-predictions.csv", [])
+            runner_v3.write_csv(evidence / "action-triplets.csv", [])
+            runner_v3.write_json(
+                evidence / "run-summary.json",
+                {
+                    "protocol_version": runner_v3.V3_VERSION,
+                    "status": "data_path_failed",
+                    "fit_count": 0,
+                    "records_complete": False,
+                    "heldout_open": False,
+                },
+            )
+            files = {}
+            for path in sorted(evidence.iterdir()):
+                files[path.name] = {
+                    "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                    "bytes": path.stat().st_size,
+                }
+            runner_v3.write_json(
+                evidence / "sha256-manifest.json",
+                {"protocol_version": runner_v3.V3_VERSION, "files": files},
+            )
+
+            with patch.object(validator_v3, "verify_protocol_lock"):
+                result = validate_study(evidence)
+
+        self.assertEqual(result["status"], "data_path_failed")
+        self.assertFalse(result["heldout_open"])
 
     def test_evidence_manifest_detects_corruption(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

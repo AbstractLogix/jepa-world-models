@@ -69,6 +69,7 @@ As a learner or portfolio reader, I need per-coordinate records and reproducible
 - **FR-006**: Independent test data and multi-step rollouts MUST remain closed until the frozen validation gate passes. Planning MUST remain outside this feature.
 - **FR-007**: Notebook 22, Notebook 23 v1, and v2 source, records, and figures MUST remain unchanged.
 - **FR-008**: Retained validation evidence MUST include per-run and per-start values, failed or incomplete runs, provenance, and enough data to regenerate every figure.
+- **FR-010**: If a data-path gate stops training, evidence MUST retain the exact-dynamics outcome and a `not_run` status with a reason for every later planned arm. If a held-out trajectory ends before a scheduled step, evidence MUST retain that missing seed/step pair.
 - **FR-009**: Tests MUST check data-split isolation, fixed seeds, model action sensitivity, numeric failures, gate behavior, evidence completeness, and deterministic figure generation.
 
 ### Key Entities

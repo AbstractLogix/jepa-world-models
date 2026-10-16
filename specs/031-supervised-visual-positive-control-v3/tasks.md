@@ -52,7 +52,7 @@
 
 ### Tests for User Story 2
 
-- [x] T009 [US2] Test gate selection, held-out isolation, incomplete-run rejection, and evidence integrity in `tests/test_visual_jepa_supervised_positive_control_v3.py`.
+- [x] T009 [US2] Test gate selection, held-out isolation, incomplete-run rejection, missing scheduled starts, early-stop arm records, and evidence integrity in `tests/test_visual_jepa_supervised_positive_control_v3.py`.
 
 ### Implementation for User Story 2
 

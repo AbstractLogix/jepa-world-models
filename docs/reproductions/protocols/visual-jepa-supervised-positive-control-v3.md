@@ -6,6 +6,10 @@
 **Spec Kit feature**: [Feature 031](../../../specs/031-supervised-visual-positive-control-v3/spec.md)
 **Prior evidence**: [v2 investigation](../visual-jepa-action-fidelity-v2-investigation.md)
 
+## Pre-training amendment
+
+On 2026-10-16, static review found two evidence-completeness gaps before training. The validation runner now records every planned arm and a stop reason when the data-path gate fails. The held-out protocol and runner record each scheduled start, including missing starts. No training or independent test data had been accessed. This amendment does not change the methods, data, thresholds, or selection rules.
+
 ## Question and scope
 
 Can a small supervised visual model recover current position and velocity, then predict action-conditioned next states with useful per-coordinate accuracy?
@@ -107,9 +111,17 @@ Record action sensitivity even when a method fails. A zero or incorrectly direct
 
 ## Conditional held-out stage; no planning
 
-If the frozen validation gate passes, evaluate the one selected family on all five reserved test groups, all three trained model seeds, and the shared 20 test contexts. Include exact dynamics, handcrafted state plus exact dynamics, the fixed ridge baseline, and the learned current-state estimator as diagnostic controls. For each context, draw 60 actions from U[-1, 1] using the SHA-256 stable-seed helper keyed by protocol version, test seed, context ID, and role `heldout-rollout-actions`. Use the same sequence for every dynamics method. Report every seed and context, including failed predictions.
+If the frozen validation gate passes, evaluate the selected family on all five reserved test groups. Use all three trained model seeds and the shared 20 test contexts.
 
-Create each test start trajectory from `reset(seed=test_seed)` with a U[-1, 1] action stream from a stable seed keyed by protocol version, role `heldout-start-trajectory`, and test seed. Retain starts at steps 40, 90, 140, and 190. If the simulator terminates before a scheduled start, record the missing start and mark held-out coverage incomplete; do not replace the seed or start. Use the same four 60-step action sequences for every method in each test seed. Start from the recorded test state and two frames, then render the predicted position for subsequent predicted visual inputs. Compare privileged exact dynamics, handcrafted state plus exact dynamics, fixed ridge, and the selected visual dynamics model at horizons 1, 5, 10, 20, and 60. Report raw position and velocity error, error growth, clipping, rollout completion, and the fraction of predicted states outside the minimum-to-maximum position and velocity range of all training-partition states. These are held-out predictive dynamics results, not planning or policy results. Do not run CEM, train a policy, or open JEPA planning in v3.
+1. Include exact dynamics, handcrafted state plus exact dynamics, the fixed ridge baseline, and the learned current-state estimator as controls.
+2. For each context, draw 60 actions from U[-1, 1]. Use the SHA-256 stable-seed helper with the protocol version, test seed, context ID, and role `heldout-rollout-actions`. Give every dynamics method the same action sequence.
+3. Create each test start trajectory with `reset(seed=test_seed)`. Use a U[-1, 1] action stream from a stable seed keyed by the protocol version, role `heldout-start-trajectory`, and test seed. Retain starts at steps 40, 90, 140, and 190.
+4. If the simulator ends before a scheduled start, record the missing start and mark held-out coverage incomplete. Do not replace the seed or start.
+5. At each start, use the same four 60-step action sequences for every method in that test seed. Start from the recorded test state and two frames. Render each predicted position for the next visual input.
+6. Compare exact dynamics, handcrafted state plus exact dynamics, fixed ridge, and the selected visual dynamics model at horizons 1, 5, 10, 20, and 60.
+7. Report raw position and velocity error, error growth, clipping, rollout completion, and the fraction of predicted states outside the training partition's minimum-to-maximum position and velocity range. Report every seed and context, including failed predictions.
+
+These are held-out predictive dynamics results. They are not planning or policy results. Do not run CEM, train a policy, or open JEPA planning in v3.
 
 ## Failure, abstention, and compute limits
 
@@ -117,6 +129,7 @@ Create each test start trajectory from `reset(seed=test_seed)` with a U[-1, 1] a
 - Maximum allocated CUDA memory: 2 GiB. Stop the training stage if exceeded.
 - Maximum transient output on E:: 5 GiB, including checkpoints and generated arrays. Do not commit datasets, frame tensors, or checkpoints.
 - Stop without seed replacement if a required fit is incomplete, non-finite, or exceeds the compute limit. Preserve its status and error.
+- If the data-path gate fails, retain the exact-dynamics outcome and one `not_run` record with a stop reason for every later planned arm.
 - Do not change the architecture, loss, target transform, data, thresholds, or selected seed after viewing validation results.
 - A failed data-path or action-shuffle sanity gate blocks independent test data.
 - Planning is out of scope even if held-out prediction passes.

@@ -1,20 +1,20 @@
 {
   "files": {
-    "docs/reproductions/protocols/visual-jepa-supervised-positive-control-v3.md": "a044bedf5daf9d5efbb654d41a9ebcaf09dc54ebb66da598a67150658bccee9f",
+    "docs/reproductions/protocols/visual-jepa-supervised-positive-control-v3.md": "178c4a943aceaed8c2635889d7422917e4924290d959ce9979b576ee3d5c9ae1",
     "pyproject.toml": "a6b688ca961e58553cc390762decef3ba26f671ab25b303289a6b481e851fdc8",
     "requirements-torch.txt": "bfb960ffc620200347c85ae09ee896f99b8ea4c121b069b82dea9bdb6ffac664",
     "scripts/analyze_visual_jepa_supervised_positive_control_v3.py": "bc0da673a809763bea067d87b6a606f5291fdec23dabc3c70bb9203cc8263469",
-    "scripts/run_visual_jepa_supervised_positive_control_v3.py": "3ca8190f221cabc7994e945eee04b67ffdefde710edfc587404db623d9b32f4b",
-    "scripts/validate_visual_jepa_supervised_positive_control_v3.py": "a5e918b5a46189b45f5eb2fa9ff4f8d01c82d7db9915abf7fb8f34b8e09399ff",
+    "scripts/run_visual_jepa_supervised_positive_control_v3.py": "8c582d8f7e757d9bd16faca665352489ce3b6617cecd626404df0545f980520f",
+    "scripts/validate_visual_jepa_supervised_positive_control_v3.py": "4e270656150068b34608c8f5c4d386898750cef0c5a2fa8698c3e646c71997f3",
     "src/jepa_tutorial/action_conditioned_visual.py": "83013d28763c5df1079e50ed3a41d953103003d42047f618e95c06a82afa9d2c",
     "src/jepa_tutorial/action_fidelity_v2.py": "dc74909b1b5054ad831daf1c2a326bb26e70bb722efe3857e7e4d79e56f5ee02",
     "src/jepa_tutorial/decision_study.py": "fd5af8ddd03cfdbf0c06eb94103fa308e01c987f01cbb52096c8e1fc0ca52b99",
     "src/jepa_tutorial/supervised_visual_v3.py": "5782ebee37dd20b6e43b172ce475e4fd2a2d0c3d12a36966205947fe4301dab6",
     "src/jepa_tutorial/visual_mountaincar.py": "b3456c04e2413700957a30772922f5e9121005a6a2c9a380f64d1e2652bea652",
-    "tests/test_visual_jepa_supervised_positive_control_v3.py": "dee5c277c96a44997dfd6dffd1e1f9f10d4a0d5ead8c07d5c7e9ef0e767e9b10",
+    "tests/test_visual_jepa_supervised_positive_control_v3.py": "fa78802819adbd3790a83dec9004009ca565260b50e5abeea876ba6b78346dad",
     "uv.lock": "cd830951d95bbf7742c063bd0afd6b82e251651aabfa72253e635e88daa72535"
   },
-  "locked_at_utc": "2026-10-16T14:43:35.610536+00:00",
-  "protocol_sha256": "a044bedf5daf9d5efbb654d41a9ebcaf09dc54ebb66da598a67150658bccee9f",
+  "locked_at_utc": "2026-10-16T14:57:01.300707+00:00",
+  "protocol_sha256": "178c4a943aceaed8c2635889d7422917e4924290d959ce9979b576ee3d5c9ae1",
   "protocol_version": "visual-jepa-supervised-positive-control-v3"
 }

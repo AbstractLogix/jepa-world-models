@@ -12,6 +12,9 @@ from typing import Sequence
 
 from run_visual_jepa_supervised_positive_control_v3 import (
     EVIDENCE_DIR,
+    METHOD_HANDCRAFTED_EXACT,
+    TEST_SEEDS,
+    TEST_STEPS,
     V3_VERSION,
     StudyError,
     can_open_heldout,
@@ -119,8 +122,28 @@ def validate_study(evidence_dir: Path = EVIDENCE_DIR) -> dict[str, object]:
     if summary.get("protocol_version") != V3_VERSION:
         raise StudyError("v3 run summary protocol version is invalid")
     if summary.get("status") == "data_path_failed":
-        if summary.get("fit_count") != 0 or summary.get("heldout_open"):
+        if (
+            summary.get("fit_count") != 0
+            or summary.get("heldout_open")
+            or summary.get("records_complete")
+        ):
             raise StudyError("failed data path must stop before fitting and held-out access")
+        data_path_path = evidence_dir / "data-path.csv"
+        if not data_path_path.is_file():
+            raise FileNotFoundError("data-path failure has no data-path records")
+        data_path_rows = _read_csv(data_path_path)
+        if not data_path_rows or all(row.get("passed") == "True" for row in data_path_rows):
+            raise StudyError("data-path failure summary has no recorded failed positive control")
+        model_rows = _read_csv(evidence_dir / "model-runs.csv")
+        validate_method_run_coverage(model_rows)
+        if len(model_rows) != 21:
+            raise StudyError("data-path failure must retain all 21 planned arm records")
+        for row in model_rows:
+            if row["method"] == METHOD_HANDCRAFTED_EXACT:
+                if row["status"] not in ("complete", "failed"):
+                    raise StudyError("exact-dynamics data-path control has no outcome")
+            elif row["status"] != "not_run" or not row.get("error"):
+                raise StudyError("every later arm must be marked not_run with a stop reason")
         for filename in ("validation-predictions.csv", "action-triplets.csv"):
             path = evidence_dir / filename
             if path.is_file() and path.stat().st_size > 0:
@@ -260,6 +283,32 @@ def validate_study(evidence_dir: Path = EVIDENCE_DIR) -> dict[str, object]:
         missing_heldout = [name for name in heldout_required if not (evidence_dir / name).is_file()]
         if missing_heldout:
             raise FileNotFoundError(f"gated held-out evidence is incomplete: {missing_heldout}")
+        heldout_summary = json.loads(
+            (evidence_dir / "heldout-summary.json").read_text(encoding="utf-8")
+        )
+        start_rows = _read_csv(evidence_dir / "heldout-starts.csv")
+        expected_starts = {
+            (str(test_seed), str(step))
+            for test_seed in TEST_SEEDS
+            for step in TEST_STEPS
+        }
+        observed_starts = {
+            (row["test_seed"], row["step"]): row for row in start_rows
+        }
+        if set(observed_starts) != expected_starts or len(start_rows) != len(expected_starts):
+            raise StudyError("held-out start records must include every scheduled seed and step")
+        missing_starts = [
+            row for row in start_rows if row.get("status") == "missing"
+        ]
+        if any(not row.get("reason") for row in missing_starts):
+            raise StudyError("each missing held-out start must include a reason")
+        completed_count = sum(row.get("status") == "complete" for row in start_rows)
+        if (
+            heldout_summary.get("expected_start_contexts") != len(expected_starts)
+            or heldout_summary.get("observed_start_contexts") != completed_count
+            or (heldout_summary.get("status") == "complete") != (not missing_starts)
+        ):
+            raise StudyError("held-out start coverage summary does not match per-start records")
         validate_rollout_records(_read_csv(evidence_dir / "rollout-trajectories.csv"))
     else:
         for name in (

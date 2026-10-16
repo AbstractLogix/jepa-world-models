@@ -1076,6 +1076,50 @@ def _make_not_run_row(method: str, model_seed: int, data_seed: int, reason: str)
     }
 
 
+def _exact_dynamics_run_row(group: PreparedGroup) -> dict[str, object]:
+    """Record the handcrafted-state exact-dynamics arm without fitting a model."""
+    indices = group.validation_indices
+    prediction = mountaincar_step(
+        group.handcrafted_states[indices], group.data.actions[indices]
+    )
+    finite = bool(np.isfinite(prediction).all())
+    row: dict[str, object] = {
+        "protocol_version": V3_VERSION,
+        "stage": "validation",
+        "method": METHOD_HANDCRAFTED_EXACT,
+        "objective": "exact_dynamics_from_visual_state",
+        "model_seed": 0,
+        "data_seed": group.data_seed,
+        "status": "complete" if finite else "failed",
+        "epochs": 0,
+        "train_rows": int(len(group.train_indices)),
+        "validation_rows": int(len(indices)),
+        "finite": finite,
+        **_coordinate_metrics(prediction, group.data.next_states[indices]),
+    }
+    if not finite:
+        row["error"] = "exact dynamics produced non-finite validation predictions"
+    return row
+
+
+def _data_path_failure_model_runs(
+    groups: Sequence[PreparedGroup], reason: str
+) -> list[dict[str, object]]:
+    """Retain every planned arm when a data-path gate stops the study."""
+    rows = [_exact_dynamics_run_row(group) for group in groups]
+    rows.extend(
+        _make_not_run_row(METHOD_RIDGE, 0, group.data_seed, reason)
+        for group in groups
+    )
+    rows.extend(
+        _make_not_run_row(method, model_seed, group.data_seed, reason)
+        for group, model_seed in zip(groups, MODEL_SEEDS, strict=True)
+        for method in NEURAL_METHODS
+    )
+    validate_method_run_coverage(rows)
+    return rows
+
+
 def _method_gate_record(
     run: Mapping[str, object],
     action: Mapping[str, object],
@@ -1335,6 +1379,8 @@ def run_validation(output_dir: Path, *, prefer_cuda: bool = True) -> dict[str, o
     ridge_models: dict[str, object] = {}
     validation_gate_rows: list[dict[str, object]] = []
     if not data_path_pass:
+        stop_reason = "not run because a frozen data-path positive control failed"
+        model_runs = _data_path_failure_model_runs(groups, stop_reason)
         run_summary = {
             "protocol_version": V3_VERSION,
             "stage": "validation",
@@ -1344,6 +1390,7 @@ def run_validation(output_dir: Path, *, prefer_cuda: bool = True) -> dict[str, o
             "heldout_open": False,
             "reason": "one or more frozen data-path positive controls failed",
             "fit_count": 0,
+            "expected_fit_count": len(NEURAL_METHODS) * len(DATA_SEEDS),
             "compute_seconds": time.perf_counter() - stage_started,
         }
         write_csv(EVIDENCE_DIR / "model-runs.csv", model_runs)
@@ -1631,6 +1678,38 @@ def _collect_test_contexts(test_seed: int) -> list[dict[str, object]]:
     return starts
 
 
+def _scheduled_test_start_records(
+    test_seed: int, starts: Sequence[Mapping[str, object]]
+) -> tuple[dict[int, Mapping[str, object]], list[dict[str, object]]]:
+    """Record every frozen start, including starts missing after termination."""
+    by_step = {int(start["step"]): start for start in starts}
+    rows: list[dict[str, object]] = []
+    for step in TEST_STEPS:
+        row: dict[str, object] = {
+            "protocol_version": V3_VERSION,
+            "stage": "heldout",
+            "test_seed": int(test_seed),
+            "start_id": f"test-{test_seed}-step-{step}",
+            "step": int(step),
+            "status": "complete" if step in by_step else "missing",
+            "reason": "" if step in by_step else "simulator terminated or truncated before scheduled start",
+        }
+        start = by_step.get(step)
+        if start is not None:
+            state = np.asarray(start["state"], dtype=np.float32)
+            visual_state_value = np.asarray(start["visual_state"], dtype=np.float32)
+            row.update(
+                {
+                    "actual_position": float(state[0]),
+                    "actual_velocity": float(state[1]),
+                    "handcrafted_position": float(visual_state_value[0]),
+                    "handcrafted_velocity": float(visual_state_value[1]),
+                }
+            )
+        rows.append(row)
+    return by_step, rows
+
+
 def _load_dynamics_checkpoint(
     method: str,
     model_seed: int,
@@ -1875,20 +1954,11 @@ def run_heldout(output_dir: Path, *, prefer_cuda: bool = True) -> dict[str, obje
     del training_states
 
     for test_seed, starts in test_contexts.items():
+        by_step, scheduled_rows = _scheduled_test_start_records(test_seed, starts)
+        start_rows.extend(scheduled_rows)
         for start in starts:
-            start_rows.append(
-                {
-                    "protocol_version": V3_VERSION,
-                    "stage": "heldout",
-                    "test_seed": test_seed,
-                    "start_id": start["start_id"],
-                    "step": start["step"],
-                    "actual_position": float(start["state"][0]),
-                    "actual_velocity": float(start["state"][1]),
-                    "handcrafted_position": float(start["visual_state"][0]),
-                    "handcrafted_velocity": float(start["visual_state"][1]),
-                }
-            )
+            if int(start["step"]) not in by_step:
+                raise StudyError("held-out start map lost a collected scheduled start")
             for data_seed, model_seed in model_pairs:
                 state_model = _load_state_estimator_checkpoint(
                     model_seed, data_seed, output_dir, device

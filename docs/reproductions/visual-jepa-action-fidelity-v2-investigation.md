@@ -34,6 +34,23 @@ The exact and state-model outcomes confirm that the locked CEM can solve this ta
 
 Notebook 22 is separate historical evidence. It uses a VISReg-style temporal-prediction adaptation, not the v1 LeJEPA-style SIGReg setting. Its final JEPA fits had standard deviations of 0.00279–0.00574, 153/295 non-tied action-pair rankings correct, 0/100 uniform-start successes, and 100/100 momentum-prior successes. Direct visual-momentum control reached 20/20. The different objective and planner outcomes are not a controlled objective comparison.
 
+## V1 checkpoint replay
+
+All five retained v1 checkpoints were replayed with the saved probe and fixed intervention contexts. The replay matched all 300 saved post-clamp position and velocity predictions exactly. It did not edit the v1 checkpoints, notebooks, protocol, or evidence.
+
+| Diagnostic | Replayed result |
+|---|---|
+| Context and target spread | Context mean standard deviation 0.0000147–0.0000882; target mean standard deviation 0.0000147–0.0000889. All 32 dimensions in each distribution are below the v1 1e-3 rule. |
+| Effective rank | Context rank 1.36–3.99; target rank 1.38–4.00. |
+| Encoder and predictor norms | Context encoder output norm is 5.65685 on these rows, consistent with the per-sample LayerNorm scale. Total predictor norm across each three-action batch is 9.63–9.85. Norm alone does not show between-sample health. |
+| Probe conditioning | V1 minimum feature scale is 1e-4 for every seed. Two seeds selected alpha 0. The regularized Gram condition number ranges from 95,012 to 31,923,390; raw probe coefficient L2 norm ranges from 8,234 to 28,583. |
+| Unclipped state readout | All 300 predictions change under task-bound clipping. Raw position spans -74.13 to 780.74; raw velocity spans -646.51 to 29.30. |
+| Action effect after decoding | Median absolute raw position change between action -1 or +1 and action 0 is 5.11–92.65 across seeds; the corresponding actual median change is about 0.0015. The velocity change is 1.62–27.79 against about 0.0015 actual. Action ordering is inconsistent across seeds and coordinates. |
+| Probe bootstrap | Across 20 episode-block refits per seed, position prediction variation RMSE is 0.0014–0.0067 and velocity is 0.0005–0.0156. Seed 7404 has the largest velocity variation. |
+| Saved-checkpoint gradients | On one reconstructed training batch per checkpoint, the weighted encoder SIGReg gradient is about 135–370 times the predictive encoder gradient. Cosine similarity ranges from -0.44 to 0.16. The regularizer gradient is not near zero on these batches. |
+
+The replay confirms a failure path: a very low-spread representation is followed by a large, poorly conditioned linear readout, and predictor outputs decode far outside the physical state range. This explains why some post-clamp seeds appear action-insensitive while others span the full allowed position range. It does not isolate whether the main cause is the collapsed latent geometry, the probe floor and unregularized v1 alpha choices, predictor outputs leaving the probe's training distribution, or their interaction. V1 did not save enough latent vectors to measure its predictor outputs against a training-distribution distance reference. V2 will record this directly if its validation gates pass.
+
 ## Root-cause plan recorded before model changes
 
 The Notebook 22 and 23 implementations and all v1 evidence remain unchanged. The separate v2 models have not been fit. The following diagnostic order is fixed:
@@ -50,7 +67,7 @@ The Notebook 22 and 23 implementations and all v1 evidence remain unchanged. The
 - Notebook 23 sends two consecutive 48 × 128 RGB frames to a 32-dimensional convolutional encoder. The action predictor concatenates a scalar action to that embedding and predicts a target embedding.
 - The JEPA uses a shared online encoder for context and target. This is allowed by the LeJEPA objective family; the absence of a stop-gradient is not, by itself, evidence of a defect.
 - The v1 regularizer is applied to concatenated current and target embeddings. The local loss is predictive MSE plus 0.1 times the local Epps–Pulley SIGReg term, with 128 projections and 17 frequencies.
-- V1 probe features are scaled with a 1e-4 floor. The alpha search includes zero and fits from a Gram matrix. Those choices can make a probe numerically sensitive; their effect on the saved predictions remains to be measured.
+- V1 probe features are scaled with a 1e-4 floor. The alpha search includes zero and fits from a Gram matrix. The replay confirms large raw coefficient norms, high condition numbers for four of five seeds, and extreme unbounded readouts. Readout amplification is part of the failure, but its share relative to predictor distribution shift remains open.
 - The planner clips decoded position and velocity to task bounds after each latent prediction. The saved intervention states are therefore not raw probe outputs.
 - V1 did not include a supervised visual state-prediction control, a frozen action-fidelity gate, effective rank, gradient-by-loss records, unclipped readouts, or autoregressive rollout diagnostics.
 
@@ -58,10 +75,10 @@ The Notebook 22 and 23 implementations and all v1 evidence remain unchanged. The
 
 | Hypothesis | Evidence needed before it can be stated as a cause |
 |---|---|
-| The SIGReg gradient vanishes near the v1 representation and lets prediction collapse dominate. | Per-component encoder and predictor gradient norms at saved checkpoints and throughout fixed v2 training batches; compare against VISReg-style and variance/covariance losses. |
+| The SIGReg gradient vanishes near the v1 representation and lets prediction collapse dominate. | Not observed on the five reconstructed checkpoint batches: the weighted encoder regularizer gradient is much larger than the predictive gradient. This does not show how gradients behaved during training. Compare complete v2 histories across the frozen objectives. |
 | The visual context contains too little or too noisy velocity information. | Handcrafted visual estimate and matched supervised visual dynamics results on held-out validation and test trajectories. |
-| The predictor ignores action in some seeds and overreacts in others. | Raw predicted latent changes and unbounded decoded state differences for the same observation under three actions. |
-| Probe scaling amplifies small residual variation. | Train design condition numbers, coefficient norms, bootstrap probe stability, and direct comparison of unbounded readout with clipped intervention rows. |
+| The predictor ignores action in some seeds and overreacts in others. | The v1 predictor has nonzero latent action displacement, but decoded action effects are far too large and often misranked. Determine whether this comes from predictor outputs outside the probe's training distribution or the readout fit, using v2 latent distances and held-out action triplets. |
+| Probe scaling amplifies small residual variation or extrapolates poorly. | V1 readout amplification is confirmed by large coefficient norms and unbounded decoded predictions. Its causal share remains open because v1 did not retain action-prediction latents or an OOD reference. V2 uses a positive-alpha train-only ridge probe and records bootstrap stability. |
 | A valid one-step representation becomes unstable during recursive planning. | Held-out state and latent errors at horizons 1, 5, 10, 20, and 60, together with saturation and training-distribution distance. |
 
 The v1 results establish near-collapse and poor state/action decoding for that configuration. They do not yet identify which of these mechanisms caused the failure.
@@ -74,4 +91,4 @@ Primary sources: [LeJEPA](https://arxiv.org/abs/2511.08544), [VISReg](https://ar
 
 ## Evidence status
 
-At this point, only the v1 audit is complete. The v2 protocol is frozen separately. V2 training, held-out trajectories, multi-step tests, and planning have not yet run. No new objective has been selected from held-out outcomes.
+The v1 raw audit and checkpoint replay are complete. The v2 protocol and two pre-training amendments are frozen and locked to the implementation. V2 smoke and validation fits, held-out trajectories, multi-step tests, and planning have not yet run. No new objective has been selected.

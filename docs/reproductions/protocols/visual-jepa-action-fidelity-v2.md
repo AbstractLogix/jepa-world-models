@@ -56,7 +56,7 @@ Model and data seeds are distinct and paired. Every method uses the same data gr
 
 - Fit the frozen visual state readout on training embeddings and training state labels only. Select alpha on validation data from {0.01, 0.1, 1.0, 10.0}. Do not allow an unregularized alpha of zero.
 - Standardize features with a 1e-3 minimum scale. Solve the ridge system with a stable linear solver. Record the standardized Gram condition number, chosen alpha, raw and standardized coefficient norms, and bootstrap prediction variation.
-- Use three seeded episode-block bootstrap refits for validation probe stability. Report the root-mean-square standard deviation of the predicted position and velocity.
+- Use 20 seeded episode-block bootstrap refits for validation probe stability. Report the root-mean-square standard deviation of the predicted position and velocity.
 - For one-step counterfactuals, hold the same rendered context fixed and evaluate actions -1, 0, and +1. Exact next states come from the simulator dynamics at the corresponding privileged label state.
 - Record predicted latent displacement from action 0, finite-difference action sensitivity, predictor output norm, unbounded state readout, clipped state, and saturation indicators.
 - Effective rank is exp(entropy of the normalized nonnegative covariance eigenvalues). Report the full spectrum summary and the absolute covariance trace so rank is not read without its scale.
@@ -70,13 +70,13 @@ A JEPA seed passes representation health only when all conditions hold on its va
 1. All embeddings and loss outputs are finite.
 2. No more than 16 of 32 dimensions have standard deviation below 1e-3.
 3. Effective rank is at least 8.
-4. The selected probe Gram condition number is at most 1e6, and the three-refit bootstrap prediction RMSE is at most 0.01 position units and 0.005 velocity units.
+4. The selected probe Gram condition number is at most 1e6, and the 20-refit bootstrap prediction RMSE is at most 0.01 position units and 0.005 velocity units.
 5. Position probe R² is at least 0.80 and velocity probe R² is at least 0.50; position MAE is at most 0.02 and velocity MAE is at most 0.01.
-6. For each coordinate, median normalized error of predicted action contrasts is at most 0.25 across non-tied validation states. The denominator is the true action span with a floor of 1e-4. At least 40 validation states must contribute to each coordinate.
-7. Pairwise action-order concordance is at least 0.80 across non-tied position/velocity comparisons.
+6. For each coordinate, median normalized error of predicted action contrasts is at most 0.25 across non-tied validation states. The denominator is the true action span with a floor of 1e-4. Each seed must have at least 12 valid starts per coordinate; the objective family must have at least 40 valid starts per coordinate across its three seeds.
+7. For each seed, pairwise action-order concordance is at least 0.80 across non-tied position/velocity comparisons.
 8. No more than 5% of unbounded next-state predictions fall outside the physical state limits. Always report the unclipped values.
 
-The supervised visual control must pass the one-step MAE, action-contrast, action-order, finite-output, and clipping gates on validation data. If it fails, stop objective-level attribution and investigate the renderer, temporal context, split, and labels. The exact control must match simulator transitions; the state-space control must remain finite and its prediction error must be reported.
+The supervised visual control must pass the one-step MAE, action-contrast, action-order, finite-output, and clipping gates on validation data, with at least 12 valid starts per seed and 40 across the family. If it fails, stop objective-level attribution and investigate the renderer, temporal context, split, and labels. The exact control must match simulator transitions; the state-space control must remain finite and its prediction error must be reported.
 
 For the five-step validation tie-break, use the first available rollout from each of episodes 16–19 in each of the three data groups. Apply the next five recorded actions in that episode. Keep all 12 start rows and mark a missing horizon unsupported.
 

@@ -1,0 +1,115 @@
+{
+  "code_files": [
+    {
+      "path": "src/jepa_tutorial/action_conditioned_visual.py",
+      "sha256": "83013d28763c5df1079e50ed3a41d953103003d42047f618e95c06a82afa9d2c"
+    },
+    {
+      "path": "src/jepa_tutorial/action_fidelity_v2.py",
+      "sha256": "dc74909b1b5054ad831daf1c2a326bb26e70bb722efe3857e7e4d79e56f5ee02"
+    },
+    {
+      "path": "src/jepa_tutorial/decision_study.py",
+      "sha256": "fd5af8ddd03cfdbf0c06eb94103fa308e01c987f01cbb52096c8e1fc0ca52b99"
+    },
+    {
+      "path": "src/jepa_tutorial/lejepa_loss.py",
+      "sha256": "ed8bd0fd84a869787b5d932994d116fe582396fa4217ba6af7b443459996f0da"
+    },
+    {
+      "path": "src/jepa_tutorial/paper_losses.py",
+      "sha256": "53988a9413ddf5c34f97e27f93c913885649a99557fcc0f20abccc3519833923"
+    },
+    {
+      "path": "src/jepa_tutorial/sigreg.py",
+      "sha256": "83d6b0801a6f2d08ffa97957f1d667335f6ae20f8057c6509729ec2f6d9cf225"
+    },
+    {
+      "path": "src/jepa_tutorial/visreg_style.py",
+      "sha256": "92f4ac26dca2dc26545e45e64a2d21db73038c76cf76af4f4a64e0d5396adcf3"
+    },
+    {
+      "path": "src/jepa_tutorial/visual_mountaincar.py",
+      "sha256": "b3456c04e2413700957a30772922f5e9121005a6a2c9a380f64d1e2652bea652"
+    },
+    {
+      "path": "scripts/run_visual_jepa_action_fidelity_v2.py",
+      "sha256": "ade76639727b68c4aabdd7f079fe89c3649f1c2c442830ef6cca93295456cd2c"
+    },
+    {
+      "path": "scripts/validate_visual_jepa_action_fidelity_v2.py",
+      "sha256": "8d0e47d4b4e908e78551800f54e307b0e5242087f3526f32ec391629b51a5f8c"
+    },
+    {
+      "path": "scripts/analyze_visual_jepa_action_fidelity_v2.py",
+      "sha256": "740e5772a06d45ae8de7f29479257bd8a3b526bb12df14ec8c9c23c846182bf3"
+    },
+    {
+      "path": "scripts/run_visual_jepa_decision_study.py",
+      "sha256": "3641a011aecd10e458dd81c75e35a698a983f38c6fd94ab9f0d005ff6a6d5328"
+    }
+  ],
+  "code_hash": "7841b8755437fe20c7ea764530894604ab26e924d25621ea89b941e27d2ee31e",
+  "compute_budget_gpu_minutes": 90,
+  "created_at_utc": "2026-10-16T07:32:18Z",
+  "experiment_version": "visual-jepa-action-fidelity-v2",
+  "memory_budget_mib": 2048,
+  "model_seeds": [
+    9401,
+    9402,
+    9403
+  ],
+  "planning_seeds": [
+    8700,
+    8701,
+    8702,
+    8703,
+    8704,
+    8705,
+    8706,
+    8707,
+    8708,
+    8709,
+    8710,
+    8711,
+    8712,
+    8713,
+    8714,
+    8715,
+    8716,
+    8717,
+    8718,
+    8719
+  ],
+  "protocol_files": [
+    {
+      "path": "docs/reproductions/protocols/visual-jepa-action-fidelity-v2.md",
+      "sha256": "45f2b2845c2d8a9cc6fd0424908afe79dddef805693ea6e058c2d53746e75519"
+    },
+    {
+      "path": "docs/reproductions/protocols/visual-jepa-action-fidelity-v2-amendment-1.md",
+      "sha256": "7afa7335d40f902a0931c6f56450a4509071eda74792fada56b8526930cb0ccc"
+    },
+    {
+      "path": "docs/reproductions/protocols/visual-jepa-action-fidelity-v2-amendment-2.md",
+      "sha256": "51693ef8d61225692480f1456e0c1d1e7ed94154cb57883e8c7f96b69d369dbe"
+    }
+  ],
+  "protocol_hash": "449757b72919fa593be1c1f931b443de42692931b79060d70354011a5570febb",
+  "protocol_path": "docs/reproductions/protocols/visual-jepa-action-fidelity-v2.md",
+  "schema_version": 1,
+  "status": "locked",
+  "storage_budget_bytes": 5368709120,
+  "test_data_seeds": [
+    9501,
+    9502,
+    9503,
+    9504,
+    9505
+  ],
+  "training_data_seeds": [
+    9301,
+    9302,
+    9303
+  ]
+}

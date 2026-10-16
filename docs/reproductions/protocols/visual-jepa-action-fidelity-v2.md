@@ -52,6 +52,8 @@ No objective weight, architecture, epoch count, or gate is tuned after reading a
 
 Model and data seeds are distinct and paired. Every method uses the same data group for a given pair. Test trajectories, intervention contexts, final planning outcomes, and smoke cases never train model parameters or fit probes.
 
+For validation action triplets, select 20 distinct rows from episodes 16–19 for each data seed. Use the SHA-256 stable-seed helper with protocol version, the validation-intervention role, and data seed to sample without replacement; sort selected row indices before evaluation. Reuse those same contexts for all methods paired to that data seed. For test action triplets, use episode 0 at steps 40, 90, 140, and 190 from each test seed. The runner must fail the stage if a required start is unavailable.
+
 ## Probe and metric rules
 
 - Fit the frozen visual state readout on training embeddings and training state labels only. Select alpha on validation data from {0.01, 0.1, 1.0, 10.0}. Do not allow an unregularized alpha of zero.

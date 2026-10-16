@@ -51,9 +51,47 @@ All five retained v1 checkpoints were replayed with the saved probe and fixed in
 
 The replay confirms a failure path: a very low-spread representation is followed by a large, poorly conditioned linear readout, and predictor outputs decode far outside the physical state range. This explains why some post-clamp seeds appear action-insensitive while others span the full allowed position range. It does not isolate whether the main cause is the collapsed latent geometry, the probe floor and unregularized v1 alpha choices, predictor outputs leaving the probe's training distribution, or their interaction. V1 did not save enough latent vectors to measure its predictor outputs against a training-distribution distance reference. V2 will record this directly if its validation gates pass.
 
+## V2 validation results
+
+The v2 protocol and implementation hashes were locked before training. The bounded CUDA validation completed all 15 preregistered fits: three seeds for each of three JEPA objectives, the supervised visual control, and the privileged-state model. All fits completed. Training used 14.28 GPU-minutes on an NVIDIA RTX 5070, with 482.33 MiB maximum allocated GPU memory. The independent test split remained closed because the supervised visual control failed its frozen gate. No held-out rollout, CEM planning, or planning outcome was collected.
+
+### Observation and label controls
+
+The observation audit regenerated the three paired data groups without fitting a model. Each group contains 4,800 training and 1,200 validation transitions. Across both splits, the fixed two-frame color-center estimator had position MAE 0.003747–0.003751 and velocity MAE 0.0000555–0.0000574. Its 95th-percentile absolute errors were at most 0.003834 position and 0.000138 velocity. The simulator transition function matched stored next-state labels to a maximum absolute error below 6e-8 across the 18,000 regenerated transitions. This confirms that the renderer, temporal context, split, and labels contain enough information for this task. It does not show that a learned visual model can recover that information.
+
+On the 20 preregistered action contexts per data seed, the handcrafted visual estimate followed by exact dynamics produced position MAE 0.00366–0.00375 and velocity MAE 0.000045–0.000080. Its normalized position and velocity action-contrast errors were below 1e-5 and 5e-8, with correct action ordering on all 20 starts in each group. The exact privileged-state simulator also matched all tested transitions. The learned state-space control remained finite and had position MAE 0.00046–0.00163 and velocity MAE 0.00092–0.00214; it is a privileged-state reference.
+
+The supervised visual dynamics model failed validation on all three model/data pairs. Its position MAE was 0.0261–0.0803, above the frozen 0.02 limit, while velocity MAE was 0.00424–0.00704. Normalized action-contrast error was 0.236–1.415 for position and 0.573–0.733 for velocity, against the 0.25 limit. The three final validation prediction losses were 0.000438–0.006244, but a low average MSE did not satisfy the state or action-fidelity gates. This failure stops objective-level attribution under the preregistered rule.
+
+### Objective and representation findings
+
+| Objective | Context and target spread | Effective rank | Position probe R² | Velocity probe R² | Position MAE | Action-contrast error, position / velocity | Result |
+|---|---|---:|---:|---:|---:|---:|---|
+| SIGReg-style | All 32 dimensions below 1e-3 in all three seeds | 1.77–4.33 | 0.249–0.947 | -0.0015–0.0017 | 17.0–26.2 | 69.3–178.0 / 0.34–1.20 | 0/3 pass; all 180 action predictions clip |
+| VISReg-style | No dimensions below 1e-3 in all three seeds | 9.44–12.09 | 0.970–0.985 | 0.0082–0.0180 | 0.246–5.03 | 5.60–40.25 / 0.31–6.58 | 0/3 pass; one seed clips all 60 action predictions |
+| Variance/covariance control | All 32 dimensions below 1e-3 in all three seeds | 6.14–7.58 | 0.899–0.946 | 0.0066–0.0140 | 0.096–0.201 | 25.6–126.5 / 0.58–4.21 | 0/3 pass; rank below 8 in every seed |
+
+All nine JEPA fits failed the validation gate, and no objective was selected. VISReg-style training cleared the numeric spread and rank screens, but it did not produce useful velocity probes or action-conditioned state predictions. Thus non-collapsed spread alone was not enough. Position probes were often high, while velocity probes remained close to zero for every objective. The three objective settings are local adaptations, not the complete recipes or benchmarks from the cited papers.
+
+The action predictor was not uniformly insensitive at the latent level: median latent displacement from the zero-action prediction ranged from 0.0086 to 0.0692. However, the resulting state readout had incorrect action magnitudes and, in some seeds, incorrect direction. The actual one-step action change at the sampled contexts was small (median about 0.0015 state units), while decoded JEPA contrasts were much larger. SIGReg raw position predictions ranged from -26.9 to -17.2 across its three seeds; VISReg-style predictions ranged from -0.90 to 4.70. The validation probe's selected alpha was positive and its Gram condition number was 1.3–512.5, so the v2 failures are not explained by the extreme v1 Gram conditioning alone. V2 raw probe coefficient norms were 11.6–392.6.
+
+The encoder output norm was about 5.6568 for each visual context, as expected from the encoder's final per-sample normalization. This norm does not measure between-sample representation spread. The predictor output norm was about 9.57–12.23, and predicted latent norms were about 5.53–7.06. These finite norms do not make the action readout valid.
+
+Gradient snapshots were recorded at epochs 1, 5, 10, 15, 20, 25, 30, and 35. The diagnostic computes gradients of the unweighted prediction and regularizer components separately. After applying each objective's frozen regularizer weight, the median SIGReg encoder-regularizer gradient was about 133–157 times its prediction gradient across the three seeds. The VISReg-style weighted ratio was about 1.5–5.5, and the variance/covariance weighted ratio was below 0.001. This gradient imbalance is measured, but it is not a causal ablation and does not prove why SIGReg collapsed. The protocol did not permit post-result weight tuning.
+
+### What the evidence does and does not identify
+
+Confirmed: v1 has near-constant embeddings, unstable probe coefficients, and extreme pre-clamp state outputs. In v2, SIGReg and the variance/covariance control again have low spread; VISReg-style has adequate spread but weak velocity information; all three objectives fail action fidelity; and the supervised visual model fails despite a verified visual state signal and correct labels. The action-conditioning, representation, and state readout do not jointly support reliable one-step dynamics under this protocol.
+
+Not identified: whether SIGReg's gradient imbalance caused its collapse; whether the weak velocity signal comes from the loss, optimizer, architecture, or one-step target scale; whether predicted latents are out of the training distribution; and whether errors accumulate during autoregressive planning. The last two questions require a valid model and an opened rollout stage. Because the validation gate failed, the independent test data and planner were not accessed. This is an intentional stop, not a missing successful run.
+
+The frozen v2 planner design labels its direct visual-momentum controller as the prior-only arm. It does not define a separate prior-only CEM planner without learned JEPA dynamics, although the requested future comparison distinguishes both. No planning arm ran because validation failed. A future planning study must add that separate planner in a new preregistration amendment and lock its implementation hash before opening the stage.
+
+Retained records include the validation fit, training-history, gradient, action-triplet and summary tables; the closed held-out summary; the replayed v1 checkpoint diagnostics; and a separate observation-control audit. Their file hashes are recorded in [the v2 evidence manifests](../evidence/visual-jepa-action-fidelity-v2-evidence-manifest.json) and [the observation audit manifest](../evidence/visual-jepa-action-fidelity-v2-observation-control-manifest.json). CUDA checkpoints and full transient outputs remain on E:.
+
 ## Root-cause plan recorded before model changes
 
-The Notebook 22 and 23 implementations and all v1 evidence remain unchanged. The separate v2 models have not been fit. The following diagnostic order is fixed:
+The Notebook 22 and 23 implementations and all v1 evidence remain unchanged. At preregistration freeze, the separate v2 models had not been fit. The following diagnostic order was fixed before model changes:
 
 1. Replay the v1 JEPA checkpoints without changing them. Measure encoder norms, latent covariance spectrum and effective rank, predictor output norms, action derivatives, action-triplet latent displacement, and decoded states before and after task-bound clipping.
 2. Recompute probe design conditioning and coefficient magnitudes. Compare ridge selection, feature scaling, train-only fit, validation selection, and bootstrap prediction stability. Report whether the readout, rather than the predictor, creates the boundary-saturated state output.
@@ -75,11 +113,12 @@ The Notebook 22 and 23 implementations and all v1 evidence remain unchanged. The
 
 | Hypothesis | Evidence needed before it can be stated as a cause |
 |---|---|
-| The SIGReg gradient vanishes near the v1 representation and lets prediction collapse dominate. | Not observed on the five reconstructed checkpoint batches: the weighted encoder regularizer gradient is much larger than the predictive gradient. This does not show how gradients behaved during training. Compare complete v2 histories across the frozen objectives. |
-| The visual context contains too little or too noisy velocity information. | Handcrafted visual estimate and matched supervised visual dynamics results on held-out validation and test trajectories. |
-| The predictor ignores action in some seeds and overreacts in others. | The v1 predictor has nonzero latent action displacement, but decoded action effects are far too large and often misranked. Determine whether this comes from predictor outputs outside the probe's training distribution or the readout fit, using v2 latent distances and held-out action triplets. |
-| Probe scaling amplifies small residual variation or extrapolates poorly. | V1 readout amplification is confirmed by large coefficient norms and unbounded decoded predictions. Its causal share remains open because v1 did not retain action-prediction latents or an OOD reference. V2 uses a positive-alpha train-only ridge probe and records bootstrap stability. |
-| A valid one-step representation becomes unstable during recursive planning. | Held-out state and latent errors at horizons 1, 5, 10, 20, and 60, together with saturation and training-distribution distance. |
+| SIGReg's regularizer interaction causes predictive information loss. | V1 checkpoint replay and v2 training snapshots show a large regularizer-to-prediction encoder-gradient ratio. The v2 ratio is not a causal ablation, so the loss interaction is confirmed but its causal role remains open. |
+| The visual context contains too little or too noisy velocity information. | The handcrafted estimator recovered position and velocity across all train and validation episodes. This rules out missing visual information as the cause in this renderer. The learned visual control still failed; its learning cause is unresolved. |
+| The predictor ignores action in some seeds and overreacts in others. | Latent action displacement is nonzero in v1 and v2, but decoded effects are far too large or misdirected. The latent distribution of predicted outputs was not assessed against the training reference because no rollout gate opened. |
+| Probe scaling amplifies small residual variation or extrapolates poorly. | V1 readout amplification is confirmed by large coefficient norms and out-of-range decoded predictions. V2 uses positive-alpha ridge probes with moderate Gram condition numbers, yet some predictions still leave physical bounds. Probe instability alone does not explain the v2 failures. |
+| A valid one-step representation becomes unstable during recursive planning. | Not measured. The v2 model failed validation, so test rollouts, saturation accumulation, and planning OOD distances were not run. |
+| The one-step supervised loss underweights small action effects. | The visual model's average validation MSE is low for two seeds, but action-contrast checks fail. This is consistent with a low-signal action effect, but no loss-scale or horizon ablation was run and the cause is not confirmed. |
 
 The v1 results establish near-collapse and poor state/action decoding for that configuration. They do not yet identify which of these mechanisms caused the failure.
 
@@ -91,4 +130,4 @@ Primary sources: [LeJEPA](https://arxiv.org/abs/2511.08544), [VISReg](https://ar
 
 ## Evidence status
 
-The v1 raw audit and checkpoint replay are complete. The v2 protocol and two pre-training amendments are frozen and locked to the implementation. V2 smoke and validation fits, held-out trajectories, multi-step tests, and planning have not yet run. No new objective has been selected.
+The v1 raw audit and checkpoint replay and the v2 validation study are complete. The v2 protocol and two pre-training amendments were frozen and locked before fitting. The validation gate failed, no objective was selected, and independent test trajectories, multi-step rollouts, and planning remain closed. The validation-only result is negative and exploratory; it is not a paper reproduction or a general JEPA conclusion.

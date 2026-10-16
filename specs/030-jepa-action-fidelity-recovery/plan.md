@@ -34,6 +34,7 @@ Audit the raw Notebook 23 evidence, freeze a v2 validation protocol, then build 
 - Measure before claims: PASS. Freeze gates and seeds before training.
 - Small and reviewable: PASS. Use a separate v2 runner and records; do not refactor or rewrite v1.
 - Preserve licensing and data limits: PASS. No external asset or checkpoint is added.
+- Generated-output exception: this requested public research deliverable retains only compact CSV/JSON audit records and deterministic SVG/PNG figures. Full datasets, checkpoints, and temporary training outputs stay on E:. This is a scoped exception to the general generated-output rule, not a change to project policy.
 
 ## Root-Cause Investigation Plan
 
@@ -68,7 +69,7 @@ Notebook 22 used a VISReg-style temporal-prediction adaptation. Its five final J
 3. Keep the three JEPA candidate objectives on the same 32-dimensional visual encoder, action predictor, optimizer, training data, epochs, and seed pairs. Keep the supervised visual model's visual encoder and action input comparable while predicting simulator state directly.
 4. Measure action triplets from one held-out visual context. Keep privileged state only in the exact and state-space controls and in the environment-side labels.
 5. Fit robust probes on train data, select them on validation data, and record conditioning and coefficient scales. Never fit with held-out labels.
-6. Open held-out rollouts only after the supervised visual control and selected JEPA family pass validation. Open planning only after the selected JEPA also passes independent action and rollout gates.
+6. Open held-out rollouts only after the supervised visual control and selected JEPA family pass validation. Open planning only after the selected JEPA also passes independent action and rollout gates. Before any future planning run, amend the protocol to include a prior-only planner separately from the direct visual-momentum controller, and lock its implementation hash before the stage opens.
 7. Generate separate figures from versioned evidence. Do not add synthetic or illustrative rows.
 8. Update the roadmap, evaluation protocol, reproduction matrix, technical report, case study, and JSON manifest after evidence status is known.
 
@@ -80,9 +81,13 @@ src/jepa_tutorial/action_fidelity_v2.py
 scripts/run_visual_jepa_action_fidelity_v2.py
 scripts/analyze_visual_jepa_action_fidelity_v2.py
 scripts/validate_visual_jepa_action_fidelity_v2.py
+scripts/audit_visual_jepa_action_fidelity_v2_observations.py
 tests/test_visual_jepa_action_fidelity_v2.py
 docs/reproductions/protocols/visual-jepa-action-fidelity-v2.md
 docs/reproductions/visual-jepa-action-fidelity-v2-investigation.md
+docs/TECHNICAL_REPORT.md
+docs/portfolio/CASE_STUDY.md
+docs/portfolio/project.json
 docs/evidence/visual-jepa-action-fidelity-v2-*.csv
 docs/evidence/visual-jepa-action-fidelity-v2-*.json
 docs/portfolio/figures/visual-jepa-action-fidelity-v2/*.{svg,png}

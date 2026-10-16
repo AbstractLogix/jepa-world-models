@@ -38,8 +38,11 @@ If validation fails a gate, the runner records the reason and keeps later stages
 Figures use only retained raw records. They do not train or evaluate models.
 
 ~~~bash
+uv run --locked --no-sync python scripts/audit_visual_jepa_action_fidelity_v2_observations.py
+uv run --locked --no-sync python scripts/analyze_visual_jepa_action_fidelity_v2.py --output-dir docs/portfolio/figures/visual-jepa-action-fidelity-v2
 uv run --locked --no-sync python scripts/analyze_visual_jepa_action_fidelity_v2.py --output-dir docs/portfolio/figures/visual-jepa-action-fidelity-v2 --verify-determinism
 uv run --locked --no-sync python scripts/validate_visual_jepa_action_fidelity_v2.py --check-integrity
+uv run --locked --no-sync python scripts/audit_visual_jepa_action_fidelity_v2_observations.py --check-integrity
 ~~~
 
 The full study is bounded to 90 GPU-minutes, 2 GiB allocated GPU memory, and 5 GiB of transient output. The conditional planning stage stops at 750 million model transition calls. No Push-T or JEPA-WAM LIBERO-Plus benchmark is part of this protocol.

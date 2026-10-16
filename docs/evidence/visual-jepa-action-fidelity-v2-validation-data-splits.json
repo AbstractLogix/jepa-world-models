@@ -1,0 +1,177 @@
+{
+  "exact_checks": [
+    {
+      "data_seed": 9301,
+      "exact_match": true,
+      "max_abs_error": 5.960464477539063e-08,
+      "rows_checked": 500
+    },
+    {
+      "data_seed": 9302,
+      "exact_match": true,
+      "max_abs_error": 5.960464477539063e-08,
+      "rows_checked": 500
+    },
+    {
+      "data_seed": 9303,
+      "exact_match": true,
+      "max_abs_error": 5.960464477539063e-08,
+      "rows_checked": 500
+    }
+  ],
+  "groups": [
+    {
+      "data_seed": 9301,
+      "train_episodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "train_rows": 4800,
+      "validation_episodes": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "validation_intervention_rows": [
+        4951,
+        4996,
+        5006,
+        5113,
+        5152,
+        5160,
+        5179,
+        5256,
+        5301,
+        5329,
+        5374,
+        5404,
+        5459,
+        5647,
+        5718,
+        5750,
+        5798,
+        5853,
+        5926,
+        5966
+      ],
+      "validation_rows": 1200
+    },
+    {
+      "data_seed": 9302,
+      "train_episodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "train_rows": 4800,
+      "validation_episodes": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "validation_intervention_rows": [
+        4841,
+        4871,
+        4913,
+        4984,
+        5077,
+        5097,
+        5126,
+        5209,
+        5329,
+        5400,
+        5515,
+        5521,
+        5546,
+        5563,
+        5590,
+        5763,
+        5875,
+        5909,
+        5942,
+        5967
+      ],
+      "validation_rows": 1200
+    },
+    {
+      "data_seed": 9303,
+      "train_episodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "train_rows": 4800,
+      "validation_episodes": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "validation_intervention_rows": [
+        4852,
+        4885,
+        4932,
+        4951,
+        5062,
+        5089,
+        5187,
+        5196,
+        5258,
+        5261,
+        5285,
+        5332,
+        5343,
+        5358,
+        5397,
+        5492,
+        5681,
+        5806,
+        5826,
+        5840
+      ],
+      "validation_rows": 1200
+    }
+  ]
+}

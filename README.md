@@ -80,6 +80,8 @@ Each result has an explicit status:
 
 Use the [evaluation protocol](docs/EVALUATION_PROTOCOL.md) before making a comparison. The [research case study](docs/portfolio/CASE_STUDY.md) summarizes the strongest local findings and their limits. The [research roadmap](docs/ROADMAP.md) and [reproduction matrix](docs/REPRODUCTION_MATRIX.md) track current sources, planned lessons, resource needs, and open reproduction work. The full [documentation index](docs/index.md) links to reports and evidence records.
 
+The latest visual JEPA study is a validation-only negative result: the rendered inputs contain recoverable position and velocity, but the supervised visual control and all nine JEPA fits failed preregistered gates. Independent test data and planning stayed closed. See the [technical report](docs/TECHNICAL_REPORT.md) and [retained evidence](docs/reproductions/visual-jepa-action-fidelity-v2-investigation.md).
+
 ## Contribute
 
 Contributions that improve a lesson, add a careful evaluation, or make the course easier to follow are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md). For a new lesson or research reproduction, use the project's [Spec Kit quickstart](specs/001-project-vision/quickstart.md).

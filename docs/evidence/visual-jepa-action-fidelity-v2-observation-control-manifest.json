@@ -1,0 +1,15 @@
+{
+  "files": {
+    "visual-jepa-action-fidelity-v2-observation-control-summary.json": "77c33bd075b23eb16a84c357822c171ef930652067c674423c66c62f82ccd492",
+    "visual-jepa-action-fidelity-v2-observation-control.csv": "2461e284744a61846c2f73fb9314c579763af2dcb462aed1a8a26c77591618e8"
+  },
+  "protocol_version": "visual-jepa-action-fidelity-v2",
+  "schema_version": 1,
+  "sources": {
+    "docs/evidence/visual-jepa-action-fidelity-v2-protocol-lock.json": "c9c178ca487a60e24faafe46c96a3dcbd4950d106a9c846098c0f9a58bf4e84b",
+    "scripts/audit_visual_jepa_action_fidelity_v2_observations.py": "6aadaae3f40c6c9de8325f32621b3e8b56c148053d2d85b6718dc9a7023ca1dc",
+    "src/jepa_tutorial/action_fidelity_v2.py": "dc74909b1b5054ad831daf1c2a326bb26e70bb722efe3857e7e4d79e56f5ee02",
+    "src/jepa_tutorial/decision_study.py": "fd5af8ddd03cfdbf0c06eb94103fa308e01c987f01cbb52096c8e1fc0ca52b99",
+    "src/jepa_tutorial/visual_mountaincar.py": "b3456c04e2413700957a30772922f5e9121005a6a2c9a380f64d1e2652bea652"
+  }
+}

@@ -104,8 +104,8 @@ class PortfolioEvidenceTests(unittest.TestCase):
         self.assertTrue(manifest["status"]["label"])
         self.assertTrue(manifest["status"]["summary"])
         self.assertGreaterEqual(len(manifest["verifiedFindings"]), 3)
-        self.assertLessEqual(len(manifest["verifiedFindings"]), 5)
         verified_ids = {finding["id"] for finding in manifest["verifiedFindings"]}
+        self.assertIn("visual-jepa-action-fidelity-v2-validation", verified_ids)
         for finding in manifest["verifiedFindings"]:
             self.assertTrue(finding["claimBoundary"])
             for evidence_path in finding["evidence"]:

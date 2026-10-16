@@ -12,27 +12,27 @@
 
 ## Phase 2: Diagnostic and positive-control implementation
 
-- [ ] T005 Implement effective-rank, norm, gradient, action-sensitivity, state-clipping, and probe-conditioning diagnostics in src/jepa_tutorial/action_fidelity_v2.py
-- [ ] T006 Implement validation-only objective/control training and fail-closed evidence writing in scripts/run_visual_jepa_action_fidelity_v2.py
-- [ ] T007 Add exact, state-space, handcrafted visual, and supervised visual controls in scripts/run_visual_jepa_action_fidelity_v2.py
-- [ ] T008 Add tests for finite/constant embeddings, action input sensitivity, probe conditioning, clipping, rollout validity, deterministic seeds, and split isolation in tests/test_visual_jepa_action_fidelity_v2.py
-- [ ] T009 Implement v2 evidence completeness, integrity hashes, and gate validation in scripts/validate_visual_jepa_action_fidelity_v2.py
-- [ ] T010 Run bounded CUDA validation only after the preregistration and implementation hashes are locked; save checkpoints only to E:
+- [x] T005 Implement effective-rank, norm, gradient, action-sensitivity, state-clipping, and probe-conditioning diagnostics in src/jepa_tutorial/action_fidelity_v2.py
+- [x] T006 Implement validation-only objective/control training and fail-closed evidence writing in scripts/run_visual_jepa_action_fidelity_v2.py
+- [x] T007 Add exact, state-space, handcrafted visual, and supervised visual controls in scripts/run_visual_jepa_action_fidelity_v2.py; retain the full train/validation frame and label audit in scripts/audit_visual_jepa_action_fidelity_v2_observations.py
+- [x] T008 Add tests for finite/constant embeddings, action input sensitivity, probe conditioning, clipping, rollout validity, deterministic seeds, and split isolation in tests/test_visual_jepa_action_fidelity_v2.py
+- [x] T009 Implement v2 evidence completeness, integrity hashes, and gate validation in scripts/validate_visual_jepa_action_fidelity_v2.py
+- [x] T010 Run bounded CUDA validation only after the preregistration and implementation hashes are locked; save checkpoints only to E: (15/15 fits completed within budget.)
 
 ## Phase 3: Conditional held-out and planning evaluation
 
-- [ ] T011 [US3] Implement independent action interventions and horizons 1, 5, 10, 20, and 60 in scripts/run_visual_jepa_action_fidelity_v2.py
-- [ ] T012 [US3] Implement fail-closed validation and held-out gate transitions in scripts/validate_visual_jepa_action_fidelity_v2.py
-- [ ] T013 [US3] Run held-out trajectories only if the supervised visual control and selected JEPA family pass validation
-- [ ] T014 [US3] Run the locked CEM comparison only if held-out action and rollout gates pass; preserve all v1 starts and budgets
+- [x] T011 [US3] Implement independent action interventions and horizons 1, 5, 10, 20, and 60 in scripts/run_visual_jepa_action_fidelity_v2.py (execution remains conditional.)
+- [x] T012 [US3] Implement fail-closed validation and held-out gate transitions in scripts/validate_visual_jepa_action_fidelity_v2.py
+- [x] T013 [US3] Run held-out trajectories only if the supervised visual control and selected JEPA family pass validation (not opened: the visual positive control and all JEPA objectives failed validation.)
+- [x] T014 [US3] Run the locked CEM comparison only if held-out action and rollout gates pass; preserve all v1 starts and budgets (not opened: held-out gates stayed closed. The frozen v2 protocol's prior-only arm is the direct controller; a separate prior-only planner must be added in a new locked protocol before any future planning run.)
 
 ## Phase 4: Analysis, figures, and project alignment
 
-- [ ] T015 [P] Generate separate deterministic figures A–F from retained records in scripts/analyze_visual_jepa_action_fidelity_v2.py
-- [ ] T016 Analyze seed-level records and update docs/reproductions/visual-jepa-action-fidelity-v2-investigation.md
-- [ ] T017 [P] Update docs/ROADMAP.md, docs/EVALUATION_PROTOCOL.md, and docs/REPRODUCTION_MATRIX.md
-- [ ] T018 [P] Update docs/TECHNICAL_REPORT.md, docs/portfolio/CASE_STUDY.md, and docs/portfolio/project.json
-- [ ] T019 Run unit tests, Ruff, package build, evidence validation, CPU smoke, figure regeneration, and git diff checks; record exact results
+- [x] T015 [P] Generate separate deterministic figures from retained records in scripts/analyze_visual_jepa_action_fidelity_v2.py (A, B, D, and F generated; C and E omitted because gates stayed closed.)
+- [x] T016 Analyze seed-level records and update docs/reproductions/visual-jepa-action-fidelity-v2-investigation.md
+- [x] T017 [P] Update docs/ROADMAP.md, docs/EVALUATION_PROTOCOL.md, and docs/REPRODUCTION_MATRIX.md
+- [x] T018 [P] Update docs/TECHNICAL_REPORT.md, docs/portfolio/CASE_STUDY.md, and docs/portfolio/project.json
+- [x] T019 Run unit tests, Ruff, package build, evidence validation, CPU smoke, figure regeneration, and git diff checks; record exact results (66 unit tests passed; Ruff and package build passed; 15/15 CUDA fits validated with held-out closed; CPU smoke passed 10/10 fits; deterministic regeneration passed for six figures A1, A2, B1, B2, D, and F; evidence integrity and git diff checks passed.)
 - [ ] T020 Open a draft PR based on PR #5 and attach it to this task; do not merge
 
 ## Dependencies

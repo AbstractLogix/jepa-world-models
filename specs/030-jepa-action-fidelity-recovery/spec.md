@@ -2,7 +2,7 @@
 
 **Feature Branch**: codex/jepa-action-fidelity-recovery
 **Created**: 2026-10-16
-**Status**: Draft
+**Status**: Implemented; validation gate closed; planning remains conditional
 **Input**: User request to diagnose the Notebook 23 JEPA representation and action-prediction failures with a preregistered, bounded study.
 
 ## User Scenarios & Testing
@@ -70,7 +70,7 @@ A researcher wants independent action-fidelity and multi-step evidence, with pla
 - **FR-008**: The objective comparison MUST use fixed SIGReg-style, VISReg-style, and variance/covariance settings on the same three model/data seed pairs and data splits. It MUST include the supervised visual control.
 - **FR-009**: A failed supervised visual control MUST prevent a JEPA-objective failure claim until the visual observation or data protocol is investigated.
 - **FR-010**: No held-out action-fidelity evaluation may open until the frozen validation gates pass. No planning evaluation may open until the selected model passes held-out action and multi-step gates.
-- **FR-011**: The planning stage, if opened, MUST include exact dynamics, learned state dynamics, supervised visual dynamics, the validated JEPA, direct visual-momentum control, and JEPA-guided CEM with and without the same prior. The prior-only action baseline MUST not be counted as an independent learned planner.
+- **FR-011**: A planning stage, if opened under a future protocol, MUST include exact dynamics, learned state dynamics, supervised visual dynamics, the validated JEPA, direct visual-momentum control, a separate prior-only planner that uses the same prior without learned JEPA dynamics, and JEPA-guided CEM with and without that prior. The prior-only planner MUST not be counted as a learned planner. Any such stage MUST use a protocol amendment and implementation hash locked before it opens.
 - **FR-012**: Evidence records MUST retain every seed, failure, exclusion, sample count, device, runtime, memory, code hash, and protocol hash.
 - **FR-013**: Figures MUST be deterministic, use retained measured data, show individual seed records, include sample counts and limits, and keep v1 and v2 evidence distinct.
 - **FR-014**: Reports MUST distinguish learned JEPA models from state-space, supervised visual, and handcrafted controls. They MUST NOT claim a paper reproduction or general JEPA result from this synthetic task.
@@ -94,7 +94,7 @@ A researcher wants independent action-fidelity and multi-step evidence, with pla
 - **SC-003**: The validation run records all preregistered objective/control seed pairs or marks each missing run as failed or incomplete.
 - **SC-004**: The report states whether the supervised visual control passes before making an objective-level conclusion.
 - **SC-005**: Held-out data and planning records exist only if their prior-stage gates pass.
-- **SC-006**: Every figure regenerates from versioned evidence and includes every completed seed.
+- **SC-006**: Every figure for an opened study stage regenerates from versioned evidence and includes every completed seed. The multi-step rollout figure is required only when held-out rollouts complete; the planning figure is required only when planning opens.
 - **SC-007**: The repository unit suite, Ruff, package build, evidence validation, and CPU smoke checks pass or record exact failures and unrun checks.
 
 ## Assumptions
@@ -105,3 +105,7 @@ A researcher wants independent action-fidelity and multi-step evidence, with pla
 - CUDA may be used only for the bounded v2 fit and evaluation stages; all transient artifacts stay on E:.
 - Planning is conditional. A negative validation or held-out result is a successful research outcome when the evidence is complete.
 - The local SIGReg, VISReg-style, and variance/covariance implementations are objective adaptations, not full paper reproductions.
+
+## Post-validation clarification
+
+The v2 validation gate failed, so no held-out or planning records were opened. This specification records that negative outcome and clarifies the future conditional planner baseline. The frozen v2 protocol and its hash remain unchanged. Its prior-only arm is the direct visual-momentum controller, not a separate prior-only planner. A future planning run needs a new amendment and hash before it opens.

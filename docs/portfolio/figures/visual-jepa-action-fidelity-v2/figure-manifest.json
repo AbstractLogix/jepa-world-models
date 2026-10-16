@@ -1,0 +1,157 @@
+{
+  "figure_count": 6,
+  "figure_generator": {
+    "path": "scripts/analyze_visual_jepa_action_fidelity_v2.py",
+    "sha256": "740e5772a06d45ae8de7f29479257bd8a3b526bb12df14ec8c9c23c846182bf3"
+  },
+  "figures": [
+    {
+      "alt_text": "Action-effect fidelity for Retained Notebook 23 checkpoint replay; pre-clamp probe outputs.. Two rows compare position and velocity changes from action zero. Each panel shows actual simulator changes as dashed lines and model predictions as colored lines for actions minus one, zero, and plus one. The plot uses 100 model-seed and context groups, with every seed shown separately.",
+      "caption": "Retained Notebook 23 checkpoint replay; pre-clamp probe outputs.. Each point is a mean over matched fixed contexts for one model seed. Changes are measured relative to action zero. Predictions use pre-clip values; simulator trajectories follow MountainCarContinuous-v0. This synthetic environment does not test transfer to physical systems.",
+      "files": [
+        {
+          "path": "figure-a1-historical-v1-action-fidelity.svg",
+          "sha256": "a2a22e8ba835652ef9a7cb4f6749c85e44de196cb890eefaab28870026bec27d",
+          "size_bytes": 70621
+        },
+        {
+          "path": "figure-a1-historical-v1-action-fidelity.png",
+          "sha256": "28298cbf57573c5c862d7761b679c97bc837ed6d6cd3e17cd3e78802ee890a66",
+          "size_bytes": 396318
+        }
+      ],
+      "sample_groups": 100,
+      "stem": "figure-a1-historical-v1-action-fidelity",
+      "title": "Historical v1 action-effect fidelity"
+    },
+    {
+      "alt_text": "Action-effect fidelity for New validation-only v2 records; All recorded fits completed. Held-out evaluation remains separate.. Two rows compare position and velocity changes from action zero. Each panel shows actual simulator changes as dashed lines and model predictions as colored lines for actions minus one, zero, and plus one. The plot uses 420 model-seed and context groups, with every seed shown separately.",
+      "caption": "New validation-only v2 records; All recorded fits completed. Held-out evaluation remains separate.. Each point is a mean over matched fixed contexts for one model seed. Changes are measured relative to action zero. Predictions use pre-clip values; simulator trajectories follow MountainCarContinuous-v0. This synthetic environment does not test transfer to physical systems.",
+      "files": [
+        {
+          "path": "figure-a2-v2-validation-action-fidelity.svg",
+          "sha256": "30e0b9c63c62880bf4cc88437f38618d2b4a4afa06fcfc81464f2e0c3ba5dbe8",
+          "size_bytes": 218712
+        },
+        {
+          "path": "figure-a2-v2-validation-action-fidelity.png",
+          "sha256": "404f272cc92ac3e8936e8822d5e3b5bba75f42c0e216dcd40e68bbc4507a2f34",
+          "size_bytes": 862909
+        }
+      ],
+      "sample_groups": 420,
+      "stem": "figure-a2-v2-validation-action-fidelity",
+      "title": "V2 validation action-effect fidelity"
+    },
+    {
+      "alt_text": "Six panels show context and target embedding mean standard deviation, the worse low-spread dimension count, the worse effective rank, and position and velocity probe R-squared. Every completed model seed appears as a labeled point, and failed fits are listed below their method. These are historical v1 checkpoint replays and v1 test records.",
+      "caption": "Representation health is reported per seed. The low-spread count and effective rank show the worse of the context and target embeddings; low spread uses the per-dimension 1e-3 rule. Effective rank is computed from the validation covariance spectrum. Historical v1 values are derived from retained v1 checkpoints and the original v1 test split.",
+      "failed_records": 0,
+      "files": [
+        {
+          "path": "figure-b1-historical-v1-representation-health.svg",
+          "sha256": "2244879aaa6dd9a9d2161448a9d227ecb66dafd9bcb6540917eff34f0fd5c69f",
+          "size_bytes": 105667
+        },
+        {
+          "path": "figure-b1-historical-v1-representation-health.png",
+          "sha256": "906b5f6d2c6fcc0ab150fd2db8ab95a492b611637c5ba2b839f29efad3ae6720",
+          "size_bytes": 301997
+        }
+      ],
+      "sample_size": 5,
+      "stem": "figure-b1-historical-v1-representation-health",
+      "title": "Historical v1 representation health"
+    },
+    {
+      "alt_text": "Six panels show context and target embedding mean standard deviation, the worse low-spread dimension count, the worse effective rank, and position and velocity probe R-squared. Every completed model seed appears as a labeled point, and failed fits are listed below their method. These are v2 validation-only records; no held-out data are shown.",
+      "caption": "Representation health is reported per seed. The low-spread count and effective rank show the worse of the context and target embeddings; low spread uses the per-dimension 1e-3 rule. Effective rank is computed from the validation covariance spectrum. V2 uses the frozen train/validation split and the 20-refit episode-block probe diagnostic.",
+      "failed_records": 0,
+      "files": [
+        {
+          "path": "figure-b2-v2-validation-representation-health.svg",
+          "sha256": "6652799c17b023d48d889e98d17abdf7c4aeff8db4dac126047d94bb3fd16cc1",
+          "size_bytes": 161871
+        },
+        {
+          "path": "figure-b2-v2-validation-representation-health.png",
+          "sha256": "c17ae2bd7e74b4eb6902ac0e7d298b97fed6b1e9f6219082f406cbe78d740007",
+          "size_bytes": 445672
+        }
+      ],
+      "sample_size": 12,
+      "stem": "figure-b2-v2-validation-representation-health",
+      "title": "V2 validation representation health"
+    },
+    {
+      "alt_text": "Four panels compare effective rank, velocity-probe R-squared, position action-contrast error, and velocity action-contrast error for each v2 objective and the supervised visual control. Every completed seed is shown. The selected objective is marked only when validation gates select one.",
+      "candidate_seed_rows": 9,
+      "caption": "Validation-only data are used. Error metrics are lower-is-better; rank and probe R-squared are higher-is-better. A negative or failed seed remains visible. No held-out test data are used for model selection.",
+      "files": [
+        {
+          "path": "figure-d-objective-comparison.svg",
+          "sha256": "1f6ff34fccbaecf43649d65c721f566f2108e7d9fd922d22e6bdd2dffb7c773c",
+          "size_bytes": 94398
+        },
+        {
+          "path": "figure-d-objective-comparison.png",
+          "sha256": "f5309e45ab4024d07eb3f3e6a924fab690b7a3c53701065693276f32b47dbd1c",
+          "size_bytes": 306330
+        }
+      ],
+      "selected_objective": null,
+      "stem": "figure-d-objective-comparison",
+      "supervised_visual_seed_rows": 3,
+      "title": "V2 validation objective comparison"
+    },
+    {
+      "alt_text": "A left-to-right diagram shows rendered frame pairs entering a visual encoder, then an action-conditioned predictor, a predicted latent, a frozen state readout, a planner, and environment feedback. The environment sends new rendered frames back to the encoder. The action enters the predictor.",
+      "caption": "Architecture diagram for the local synthetic MountainCar study. The state readout is a diagnostic linear probe, not a learned pixel decoder.",
+      "files": [
+        {
+          "path": "figure-f-action-conditioned-architecture.svg",
+          "sha256": "86ea094dd4a721bbb8a9cc6ddb46c1658339784428008014c18af7dd2a5bc208",
+          "size_bytes": 44246
+        },
+        {
+          "path": "figure-f-action-conditioned-architecture.png",
+          "sha256": "4c61e38853028cfdfa7f341479b3ae2cc7c97fc6c2a472364126f89643042d17",
+          "size_bytes": 174362
+        }
+      ],
+      "stem": "figure-f-action-conditioned-architecture",
+      "title": "Action-conditioned visual JEPA architecture"
+    }
+  ],
+  "measurement_sources": [
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-v1-action-triplets-replayed.csv",
+      "sha256": "5459c0d87a9b3ad5f72dd69b1b9101fb255ab622c45bcc9c77ebc2accf94e673"
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-action-triplets.csv",
+      "sha256": "30145fc042428b4b3a7f56dca1e256bc737f762af35119996fd5e1eb7a4595a1"
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-v1-checkpoint-audit.csv",
+      "sha256": "eff0383f9c1ece42f82315071a20388d5ead3fc3ba7cf08bd81012f866d09978"
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-model-runs.csv",
+      "sha256": "44d6a4040eef273ae920a703a7876c04307b01d61dd5043788867119d74e8d45"
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-validation-summary.json",
+      "sha256": "f0884d0c74669ec0b214738d2735b4ff4a1d1378853b70cef5f53b859087351b"
+    },
+    {
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-heldout-summary.json",
+      "sha256": "49bad4342880da0afeebf3a49758549579ef714a73f6f4ed4d6876ae3867fbfd"
+    }
+  ],
+  "not_generated": {
+    "figure_c": "held-out stage did not complete or contain supported rollouts",
+    "figure_e": "planning gate stayed closed or no planning rows were recorded"
+  },
+  "protocol_version": "visual-jepa-action-fidelity-v2"
+}

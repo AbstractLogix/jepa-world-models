@@ -3,7 +3,7 @@
   "slug": "jepa-world-models",
   "title": "JEPA World Models: From Prediction to Decisions",
   "summary": "An evidence-led tutorial that tests when predictive representations help action selection—and when accurate prediction is not enough.",
-  "description": "This research tutorial connects JEPA representation learning, action-conditioned prediction, planning, uncertainty, and decision evaluation. It includes small local LeJEPA objective studies, a verified inference check with an official V-JEPA 2.1 checkpoint, and clearly labeled MountainCar analogues. Notebook 23 adds a preregistered 660-episode visual study; its decision result remains partial because all five JEPA seeds triggered a low-spread diagnostic. Toy results are not presented as paper reproductions. A genuine learned-JEPA-versus-direct-policy benchmark remains future work.",
+  "description": "This research tutorial connects JEPA representation learning, action-conditioned prediction, planning, uncertainty, and decision evaluation. It includes local LeJEPA-style objective studies, a verified inference check with an official V-JEPA 2.1 checkpoint, and clearly labeled MountainCar analogues. Notebook 23 v1 remains exploratory because all five JEPA fits triggered low spread. A separate v2 validation study found that rendered observations contain usable position and velocity information, but its supervised visual control and all nine JEPA fits failed preregistered state or action-fidelity gates. Independent test data, multi-step rollouts, and planning stayed closed. Toy results are not presented as paper reproductions. A genuine learned-JEPA-versus-direct-policy benchmark remains future work.",
   "categories": [
     "Applied AI Research",
     "Reproducible Machine Learning",
@@ -21,7 +21,7 @@
   ],
   "status": {
     "label": "Active research tutorial",
-    "summary": "Local lessons and evidence are available. Notebook 22 and the preregistered Notebook 23 matrix are complete. Notebook 23's JEPA outcomes remain exploratory because all five fits triggered low spread; a learned-JEPA-versus-direct-policy comparison and large paper benchmarks remain future work.",
+    "summary": "Local lessons and evidence are available. Notebook 22 and Notebook 23 v1 are complete, with their stated limits. The v2 action-fidelity validation is a retained negative result: the visual positive control and all JEPA candidates failed their frozen gates, so held-out and planning stages stayed closed. A fresh preregistered positive-control study is required before a learned-JEPA-versus-direct-policy benchmark.",
     "license": "The package metadata declares MIT. No root LICENSE file is present; confirm rights-holder details before making a license claim."
   },
   "researchQuestion": "When do predictive representations actually improve action selection, and when does accurate prediction fail to translate into effective decisions?",
@@ -95,6 +95,24 @@
         "docs/evidence/visual-jepa-decision-study-v1-interventions.csv",
         "docs/evidence/visual-jepa-decision-study-v1-episodes.csv"
       ]
+    },
+    {
+      "id": "visual-jepa-action-fidelity-v2-validation",
+      "title": "Rendered state is recoverable, but the learned visual controls failed action-fidelity gates",
+      "status": "locally measured, validation-only",
+      "summary": "Across three paired seeds, a deterministic frame estimator had about 0.00375 position MAE and 0.000056 velocity MAE on train and validation data, and exact dynamics matched labels within 6e-8. The supervised visual model and all nine JEPA fits failed frozen validation gates. VISReg-style embeddings passed spread and rank checks, but velocity-probe R² stayed between 0.008 and 0.018.",
+      "scope": "Synthetic MountainCar; three paired model/data seeds; three JEPA objective settings; 15 completed fits; 14.28 GPU-minutes on an RTX 5070.",
+      "claimBoundary": "The result shows failure under this local frozen training recipe. It does not identify a general JEPA limitation or a causal loss defect. No independent test trajectories, multi-step rollouts, or planning outcomes were collected because the supervised visual control failed its gate. This is not a paper reproduction.",
+      "evidence": [
+        "docs/TECHNICAL_REPORT.md",
+        "docs/reproductions/visual-jepa-action-fidelity-v2-investigation.md",
+        "docs/reproductions/protocols/visual-jepa-action-fidelity-v2.md",
+        "docs/evidence/visual-jepa-action-fidelity-v2-observation-control.csv",
+        "docs/evidence/visual-jepa-action-fidelity-v2-validation-model-runs.csv",
+        "docs/evidence/visual-jepa-action-fidelity-v2-validation-action-summary.csv",
+        "docs/evidence/visual-jepa-action-fidelity-v2-validation-summary.json",
+        "docs/evidence/visual-jepa-action-fidelity-v2-evidence-manifest.json"
+      ]
     }
   ],
   "pendingWork": [
@@ -102,11 +120,12 @@
       "id": "learned-jepa-versus-direct-policy-benchmark",
       "title": "Matched learned-JEPA versus direct-policy benchmark",
       "status": "future research",
-      "summary": "Compare oracle dynamics, learned state dynamics, learned visual latent dynamics, action-conditioned JEPA dynamics, direct policy, and policy-guided planning on one preregistered task with paired starts, shared data, compute accounting, and independent regeneration.",
-      "claimBoundary": "Notebook 22 is a synthetic MountainCar analogue with a hand-written visual prior. It does not satisfy this benchmark or establish a general JEPA advantage.",
+      "summary": "First, preregister a fresh visual supervised positive-control study that targets small action effects and passes state and action-fidelity gates. Only then compare oracle dynamics, learned state-space dynamics, supervised visual dynamics, action-conditioned JEPA dynamics, a direct policy, prior-only planning, and policy-guided planning on shared held-out cases with compute accounting.",
+      "claimBoundary": "The v2 visual positive control and all nine JEPA fits failed validation. Do not tune against those validation records or claim a JEPA planning result. Any follow-up requires a new protocol, fresh independent test cases, and a passing positive control before opening held-out evaluation.",
       "evidence": [
-        "notebooks/22_visual_jepa_decision_usefulness.ipynb",
-        "docs/reproductions/visual-jepa-decision-usefulness.md",
+        "docs/TECHNICAL_REPORT.md",
+        "docs/reproductions/visual-jepa-action-fidelity-v2-investigation.md",
+        "docs/reproductions/protocols/visual-jepa-action-fidelity-v2.md",
         "docs/ROADMAP.md"
       ]
     },
@@ -246,6 +265,26 @@
       "label": "Notebook 23 architecture diagram",
       "path": "docs/portfolio/figures/visual-jepa-decision-study-v1-architecture.svg",
       "kind": "figure"
+    },
+    {
+      "label": "JEPA action-fidelity v2 technical report",
+      "path": "docs/TECHNICAL_REPORT.md",
+      "kind": "evidence"
+    },
+    {
+      "label": "JEPA action-fidelity v2 root-cause investigation",
+      "path": "docs/reproductions/visual-jepa-action-fidelity-v2-investigation.md",
+      "kind": "evidence"
+    },
+    {
+      "label": "JEPA action-fidelity v2 preregistration",
+      "path": "docs/reproductions/protocols/visual-jepa-action-fidelity-v2.md",
+      "kind": "protocol"
+    },
+    {
+      "label": "JEPA action-fidelity v2 evidence manifest",
+      "path": "docs/evidence/visual-jepa-action-fidelity-v2-evidence-manifest.json",
+      "kind": "evidence"
     }
   ],
   "media": [
@@ -285,6 +324,41 @@
       "evidence": [
         "docs/reproductions/protocols/visual-jepa-decision-study-v1.md",
         "docs/reproductions/visual-jepa-decision-study-v1.md"
+      ]
+    },
+    {
+      "path": "docs/portfolio/figures/visual-jepa-action-fidelity-v2/figure-a2-v2-validation-action-fidelity.png",
+      "alt": "Validation-only action-effect plots show raw predictions from each JEPA objective and visual control beside simulator changes for actions minus one, zero, and plus one. All seeds are shown. Several learned models predict effects that are much larger or point in the wrong direction.",
+      "caption": "V2 uses 20 validation contexts per data seed. Dashed lines show simulator changes; colored lines show raw predictions before state clipping. The held-out test and planning stages stayed closed.",
+      "evidence": [
+        "docs/evidence/visual-jepa-action-fidelity-v2-validation-action-triplets.csv",
+        "docs/evidence/visual-jepa-action-fidelity-v2-validation-summary.json"
+      ]
+    },
+    {
+      "path": "docs/portfolio/figures/visual-jepa-action-fidelity-v2/figure-b2-v2-validation-representation-health.png",
+      "alt": "Each point is one seed. SIGReg and variance-covariance models have low embedding spread. VISReg-style models pass spread and rank checks but all objectives have weak velocity probes.",
+      "caption": "Representation diagnostics for nine JEPA fits and three supervised visual fits. Probe fits use training data and report validation scores.",
+      "evidence": [
+        "docs/evidence/visual-jepa-action-fidelity-v2-validation-model-runs.csv",
+        "docs/evidence/visual-jepa-action-fidelity-v2-validation-summary.json"
+      ]
+    },
+    {
+      "path": "docs/portfolio/figures/visual-jepa-action-fidelity-v2/figure-d-objective-comparison.png",
+      "alt": "Seed-level comparison of effective rank, velocity-probe R-squared, and normalized action-contrast error. None of the JEPA objective settings passes all gates, and the supervised visual control fails its gate.",
+      "caption": "Descriptive validation results across the frozen objective settings. The supervised visual control failed, so the objective comparison does not establish causal superiority.",
+      "evidence": [
+        "docs/evidence/visual-jepa-action-fidelity-v2-validation-model-runs.csv",
+        "docs/evidence/visual-jepa-action-fidelity-v2-validation-action-summary.csv"
+      ]
+    },
+    {
+      "path": "docs/portfolio/figures/visual-jepa-action-fidelity-v2/figure-f-action-conditioned-architecture.png",
+      "alt": "Architecture diagram: rendered frame pairs enter a visual encoder; an action-conditioned predictor outputs a predicted latent; a frozen state readout feeds the planner and environment feedback loop.",
+      "caption": "Local synthetic MountainCar experiment path. The frozen state readout is a diagnostic linear probe, not a pixel decoder.",
+      "evidence": [
+        "docs/reproductions/protocols/visual-jepa-action-fidelity-v2.md"
       ]
     }
   ]

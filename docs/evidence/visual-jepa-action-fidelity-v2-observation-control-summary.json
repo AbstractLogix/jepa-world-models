@@ -1,0 +1,16 @@
+{
+  "data_seeds": [
+    9301,
+    9302,
+    9303
+  ],
+  "episode_partition": "episodes 0-15 train; episodes 16-19 validation",
+  "interpretation": "The deterministic two-frame visual estimator recovers current and next state on both training and validation episodes. This shows the rendered observations contain the state information needed by this task; it does not establish that a learned visual model can recover it under the frozen training recipe.",
+  "protocol_version": "visual-jepa-action-fidelity-v2",
+  "purpose": "observation and label audit; no model fitting",
+  "simulator_max_abs_error": 5.960464477539063e-08,
+  "status": "complete",
+  "test_data_opened": false,
+  "train_transition_count": 14400,
+  "validation_transition_count": 3600
+}

@@ -28,7 +28,7 @@
 
 ## Phase 4: Analysis, figures, and project alignment
 
-- [ ] T015 [P] Generate separate deterministic figures A–F from retained records in scripts/generate_visual_jepa_action_fidelity_v2_figures.py
+- [ ] T015 [P] Generate separate deterministic figures A–F from retained records in scripts/analyze_visual_jepa_action_fidelity_v2.py
 - [ ] T016 Analyze seed-level records and update docs/reproductions/visual-jepa-action-fidelity-v2-investigation.md
 - [ ] T017 [P] Update docs/ROADMAP.md, docs/EVALUATION_PROTOCOL.md, and docs/REPRODUCTION_MATRIX.md
 - [ ] T018 [P] Update docs/TECHNICAL_REPORT.md, docs/portfolio/CASE_STUDY.md, and docs/portfolio/project.json

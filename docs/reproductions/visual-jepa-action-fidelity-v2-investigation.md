@@ -36,7 +36,7 @@ Notebook 22 is separate historical evidence. It uses a VISReg-style temporal-pre
 
 ## Root-cause plan recorded before model changes
 
-The model has not been modified for this v2 study. The following diagnostic order is fixed:
+The Notebook 22 and 23 implementations and all v1 evidence remain unchanged. The separate v2 models have not been fit. The following diagnostic order is fixed:
 
 1. Replay the v1 JEPA checkpoints without changing them. Measure encoder norms, latent covariance spectrum and effective rank, predictor output norms, action derivatives, action-triplet latent displacement, and decoded states before and after task-bound clipping.
 2. Recompute probe design conditioning and coefficient magnitudes. Compare ridge selection, feature scaling, train-only fit, validation selection, and bootstrap prediction stability. Report whether the readout, rather than the predictor, creates the boundary-saturated state output.

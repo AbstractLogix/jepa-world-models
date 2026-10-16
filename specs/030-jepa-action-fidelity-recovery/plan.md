@@ -79,17 +79,16 @@ src/jepa_tutorial/action_conditioned_visual.py
 src/jepa_tutorial/action_fidelity_v2.py
 scripts/run_visual_jepa_action_fidelity_v2.py
 scripts/analyze_visual_jepa_action_fidelity_v2.py
-scripts/generate_visual_jepa_action_fidelity_v2_figures.py
+scripts/validate_visual_jepa_action_fidelity_v2.py
 tests/test_visual_jepa_action_fidelity_v2.py
-notebooks/24_visual_jepa_action_fidelity.ipynb
 docs/reproductions/protocols/visual-jepa-action-fidelity-v2.md
 docs/reproductions/visual-jepa-action-fidelity-v2-investigation.md
 docs/evidence/visual-jepa-action-fidelity-v2-*.csv
 docs/evidence/visual-jepa-action-fidelity-v2-*.json
-docs/portfolio/figures/visual-jepa-action-fidelity-v2-*.svg
+docs/portfolio/figures/visual-jepa-action-fidelity-v2/*.{svg,png}
 ```
 
-**Structure Decision**: Keep the new experiment in a separate v2 module and runner. Do not edit Notebook 22 or 23 or reuse their output paths.
+**Structure Decision**: Keep the new experiment in a separate v2 module and runner. Use the existing Notebook 23 only as the frozen starting evidence. Do not edit Notebook 22 or 23 or reuse their output paths. This milestone does not add a new lesson notebook.
 
 ## Validation
 

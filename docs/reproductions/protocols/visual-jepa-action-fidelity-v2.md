@@ -5,6 +5,8 @@
 **Study**: [Feature 030](../../../specs/030-jepa-action-fidelity-recovery/spec.md)  
 **Report**: [Investigation and results](../visual-jepa-action-fidelity-v2-investigation.md)
 
+**Pre-training amendments**: [Amendment 1: numeric one-step state-error gates](visual-jepa-action-fidelity-v2-amendment-1.md); [Amendment 2: context and target representation gates](visual-jepa-action-fidelity-v2-amendment-2.md).
+
 ## Question and outcomes
 
 **Primary question**: Can a compact action-conditioned visual JEPA learn a non-collapsed representation that retains position, velocity, and counterfactual action effects well enough for stable multi-step predictions?

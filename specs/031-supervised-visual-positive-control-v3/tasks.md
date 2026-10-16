@@ -79,7 +79,7 @@
 **Purpose**: Run the requested checks and prepare a focused draft PR.
 
 - [x] T015 Run unit tests, Ruff, package build, evidence validation, and deterministic figure checks; record each result in `docs/reproductions/visual-jepa-supervised-positive-control-v3-investigation.md`. Do not run a new model-fit smoke after the frozen v3 run stops.
-- [ ] T016 Open a draft PR based on PR #6 and attach it; include the exact gate outcome and limits from `docs/reproductions/visual-jepa-supervised-positive-control-v3-investigation.md` in the PR description.
+- [x] T016 Open draft PR #7 based on PR #6, attach it, and include the exact gate outcome and limits from `docs/reproductions/visual-jepa-supervised-positive-control-v3-investigation.md` in the PR description.
 
 ## Dependencies & Execution Order
 

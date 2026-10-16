@@ -42,7 +42,7 @@
 ### Implementation for User Story 1
 
 - [x] T007 [US1] Implement paired training, handcrafted ridge baseline, exact and handcrafted controls, and per-epoch records in `scripts/run_visual_jepa_supervised_positive_control_v3.py`.
-- [ ] T008 [US1] Freeze the implementation/protocol hashes and run the bounded validation fits to E: output `visual-jepa-supervised-positive-control-v3/validation`.
+- [x] T008 [US1] Freeze the implementation/protocol hashes and run the bounded validation fits to E: output `visual-jepa-supervised-positive-control-v3/validation`. Preserve the incomplete status and stop reason when the first CUDA backward call fails.
 
 ## Phase 4: User Story 2 - Respect the validation gate (Priority: P1)
 
@@ -70,15 +70,15 @@
 
 ### Implementation for User Story 3
 
-- [x] T012 [US3] Generate action-response, per-coordinate validation, and learning/gradient figures from retained CSV records in `scripts/analyze_visual_jepa_supervised_positive_control_v3.py`.
-- [ ] T013 [US3] Write the measured v3 report and update the evaluation protocol, reproduction matrix, roadmap, and portfolio case study in `docs/reproductions/visual-jepa-supervised-positive-control-v3-investigation.md` and `docs/`.
-- [ ] T014 [US3] Validate public evidence hashes, unchanged historical evidence, and the v3 quickstart outputs in `scripts/validate_visual_jepa_supervised_positive_control_v3.py`.
+- [x] T012 [US3] Generate deterministic figures from completed validation controls and document model-only figures as unavailable after the early stop in `scripts/plot_visual_jepa_supervised_positive_control_v3_observed.py`.
+- [x] T013 [US3] Write the measured v3 report and update the evaluation protocol, reproduction matrix, roadmap, and portfolio case study in `docs/reproductions/visual-jepa-supervised-positive-control-v3-investigation.md` and `docs/`.
+- [x] T014 [US3] Validate public evidence hashes and confirm unchanged historical evidence in `scripts/validate_visual_jepa_supervised_positive_control_v3.py`. Record the interrupted run and closed gates; no held-out quickstart output exists.
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
 **Purpose**: Run the requested checks and prepare a focused draft PR.
 
-- [ ] T015 Run focused unit tests, Ruff, package build, evidence validation, and CPU smoke checks; record each result in `docs/reproductions/visual-jepa-supervised-positive-control-v3-investigation.md`.
+- [x] T015 Run unit tests, Ruff, package build, evidence validation, and deterministic figure checks; record each result in `docs/reproductions/visual-jepa-supervised-positive-control-v3-investigation.md`. Do not run a new model-fit smoke after the frozen v3 run stops.
 - [ ] T016 Open a draft PR based on PR #6 and attach it; include the exact gate outcome and limits from `docs/reproductions/visual-jepa-supervised-positive-control-v3-investigation.md` in the PR description.
 
 ## Dependencies & Execution Order

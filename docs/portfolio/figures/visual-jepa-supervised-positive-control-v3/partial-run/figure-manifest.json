@@ -1,0 +1,72 @@
+{
+  "evidence_status": "incomplete",
+  "figures": [
+    {
+      "alt_text": "Six panels show position and velocity changes across actions minus one, zero, and plus one for each of three validation data seeds. Solid lines show exact and ridge predictions. Dashed lines show simulator effects. Whiskers show the min\u2013max range across 20 contexts.",
+      "caption": "Simulator, handcrafted state plus exact dynamics, and handcrafted ridge action effects. The ridge uses the same handcrafted state features but a fixed linear map.",
+      "files": [
+        "figure-a-observed-action-fidelity.svg",
+        "figure-a-observed-action-fidelity.png"
+      ],
+      "id": "figure-a-observed-action-fidelity",
+      "limitations": "No visual neural fit completed. This figure measures one-step prediction only and does not show planning performance.",
+      "sample_size": "20 shared validation action contexts for each of 3 independent data seeds",
+      "sha256": {
+        "figure-a-observed-action-fidelity.png": {
+          "bytes": 359840,
+          "sha256": "e150b573e00898b4207811800300908c942056b814b5b0dd61702b00e8fb04d4"
+        },
+        "figure-a-observed-action-fidelity.svg": {
+          "bytes": 162741,
+          "sha256": "6fc4373bfb47ea2098959afe02280c228e35d45c6eacfc9600f55f8f32a9a945"
+        }
+      }
+    },
+    {
+      "alt_text": "The first two panels show position and velocity one-step MAE for exact dynamics and handcrafted ridge across three seeds. The third panel shows next-state training variance ratios from 138.1 to 142.0. The title states that no neural fit completed.",
+      "caption": "Raw validation MAE for handcrafted state plus exact dynamics and the fixed handcrafted-feature ridge model, alongside the training next-state position-to-velocity variance ratios.",
+      "files": [
+        "figure-b-observed-positive-controls.svg",
+        "figure-b-observed-positive-controls.png"
+      ],
+      "id": "figure-b-observed-positive-controls",
+      "limitations": "The ridge model is a fixed linear baseline and cannot establish what a learned visual encoder can achieve. The neural study stopped before training.",
+      "sample_size": "Full validation partition per seed for MAE; 20 training episodes per seed for target scales",
+      "sha256": {
+        "figure-b-observed-positive-controls.png": {
+          "bytes": 167010,
+          "sha256": "8916711a87a8799041ee294554fef6a330e798f2d76c7521a446ded2e1cbf475"
+        },
+        "figure-b-observed-positive-controls.svg": {
+          "bytes": 90936,
+          "sha256": "35825c1f77c34b67de9e2a4862be67d14b8e4747c7ccdacf3bc885fcea9f5851"
+        }
+      }
+    }
+  ],
+  "heldout_open": false,
+  "protocol_sha256": "178c4a943aceaed8c2635889d7422917e4924290d959ce9979b576ee3d5c9ae1",
+  "protocol_version": "visual-jepa-supervised-positive-control-v3",
+  "source_evidence": {
+    "action-triplets.csv": {
+      "bytes": 122451,
+      "sha256": "0a6e7ff1578bbe6666c482b9c5fb4d6b958099fe5585cca94cfc8c7bca13ea01"
+    },
+    "data-path.csv": {
+      "bytes": 1308,
+      "sha256": "40e4848d363d4e717d4c9b4fa88764610e769fadc7a884c7a66ffcdf473775dd"
+    },
+    "model-runs.csv": {
+      "bytes": 10028,
+      "sha256": "06907bb8a29476043c8025a2f71a8fcc842cda437e979b7830ead7ea878812dd"
+    },
+    "run-summary.json": {
+      "bytes": 1726,
+      "sha256": "f5af032f74b07fbfdf24690e1af67cf237b2928f6be74411c583a45e64ab4125"
+    },
+    "target-scales.csv": {
+      "bytes": 6899,
+      "sha256": "c1caed9db5273b8cde7eeea37accd7bc44a905ac1ac1853bdf9a68c0ce39b67a"
+    }
+  }
+}

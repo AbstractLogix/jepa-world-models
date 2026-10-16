@@ -96,6 +96,16 @@ This result narrows the diagnosis: the rendered frames and labels are sufficient
 
 Evidence: [technical report](../TECHNICAL_REPORT.md) · [root-cause investigation](../reproductions/visual-jepa-action-fidelity-v2-investigation.md) · [frozen v2 protocol](../reproductions/protocols/visual-jepa-action-fidelity-v2.md) · [v2 evidence manifest](../evidence/visual-jepa-action-fidelity-v2-evidence-manifest.json) · [observation audit](../evidence/visual-jepa-action-fidelity-v2-observation-control.csv)
 
+### 7. The v3 positive-control study stopped before neural training
+
+The v3 preregistration reused three independent validation groups and added a fixed handcrafted-feature ridge control, a learned visual state estimator, raw and standardized visual dynamics, residual dynamics, and an action-shuffling control. All data-path checks passed. The exact simulator matched labels within 5.96×10⁻⁸. The handcrafted state estimator had position MAE 0.00375 and velocity MAE about 0.000056. The fixed ridge model had higher one-step error: position MAE 0.0345–0.0386 and velocity MAE 0.00306–0.00330.
+
+The first neural fit stopped during CUDA backward because PyTorch did not provide a deterministic adaptive-pooling backward kernel for the frozen deterministic setting. No optimizer update completed. The run records 0/15 completed neural fits, 14 later fits as `not_run`, and no selected model. The independent test set, rollouts, and planning stayed closed. This is an incomplete execution result; it does not show that a learned visual model fails.
+
+The two measured figures show action response and the completed positive controls. They do not include neural predictions or representation measurements.
+
+Evidence: [v3 report](../reproductions/visual-jepa-supervised-positive-control-v3-investigation.md) · [frozen protocol](../reproductions/protocols/visual-jepa-supervised-positive-control-v3.md) · [raw evidence](../evidence/visual-jepa-supervised-positive-control-v3/sha256-manifest.json) · [figure guide](figures/visual-jepa-supervised-positive-control-v3/partial-run/README.md)
+
 ## Figures
 
 ![Two separate MountainCar comparisons show low planner success despite perfect action-pair ranking in the local state and rendered-feature models.](figures/decision-usefulness.png)
@@ -146,6 +156,7 @@ Evidence: [Notebook 09](../../notebooks/09_vjepa21_dense_features.ipynb) · [che
 - Keep downloaded data, checkpoints, and package caches on E: or D: by setting `JEPA_ASSETS_DIR`, `UV_CACHE_DIR`, `HF_HUB_CACHE`, `HF_ASSETS_CACHE`, and `TORCH_HOME` before setup. The README gives a WSL example.
 - Notebooks 14 and 16 use CPU and no external assets. Notebook 17 uses CPU and retains 60,000 calibration rows, 200 selected plans, 220 episode outcomes, and five run records.
 - Notebooks 22 and 23 used CUDA on an RTX 5070. Notebook 22 retained 15 model-fit rows, 960 intervention rows, and 440 episode rows. Notebook 23 v1 completed 15 model fits, 960 interventions, and 660 episode rows; its evidence remains unchanged and its JEPA outcomes remain exploratory. The separate v2 validation completed 15 fits and 1,260 action-triplet rows in 14.28 GPU-minutes, with 482.33 MiB maximum allocated memory. Its test, rollout, and planning stages stayed closed. The executed notebooks, v2 checkpoints, and full transient run files remain on E:; compact audit records and figures are in the repository.
+- The v3 positive-control run used the RTX 5070 but stopped at its first CUDA backward call. The evidence records 47.02 seconds total, 0 training seconds, no completed neural fit, and no CUDA peak allocation. Its exact and handcrafted-feature ridge validation records and two figures are retained; no test or rollout data were created.
 - Notebook 09's checkpoint is about 1.66 GB and its license terms must be checked before redistribution. The notebook does not redistribute weights.
 - The repository has a focused unit-test suite for the new portfolio evidence summaries. The evidence validator for Notebooks 20 and 21 checks record structure; it does not rerun notebooks or validate scientific claims.
 - `pyproject.toml` declares MIT, but the repository has no root `LICENSE` file. Maintainers should confirm the rights holder and add the license text before describing the repository as MIT-licensed.
@@ -162,7 +173,7 @@ The strongest decision findings are small simulator studies. Notebook 14 uses on
 
 ## Prioritized future research
 
-The next study should first address the failed visual positive-control gate under a new preregistration. Keep the current validation results closed to tuning. Change one documented factor at a time, such as per-coordinate state-loss scaling or a target that makes small action effects measurable. Open a fresh independent test split only after the supervised visual control passes. Then run a genuine learned-JEPA-versus-direct-policy comparison. Select one visual control task only after its data, checkpoint, license, simulator, and compute requirements are confirmed. Do not report a result from a toy analogy as that comparison.
+The v3 study did not reach model fitting, so its validation outcomes cannot guide model changes. Any further supervised visual run needs a new protocol version or reviewed amendment that names a deterministic training path before the first fit. Keep the test set closed until a complete learned model passes the frozen validation gate. Then run a genuine learned-JEPA-versus-direct-policy comparison only after its data, checkpoint, license, simulator, and compute requirements are confirmed. Do not report a result from a toy analogy as that comparison.
 
 Compare these systems on the same fixed cases:
 

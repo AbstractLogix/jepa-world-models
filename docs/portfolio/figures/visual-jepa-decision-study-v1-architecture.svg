@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="620" viewBox="0 0 1240 620" role="img" aria-labelledby="title desc">
+<title id="title">Matched visual JEPA decision study architecture</title>
+<desc id="desc">A generated frame pair is encoded. An action-conditioned predictor predicts the next latent. A train-fitted, validation-selected linear readout maps predictions to position and velocity for the shared task return. CEM searches action sequences with either Gaussian or handcrafted momentum-prior initialization. The environment executes the first action and returns a new rendered frame. Separate privileged controls use state inputs.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#315B7D"/></marker><style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#172B3A} .title{font-size:16px;font-weight:700} .body{font-size:12px} .small{font-size:13px} .flow{stroke:#315B7D;stroke-width:3;fill:none} .visual{fill:#E8F5EF;stroke:#23835B;stroke-width:2} .priv{fill:#FFF4E5;stroke:#B56600;stroke-width:2;stroke-dasharray:7 5} .policy{fill:#F7EDF4;stroke:#9A4E7B;stroke-width:2}
+</style></defs>
+<rect width="1240" height="620" fill="#FFFFFF"/>
+<text x="30" y="45" font-size="22" font-weight="700">Matched visual JEPA decision study v1</text>
+<text x="30" y="76" class="small">Visual-model planning loop · synthetic task · no pretrained checkpoint or external dataset</text>
+<rect x="28" y="160" width="170" height="112" rx="12" fill="#F4F7FB" stroke="#315B7D" stroke-width="2"/><text x="113" y="205" class="title" text-anchor="middle">Rendered frame pair</text><text x="113" y="237" class="body" text-anchor="middle">Generated MountainCar image</text><rect x="225" y="160" width="170" height="112" rx="12" fill="#F4F7FB" stroke="#315B7D" stroke-width="2"/><text x="310" y="205" class="title" text-anchor="middle">Visual encoder</text><text x="310" y="237" class="body" text-anchor="middle">Current latent zₜ</text><rect x="422" y="160" width="170" height="112" rx="12" fill="#F4F7FB" stroke="#315B7D" stroke-width="2"/><text x="507" y="205" class="title" text-anchor="middle">Action predictor</text><text x="507" y="237" class="body" text-anchor="middle">Predict ẑₜ₊₁ from zₜ, aₜ</text><rect x="619" y="160" width="170" height="112" rx="12" fill="#F4F7FB" stroke="#315B7D" stroke-width="2"/><text x="704" y="205" class="title" text-anchor="middle">Linear state readout</text><text x="704" y="237" class="body" text-anchor="middle">Fit on train; select on validation</text><rect x="816" y="160" width="170" height="112" rx="12" fill="#F4F7FB" stroke="#315B7D" stroke-width="2"/><text x="901" y="205" class="title" text-anchor="middle">CEM planner</text><text x="901" y="237" class="body" text-anchor="middle">Gaussian or momentum-prior start</text><rect x="1013" y="160" width="170" height="112" rx="12" fill="#F4F7FB" stroke="#315B7D" stroke-width="2"/><text x="1098" y="205" class="title" text-anchor="middle">Environment</text><text x="1098" y="237" class="body" text-anchor="middle">Execute first action; render again</text>
+<line x1="198" y1="216" x2="225" y2="216" class="flow" marker-end="url(#arrow)"/><line x1="395" y1="216" x2="422" y2="216" class="flow" marker-end="url(#arrow)"/><line x1="592" y1="216" x2="619" y2="216" class="flow" marker-end="url(#arrow)"/><line x1="789" y1="216" x2="816" y2="216" class="flow" marker-end="url(#arrow)"/><line x1="986" y1="216" x2="1013" y2="216" class="flow" marker-end="url(#arrow)"/>
+<path d="M901 272 C901 332 507 332 507 272" class="flow" marker-end="url(#arrow)"/>
+<text x="700" y="326" class="small" text-anchor="middle">Candidate action sequences are scored through predicted state and the shared Gymnasium return</text>
+<path d="M1100 273 C1100 386 113 386 113 274" fill="none" stroke="#23835B" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="603" y="411" class="small" text-anchor="middle" fill="#23835B">Executed action produces the next rendered observation</text>
+<rect x="55" y="460" width="330" height="90" rx="10" class="policy"/>
+<text x="220" y="495" class="title" text-anchor="middle">Direct visual-momentum controller</text>
+<text x="220" y="523" class="body" text-anchor="middle">Handcrafted policy; one result per shared start</text>
+<rect x="440" y="460" width="350" height="90" rx="10" class="priv"/>
+<text x="615" y="495" class="title" text-anchor="middle">Learned state-space dynamics</text>
+<text x="615" y="523" class="body" text-anchor="middle">Privileged simulator state; not a visual JEPA</text>
+<rect x="845" y="460" width="350" height="90" rx="10" class="priv"/>
+<text x="1020" y="495" class="title" text-anchor="middle">Exact-dynamics oracle</text>
+<text x="1020" y="523" class="body" text-anchor="middle">Privileged state; validates planner settings</text>
+<text x="55" y="590" class="small">The direct controller supplies the momentum prior. A prior-only CEM arm is not in this protocol. Evaluator-side intervention continuation uses simulator state.</text>
+</svg>

@@ -1,0 +1,52 @@
+{
+  "evidence_status": "partial",
+  "experiment_version": "visual-jepa-decision-study-v1",
+  "figures": [
+    {
+      "aggregation": "trained methods show one point per model/data seed pair; fixed methods use episode rates",
+      "intervals": "Wilson 95% intervals for fixed-start direct/oracle outcomes; no interval across the five trained pairs",
+      "limits": [
+        "Notebook 22 and v1 use separate protocols and are not pooled.",
+        "The final starts also served as the oracle gate; model outcomes are conditional on its pass.",
+        "Prior-only CEM was not run and is shown as not run.",
+        "All five v1 JEPA seeds triggered the low-spread warning; JEPA planning outcomes are exploratory.",
+        "Oracle and learned-method timings use different devices."
+      ],
+      "panels": [
+        "A planner ablation",
+        "B common-return action ranking",
+        "C representation and action-effect diagnostics",
+        "D decision value versus compute"
+      ],
+      "path": "visual-jepa-decision-study-v1-overview.png",
+      "samples": {
+        "historical_episode_rows": 440,
+        "intervention_starts": 20,
+        "model_data_seed_pairs_per_trained_family": 5,
+        "new_episode_rows": 660,
+        "shared_final_starts": 20
+      }
+    },
+    {
+      "aggregation": "static diagram generated from the versioned v1 method",
+      "intervals": "not applicable",
+      "limits": [
+        "This diagram describes the local synthetic study and does not show a paper implementation."
+      ],
+      "panels": [
+        "E experiment architecture"
+      ],
+      "path": "visual-jepa-decision-study-v1-architecture.svg",
+      "samples": {}
+    }
+  ],
+  "generator_sha256": "386438151a34a4dad19b6f5ed28da1270ecf2f2045fbc753e7cc03c9b9a24fb8",
+  "schema_version": 1,
+  "source_hashes_sha256": {
+    "visual-jepa-decision-study-v1-episodes.csv": "3074dd2e1ef7c52d6c1aa6c031de85de3017cc809ae50403a7f2f4afe7906282",
+    "visual-jepa-decision-study-v1-interventions.csv": "a4fdf7fce466018a7b9cdca327f673ff924aedea48d4c393fb51ec967e168ee8",
+    "visual-jepa-decision-study-v1-model-runs.csv": "92f354873d1a34d531fb03bcfb5752f20608b1024ae1ab6e19aba2e72e4f8c63",
+    "visual-jepa-decision-study-v1-probe-test.csv": "2b24686210dcb780008312097483ab26bbc6fb86c533435b513fc668afd7d98f",
+    "visual-jepa-episodes.csv": "27f2808504224ee9b2dfc6d8051327bcb54ee6081fc77252e572e592fdae42e6"
+  }
+}

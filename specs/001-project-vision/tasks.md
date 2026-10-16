@@ -269,6 +269,16 @@ description: "Tasks for the project vision, coverage, and research roadmap"
 - [x] T087 After training, run the fixed held-out action interventions and paired closed-loop conditions. Preserve all 960 intervention rows and 440 episode rows. Label privileged state access, native scoring spaces, and compute; all rows completed without errors.
 - [x] T088 Complete the feature report, align the README, curriculum, roadmap, reproduction matrix, and project records with the measured results, then run focused checks and Spec Kit analysis/convergence. The report records 24 passing unit tests, Ruff, package build, notebook and evidence checks, and a clean Spec Kit review; the full CPU comparison and paper-scale benchmarks remain unrun.
 
+## Phase 32: Complete the preregistered matched visual JEPA study
+
+**Goal**: Finish Notebook 23's locked local comparison, publish its complete evidence with a bounded claim, and preserve the remaining learned-policy research gap.
+
+**Independent Test**: The evidence validator passes for the complete episode matrix and retained source hashes. The report, portfolio manifest, curriculum, protocol, reproduction matrix, roadmap, project alignment, and task ledger agree on the counts, low-spread warning, model/data seed pairing, missing prior-only planner, handcrafted direct controller, and paper-reproduction boundary.
+
+- [x] T089 Complete the locked CUDA episode matrix, validate all v1 evidence, and retain the report and corrected paired analysis. Preserve the low-spread status as partial even if every episode record completes.
+- [x] T090 Add reproducible accessible study figures and update the case study, project manifest, README, curriculum, protocol, reproduction matrix, roadmap, and remaining-work record using only validated results.
+- [ ] T091 Run focused tests, CPU smoke, Ruff, package build, notebook/evidence/figure/link checks, and Spec Kit analysis/convergence; review the diff and publish a draft PR without merging.
+
 ## Dependencies and Execution Order
 
 - Setup and foundational tasks are complete.
